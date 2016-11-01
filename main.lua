@@ -4,19 +4,20 @@
 local signIn = display.newRect(display.contentWidth/2, display.contentHeight/2+ 200, 200, 75)
 signIn:setFillColor(0,1,0)
 
-local signIn = display.newText("Sign In ", display.contentWidth/2+50, display.contentHeight/2+ 200, 200, 75)
-signIn:setFillColor(0,0,1)
+local signInText = display.newText("Sign In ", display.contentWidth/2+50, display.contentHeight/2 + 215, 200, 75)
+signInText:setFillColor(0,0,0)
 
-local forgotPassword = display.newText("forgot Password?", 100,1100,200,100)
-
-
-local Register = display.newText("Register", 600,1100,200,100)
+local forgotPassword = display.newText("forgot Password?", display.contentWidth-display.contentWidth+100, display.contentHeight-50 ,200,100)
 
 
+local Register = display.newText("Register", display.contentWidth-25, display.contentHeight-10 ,200,100)
 
 
 local titleOfApp = display.newText("Title", display.contentWidth/2 ,200)
 titleOfApp.size = 110
+
+
+
 
 
 local defaultField
