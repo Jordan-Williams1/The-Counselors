@@ -52,8 +52,8 @@ function scene:show( event )
     
         end
 
--- this listens to see if object has been tapped
-back:addEventListener("tap", back)
+        -- this listens to see if object has been tapped
+        back:addEventListener("tap", back)
 
         
        
