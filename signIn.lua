@@ -69,7 +69,12 @@ local function textListener( event )
 
     elseif ( event.phase == "ended" or event.phase == "submitted" ) then
         -- Output resulting text from "defaultField"
-        print( event.target.text )
+       
+        -- once the user inputs their user name then we can use it.
+        if userName.text == "jordan" then
+            print("ok")
+            Password.text = "ok"
+        end
 
     elseif ( event.phase == "editing" ) then
         print( event.newCharacters )
@@ -87,8 +92,20 @@ Password = native.newTextField( display.contentWidth/2, display.contentHeight/2+
 Password:addEventListener( "userInput", textListener )
 
 
+
+local options =
+{
+   Password = Password.text,
+   userName = userName.text,
+    
+    params = {
+        userName, 
+        Password
+    }
+}
+
 function signIn:tap(event)
-    composer.gotoScene("MainMenu")
+    composer.gotoScene("MainMenu", options)
     signIn:removeSelf()
     signInText:removeSelf()
     forgotPassword:removeSelf()
