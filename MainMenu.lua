@@ -28,9 +28,8 @@ function scene:create( event )
     -- It works the first time, but you can't go back and have it work twice once already logged in.
     -- ex. type in jordan for username and then text will show up, then go back and type in tim. it will still work, and it shouldn't
 
-    flag = false
-    --if flag == true then
-
+   
+   
 
     
 end
@@ -42,13 +41,15 @@ function scene:show( event )
     local sceneGroup = self.view
     local phase = event.phase
 
+     flag = false
+
     if ( phase == "will" ) then
         -- Code here runs when the scene is still off screen (but is about to come on screen)
 
         if userName.text == "jordan" and flag == false then
 
-        local food = display.newText("click a day of the week", 350, 400, native.systemFont, 48)
-        food:setFillColor(0,0,1)
+        local food = display.newText("click a day of the week", display.contentWidth/2, display.contentHeight-display.contentHeight + 200, native.systemFont, 48)
+        food:setFillColor(0,1,0)
         sceneGroup:insert(food)
 
         flag = true
@@ -56,72 +57,57 @@ function scene:show( event )
         end
 
 
+local widget = require( "widget" )
 
-        local widget = require( "widget" )
+-- ScrollView listener
+local function scrollListener( event )
 
--- The "onRowRender" function may go here (see example under "Inserting Rows", above)
+    local phase = event.phase
+    if ( phase == "began" ) then print( "Scroll view was touched" )
+    elseif ( phase == "moved" ) then print( "Scroll view was moved" )
+    elseif ( phase == "ended" ) then print( "Scroll view was released" )
+    end
 
+    -- In the event a scroll limit is reached...
+    if ( event.limitReached ) then
+        if ( event.direction == "up" ) then print( "Reached bottom limit" )
+        elseif ( event.direction == "down" ) then print( "Reached top limit" )
+        elseif ( event.direction == "left" ) then print( "Reached right limit" )
+        elseif ( event.direction == "right" ) then print( "Reached left limit" )
+        end
+    end
 
-local function onRowRender( event )
-
-    -- Get reference to the row group
-    local row = event.row
-
-    -- Cache the row "contentWidth" and "contentHeight" because the row bounds can change as children objects are added
-    local rowHeight = row.contentHeight
-    local rowWidth = row.contentWidth
-
-    local rowTitle = display.newText( row, "TIM" .. row.index, 0, 0, nil, 14 )
-    rowTitle:setFillColor( 0 )
-
-    -- Align the label left and vertically centered
-    rowTitle.anchorX = 0
-    rowTitle.x = 0
-    rowTitle.y = rowHeight * 0.5
+    return true
 end
 
 -- Create the widget
-local tableView = widget.newTableView(
+local scrollView = widget.newScrollView(
     {
+        top = 100,
         left = 10,
-        top = 200,
-        height = 290,
-        width = 600,
-        onRowRender = onRowRender,
-        onRowTouch = onRowTouch,
+        width = 500,
+        height = 300,
+        scrollWidth = 800,
+        scrollHeight = 400,
         listener = scrollListener
     }
 )
+sceneGroup:insert(scrollView)
 
--- Insert 40 rows
--- Insert 40 rows
-for i = 1, 10 do
+scrollView.x = display.contentWidth/2
+scrollView.y = 350
 
-    local isCategory = false
-    local rowHeight = 36
-    local rowColor = { default={1,1,1}, over={1,0.5,0,0.2} }
-    local lineColor = { 0.5, 0.5, 0.5 }
+-- Create a image and insert it into the scroll view
 
-    -- Make some rows categories
-    if ( i == 1 or i == 21 ) then
-        isCategory = true
-        rowHeight = 50
-        rowColor = { default={0.8,0.8,0.8,0.8} }
-        lineColor = { 1, 0, 0 }
-    end
 
-    -- Insert a row into the tableView
-    tableView:insertRow(
-        {
-            isCategory = isCategory,
-            rowHeight = rowHeight,
-            rowColor = rowColor,
-            lineColor = lineColor
+local box = display.newRect(scrollView.width/2, scrollView.height/2, 70, 75)
+box:setFillColor(0,1,0)
+scrollView:insert(box)
 
-        }
-    )
-end
-sceneGroup:insert(tableView)
+scrollView:setScrollWidth(800)
+
+
+
 
         local Main = display.newText("Account of: ", display.contentWidth/2, display.contentHeight-display.contentHeight + 100, native.systemFont, 50)
         Main.size = 40
@@ -135,9 +121,21 @@ sceneGroup:insert(tableView)
         IDP_Reference:setFillColor(0,1,0)
         sceneGroup:insert(IDP_Reference)
 
+
+        local IDP_TEXT = display.newText("IDP Reference", display.contentWidth/2+50, display.contentHeight/2, 400, 75)
+        IDP_TEXT.size = 40
+        IDP_TEXT:setFillColor(0,0,0)
+        sceneGroup:insert(IDP_TEXT)
+
         local family_Schedule = display.newRect(display.contentWidth/2, display.contentHeight/2 + 100, 400, 75)
         family_Schedule:setFillColor(0,1,0)
         sceneGroup:insert(family_Schedule)
+
+
+        local FAMILY_TEXT = display.newText("Family Schedule", display.contentWidth/2+50, display.contentHeight/2 + 100, 400, 75)
+        FAMILY_TEXT.size = 40
+        FAMILY_TEXT:setFillColor(0,0,0)
+        sceneGroup:insert(FAMILY_TEXT)
 
          local Problem_Behavior_List = display.newRect(display.contentWidth/2, display.contentHeight/2 + 200, 400, 75)
         Problem_Behavior_List:setFillColor(0,1,0)
@@ -159,9 +157,16 @@ sceneGroup:insert(tableView)
 
 
 
-
-        -- changing text to password from signIn.lua
-        --Main.text = userName.text
+       -- local options =
+       -- {
+       --     Password = Password.text,
+       --     userName = userName.text,
+    
+        --    params = {
+        --        userName, 
+        --        Password
+        --    }
+        --}
 
         
         
@@ -177,6 +182,17 @@ sceneGroup:insert(tableView)
 
         -- this listens to see if object has been tapped
         back:addEventListener("tap", back)
+
+         
+
+         function IDP_Reference:tap(event)
+    
+          composer.gotoScene("IDPReference", options)
+        end
+
+        -- this listens to see if object has been tapped
+        IDP_Reference:addEventListener("tap", IDP_Reference)
+
 
         
        
