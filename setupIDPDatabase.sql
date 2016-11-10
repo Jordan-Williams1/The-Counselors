@@ -9,7 +9,6 @@ DROP TABLE IF EXISTS consequences;
 DROP TABLE IF EXISTS rewards;
 DROP TABLE IF EXISTS problemEvent;
 DROP TABLE IF EXISTS desiredEvent;
-SET foreign_key_checks = 1;
 
 CREATE TABLE user
 ( userID int NOT NULL,
@@ -27,7 +26,7 @@ PRIMARY KEY (userID)
 );
 
 CREATE TABLE child
-( childID int NOT NULL,
+( childID varchar(10) NOT NULL,
 userID int NOT NULL,
 name varchar(100) NOT NULL,
 dateAdded date NOT NULL,
@@ -47,56 +46,63 @@ Interests text NOT NULL,
 DisciplineWorked text NOT NULL,
 DisciplineNotWorked text NOT NULL,
 PRIMARY KEY (userID,childID),
-FOREIGN KEY (userID) references user(userID)
+CONSTRAINT FOREIGN KEY (userID) references user(userID)
 );
 
 CREATE TABLE behaviors
 ( desiredBehavior varchar(255) NOT NULL,
 problemBehavior varchar(255) NOT NULL,	
-childID int NOT NULL,
+childID varchar(10) NOT NULL,
 PRIMARY KEY (desiredBehavior, problemBehavior, childID),
-FOREIGN KEY (childID) references child(childID)
+CONSTRAINT FOREIGN KEY (childID) references child (childID)
 );
- 
+
 CREATE TABLE consequences
 ( name varchar(255) NOT NULL,
 description text NOT NULL,
-childID int NOT NULL,
+childID varchar(10) NOT NULL,
 PRIMARY KEY (name, childID),
-FOREIGN KEY (childID) references child(childID)
+CONSTRAINT FOREIGN KEY (childID) references child(childID)
 );
 
 CREATE TABLE rewards
 ( name varchar(255) NOT NULL,
 description text NOT NULL,
-childID int NOT NULL,
+childID varchar(10) NOT NULL,
 PRIMARY KEY (name, childID),
-FOREIGN KEY (childID) references child(childID)
+CONSTRAINT FOREIGN KEY (childID) references child(childID)
 );
 
 CREATE TABLE problemEvent
-( childID int NOT NULL,
+( eventID varchar(10) NOT NULL,
+childID varchar(10) NOT NULL,
 problemBehavior varchar(255) NOT NULL,
-eventDeadline timestamp NOT NULL,
-eventFinishTime timestamp,
 consequence varchar(255) NOT NULL,
+eventDeadlineDate date NOT NULL,
+eventDeadlineTime time NOT NULL,
+eventFinishDate date NOT NULL,
+eventFinishTime time NOT NULL,
 eventDescription text NOT NULL,
-PRIMARY KEY (),
-FOREIGN KEY (childID) references child(childID),
-FOREIGN KEY (problemBehavior) references behaviors(problemBehavior),
-FOREIGN KEY (consequence) references consequences(name)
+PRIMARY KEY (eventID,childID,problemBehavior,consequence),
+CONSTRAINT FOREIGN KEY (childID) references child(childID),
+CONSTRAINT FOREIGN KEY (problemBehavior) references behaviors(problemBehavior),
+CONSTRAINT FOREIGN KEY (consequence) references consequences(name)
 );
 
 CREATE TABLE desiredEvent
-( eventID int NOT NULL,
-childID int NOT NULL,
-problemBehavior varchar(255) NOT NULL,
-eventDeadline timestamp NOT NULL,
-eventFinishTime timestamp,
+( eventID varchar(10) NOT NULL,
+childID varchar(10) NOT NULL,
+desiredBehavior varchar(255) NOT NULL,
 reward varchar(255) NOT NULL,
+eventDeadlineDate date NOT NULL,
+eventDeadlineTime time NOT NULL,
+eventFinishDate date NOT NULL,
+eventFinishTime time NOT NULL,
 eventDescription text NOT NULL,
-PRIMARY KEY (eventID,childID,problemBehavior,reward),
-FOREIGN KEY (childID) references child(childID),
-FOREIGN KEY (problemBehavior) references behaviors(problemBehavior),
-FOREIGN KEY (reward) references rewards(name)
+PRIMARY KEY (eventID,childID,desiredBehavior, reward),
+CONSTRAINT FOREIGN KEY (childID) references child(childID),
+CONSTRAINT FOREIGN KEY (desiredBehavior) references behaviors(desiredBehavior),
+CONSTRAINT FOREIGN KEY (reward) references rewards(name)
 );
+
+SET foreign_key_checks = 1;
