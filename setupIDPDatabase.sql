@@ -2,16 +2,15 @@ CREATE DATABASE IF NOT EXISTS IDP;
 USE IDP;
 
 SET foreign_key_checks = 0;
-DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS child;
 DROP TABLE IF EXISTS behaviors;
 DROP TABLE IF EXISTS consequences;
 DROP TABLE IF EXISTS rewards;
-DROP TABLE IF EXISTS problemEvent;
-DROP TABLE IF EXISTS desiredEvent;
+DROP TABLE IF EXISTS Event;
 
-CREATE TABLE user
-( userID int NOT NULL,
+CREATE TABLE users
+( userID varchar(10),
 username varchar(100) NOT NULL,
 password varchar(100) NOT NULL,
 masterUserID int NOT NULL,
@@ -26,8 +25,8 @@ PRIMARY KEY (userID)
 );
 
 CREATE TABLE child
-( childID varchar(10) NOT NULL,
-userID int NOT NULL,
+( childID varchar(10),
+userID varchar(10),
 name varchar(100) NOT NULL,
 dateAdded date NOT NULL,
 age int NOT NULL,
@@ -45,64 +44,57 @@ MaturityLevel text NOT NULL,
 Interests text NOT NULL,
 DisciplineWorked text NOT NULL,
 DisciplineNotWorked text NOT NULL,
-PRIMARY KEY (userID,childID),
-CONSTRAINT FOREIGN KEY (userID) references user(userID)
+PRIMARY KEY (childID),
+CONSTRAINT fk_userID FOREIGN KEY (userID) references users(userID)
 );
 
 CREATE TABLE behaviors
-( desiredBehavior varchar(255) NOT NULL,
-problemBehavior varchar(255) NOT NULL,	
-childID varchar(10) NOT NULL,
-PRIMARY KEY (desiredBehavior, problemBehavior, childID),
-CONSTRAINT FOREIGN KEY (childID) references child (childID)
+( userID varchar(10),
+childID varchar(10),
+desiredBehavior varchar(255),
+problemBehavior varchar(255),	
+PRIMARY KEY (desiredBehavior, problemBehavior),
+CONSTRAINT fk_childID1 FOREIGN KEY (childID) references child (childID)
 );
 
 CREATE TABLE consequences
-( name varchar(255) NOT NULL,
+( userID varchar(10),
+childID varchar(10),
+PBehavior varchar(255),
+name varchar(255),
 description text NOT NULL,
-childID varchar(10) NOT NULL,
-PRIMARY KEY (name, childID),
-CONSTRAINT FOREIGN KEY (childID) references child(childID)
+PRIMARY KEY (name),
+CONSTRAINT fk_childID3 FOREIGN KEY (childID) references child(childID)
 );
 
 CREATE TABLE rewards
-( name varchar(255) NOT NULL,
+( userID varchar(10),
+childID varchar(10),
+name varchar(255),
 description text NOT NULL,
-childID varchar(10) NOT NULL,
-PRIMARY KEY (name, childID),
-CONSTRAINT FOREIGN KEY (childID) references child(childID)
+PRIMARY KEY (name),
+CONSTRAINT fk_childID4 FOREIGN KEY (childID) references child(childID)
 );
 
-CREATE TABLE problemEvent
-( eventID varchar(10) NOT NULL,
-childID varchar(10) NOT NULL,
-problemBehavior varchar(255) NOT NULL,
-consequence varchar(255) NOT NULL,
+
+CREATE TABLE Event
+( userID varchar(10),
+eventID varchar(10),
+childIDE varchar(10),
+desiredbehaviorE varchar(255),
+reward varchar(255),
+problembehaviorE varchar(255),
+consequence varchar(255), 
 eventDeadlineDate date NOT NULL,
 eventDeadlineTime time NOT NULL,
 eventFinishDate date NOT NULL,
 eventFinishTime time NOT NULL,
 eventDescription text NOT NULL,
-PRIMARY KEY (eventID,childID,problemBehavior,consequence),
-CONSTRAINT FOREIGN KEY (childID) references child(childID),
-CONSTRAINT FOREIGN KEY (problemBehavior) references behaviors(problemBehavior),
-CONSTRAINT FOREIGN KEY (consequence) references consequences(name)
-);
-
-CREATE TABLE desiredEvent
-( eventID varchar(10) NOT NULL,
-childID varchar(10) NOT NULL,
-desiredBehavior varchar(255) NOT NULL,
-reward varchar(255) NOT NULL,
-eventDeadlineDate date NOT NULL,
-eventDeadlineTime time NOT NULL,
-eventFinishDate date NOT NULL,
-eventFinishTime time NOT NULL,
-eventDescription text NOT NULL,
-PRIMARY KEY (eventID,childID,desiredBehavior, reward),
-CONSTRAINT FOREIGN KEY (childID) references child(childID),
-CONSTRAINT FOREIGN KEY (desiredBehavior) references behaviors(desiredBehavior),
-CONSTRAINT FOREIGN KEY (reward) references rewards(name)
+PRIMARY KEY (eventID),
+CONSTRAINT fk_child5 FOREIGN KEY (childIDE) REFERENCES child(childID),
+CONSTRAINT fk_behaviors FOREIGN KEY (desiredbehaviorE, problembehaviorE) REFERENCES behaviors(desiredBehavior, problemBehavior),
+CONSTRAINT fk_consequence FOREIGN KEY (consequence) REFERENCES consequences(name), 
+CONSTRAINT fk_reward FOREIGN KEY (reward) REFERENCES rewards(name)
 );
 
 SET foreign_key_checks = 1;
