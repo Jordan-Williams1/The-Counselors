@@ -38,23 +38,34 @@ function scene:show( event )
         -- Code here runs when the scene is still off screen (but is about to come on screen)
 
        
+        local background = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth, display.contentHeight)
+        background:setFillColor( 0.745098 ,0.745098 ,0.745098)
+        sceneGroup:insert(background)
+
+        local signIn = display.newRect(display.contentWidth/2, display.contentHeight/2+ 200, 200, 75)
+        signIn:setFillColor(0.372549, 0.619608, 0.627451)
+        sceneGroup:insert(signIn)
+
+        local signInText = display.newText("Sign In ", display.contentWidth/2+50, display.contentHeight/2 + 215, 200, 75)
+        signInText:setFillColor(0,0,0)
+        sceneGroup:insert(signInText)
+
+        local forgotPassword = display.newText("forgot Password?", display.contentWidth-display.contentWidth+100, display.contentHeight-50 ,200,100)
+        forgotPassword:setFillColor(0,0,0)
+        sceneGroup:insert(forgotPassword)
+
+        local Register = display.newText("Register", display.contentWidth-25, display.contentHeight-10 ,200,100)
+        Register:setFillColor(0,0,0)
+        sceneGroup:insert(Register)
 
 
 
-       local signIn = display.newRect(display.contentWidth/2, display.contentHeight/2+ 200, 200, 75)
-signIn:setFillColor(0,1,0)
-
-local signInText = display.newText("Sign In ", display.contentWidth/2+50, display.contentHeight/2 + 215, 200, 75)
-signInText:setFillColor(0,0,0)
-
-local forgotPassword = display.newText("forgot Password?", display.contentWidth-display.contentWidth+100, display.contentHeight-50 ,200,100)
+        local titleOfApp = display.newText("Title", display.contentWidth/2 ,200)
+        titleOfApp.size = 110
+        titleOfApp:setFillColor(0,0,0)
+        sceneGroup:insert(titleOfApp)
 
 
-local Register = display.newText("Register", display.contentWidth-25, display.contentHeight-10 ,200,100)
-
-
-local titleOfApp = display.newText("Title", display.contentWidth/2 ,200)
-titleOfApp.size = 110
 
 
 
@@ -87,10 +98,11 @@ end
 -- Create text field
 userName = native.newTextField( display.contentWidth/2, display.contentHeight/2, display.contentWidth/2, 75)
 userName:addEventListener( "userInput", textListener )
+sceneGroup:insert(userName)
 
 Password = native.newTextField( display.contentWidth/2, display.contentHeight/2+ 100, display.contentWidth/2, 75)
 Password:addEventListener( "userInput", textListener )
-
+sceneGroup:insert(Password)
 
 
 local options =
@@ -105,14 +117,16 @@ local options =
 }
 
 function signIn:tap(event)
-    composer.gotoScene("MainMenu", options)
-    signIn:removeSelf()
-    signInText:removeSelf()
-    forgotPassword:removeSelf()
-    Register:removeSelf()
-    titleOfApp:removeSelf()
+    
     userName:removeSelf()
     Password:removeSelf()
+    composer.gotoScene("MainMenu", options)
+    --signIn:removeSelf()
+    --signInText:removeSelf()
+    --forgotPassword:removeSelf()
+    --Register:removeSelf()
+    --titleOfApp:removeSelf()
+    
     
     --myButton:removeEventListener( "touch", myTouchListener )
 end

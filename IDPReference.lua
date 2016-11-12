@@ -36,34 +36,75 @@ function scene:show( event )
     if ( phase == "will" ) then
         -- Code here runs when the scene is still off screen (but is about to come on screen)
 
-       
+        local background = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth, display.contentHeight)
+        background:setFillColor( 0.745098 ,0.745098 ,0.745098)
+        sceneGroup:insert(background)
 
+       
+        local backButton = display.newRect(display.contentWidth/2 - 270, display.contentHeight/2 - 480, 70, 75)
+        backButton:setFillColor(0.372549, 0.619608, 0.627451)
+        sceneGroup:insert(backButton)
 
         local IDP_Reference = display.newRect(display.contentWidth/2, display.contentHeight/2-200, 400, 75)
-        IDP_Reference:setFillColor(0,1,0)
+        IDP_Reference:setFillColor(0.372549, 0.619608, 0.627451)
         sceneGroup:insert(IDP_Reference)
 
+        local IDPText = display.newText("Part I Guide for Parenting ", display.contentWidth/2, display.contentHeight/2-200, 200, 75)
+        IDPText:setFillColor(0,0,0)
+        sceneGroup:insert(IDPText)
+
         local family_Schedule = display.newRect(display.contentWidth/2, display.contentHeight/2 - 100, 400, 75)
-        family_Schedule:setFillColor(0,1,0)
+        family_Schedule:setFillColor(0.372549, 0.619608, 0.627451)
         sceneGroup:insert(family_Schedule)
 
+        local IDPTextII = display.newText("Part II Understand Parent Roles and Responsibilities ", display.contentWidth/2, display.contentHeight/2 - 100, 400, 75)
+        IDPTextII:setFillColor(0,0,0)
+        sceneGroup:insert(IDPTextII)
+
          local Problem_Behavior_List = display.newRect(display.contentWidth/2, display.contentHeight/2, 400, 75)
-        Problem_Behavior_List:setFillColor(0,1,0)
+        Problem_Behavior_List:setFillColor(0.372549, 0.619608, 0.627451)
         sceneGroup:insert(Problem_Behavior_List)
 
+        local IDPTextIII = display.newText("Part III Know the Basics", display.contentWidth/2, display.contentHeight/2, 400, 75)
+        IDPTextIII:setFillColor(0,0,0)
+        sceneGroup:insert(IDPTextIII)
+
+
         local Desired_Behavior_List = display.newRect(display.contentWidth/2, display.contentHeight/2 + 100, 400, 75)
-        Desired_Behavior_List:setFillColor(0,1,0)
+        Desired_Behavior_List:setFillColor(0.372549, 0.619608, 0.627451)
         sceneGroup:insert(Desired_Behavior_List)
 
+        local IDPTextIV = display.newText("Part IV Develope an Individualized Discipline Plan", display.contentWidth/2, display.contentHeight/2 + 100, 400, 75)
+        IDPTextIV:setFillColor(0,0,0)
+        sceneGroup:insert(IDPTextIV)
+
         local Consequence_Log = display.newRect(display.contentWidth/2, display.contentHeight/2 + 200, 400, 75)
-        Consequence_Log:setFillColor(0,1,0)
+        Consequence_Log:setFillColor(0.372549, 0.619608, 0.627451)
         sceneGroup:insert(Consequence_Log)
 
+        local IDPTextV = display.newText("Part V Implement the Individualized Discipline Plan", display.contentWidth/2, display.contentHeight/2 + 200, 400, 75)
+        IDPTextV:setFillColor(0,0,0)
+        sceneGroup:insert(IDPTextV)
+
+
         local Reward_Log = display.newRect(display.contentWidth/2, display.contentHeight/2 + 300, 400, 75)
-        Reward_Log:setFillColor(0,1,0)
+        Reward_Log:setFillColor(0.372549, 0.619608, 0.627451)
         sceneGroup:insert(Reward_Log)
 
-     
+        local IDPTextVI = display.newText("Part VI Evaluate", display.contentWidth/2, display.contentHeight/2 + 300, 400, 75)
+        IDPTextVI:setFillColor(0,0,0)
+        sceneGroup:insert(IDPTextVI)
+
+
+        function backButton:tap(event)
+
+            composer.gotoScene("MainMenu")
+        
+        end
+
+        -- this listens to see if object has been tapped
+        backButton:addEventListener("tap", backButton)
+
 
 
 
