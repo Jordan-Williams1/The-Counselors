@@ -1,6 +1,6 @@
 
 local composer = require( "composer" )
-
+local crypto = require("crypto")
 local scene = composer.newScene()
 
 -- -----------------------------------------------------------------------------------
@@ -15,7 +15,7 @@ local scene = composer.newScene()
 -- Scene event functions
 -- -----------------------------------------------------------------------------------
 
-
+local serverResponse
 
 -- create()
 function scene:create( event )
@@ -33,6 +33,7 @@ function scene:show( event )
 
     local sceneGroup = self.view
     local phase = event.phase
+    
 
     if ( phase == "will" ) then
         -- Code here runs when the scene is still off screen (but is about to come on screen)
@@ -118,9 +119,33 @@ local options =
 
 function signIn:tap(event)
     
-    userName:removeSelf()
-    Password:removeSelf()
-    composer.gotoScene("MainMenu", options)
+    local x = crypto.digest(crypto.md5,userName.text)
+    local y = crypto.digest(crypto.md5,userName.text)
+
+
+    local function networkListener( event )
+        if ( event.isError ) then
+            print( "Network error: ", event.response )
+        else
+            print ( "RESPONSE: " .. event.response )
+            serverResponse = event.response
+        end
+    end
+    local URL = "http://35.161.136.208/Login.php?loginUsername="..x.."&loginPassword="..y
+    -- Access server via post
+    network.request( URL, "GET", networkListener)
+
+    --HERE GOES THE IF STATEMENT TO PROCESS REACTION TO THE RESPONSE
+    print(serverResponse)
+    if(serverResponse == "Logged in") then
+        userName:removeSelf()
+        Password:removeSelf()
+        composer.gotoScene("MainMenu", options)
+    elseif serverResponse == "Invalid username or password" then
+        local alert = native.showAlert("Login Error","Invalid username or password.",{"OK"})
+    else
+
+    end
     --signIn:removeSelf()
     --signInText:removeSelf()
     --forgotPassword:removeSelf()
