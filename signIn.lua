@@ -118,7 +118,7 @@ local options =
 }
 
 function signIn:tap(event)
-    
+    print("tap")
     local x = crypto.digest(crypto.md5,userName.text)
     local y = crypto.digest(crypto.md5,userName.text)
 
@@ -129,23 +129,19 @@ function signIn:tap(event)
         else
             print ( "RESPONSE: " .. event.response )
             serverResponse = event.response
+            if(serverResponse == "Logged in") then
+                userName:removeSelf()
+                Password:removeSelf()
+                composer.gotoScene("MainMenu", options)
+            elseif serverResponse == "Invalid username or password" then
+                local alert = native.showAlert("Login Error","Invalid username or password.",{"OK"})
+            end
         end
     end
     local URL = "http://35.161.136.208/Login.php?loginUsername="..x.."&loginPassword="..y
     -- Access server via post
-    network.request( URL, "GET", networkListener)
+    network.request( URL, "GET", networkListener)   
 
-    --HERE GOES THE IF STATEMENT TO PROCESS REACTION TO THE RESPONSE
-    print(serverResponse)
-    if(serverResponse == "Logged in") then
-        userName:removeSelf()
-        Password:removeSelf()
-        composer.gotoScene("MainMenu", options)
-    elseif serverResponse == "Invalid username or password" then
-        local alert = native.showAlert("Login Error","Invalid username or password.",{"OK"})
-    else
-
-    end
     --signIn:removeSelf()
     --signInText:removeSelf()
     --forgotPassword:removeSelf()
