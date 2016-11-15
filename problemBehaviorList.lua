@@ -25,7 +25,7 @@ end
 
 -- show()
 function scene:show( event )
-
+    composer.removeScene("problemBehaviorListFinal")
     local sceneGroup = self.view
     local phase = event.phase
 

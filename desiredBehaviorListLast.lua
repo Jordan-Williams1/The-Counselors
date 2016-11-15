@@ -19,20 +19,7 @@ function scene:create( event )
     local sceneGroup = self.view
     -- Code here runs when the scene is first created but has not yet appeared on screen
     
-
-end
-
-
--- show()
-function scene:show( event )
-
-    local sceneGroup = self.view
-    local phase = event.phase
-
-    if ( phase == "will" ) then
-        -- Code here runs when the scene is still off screen (but is about to come on screen)
-
-        local background = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth, display.contentHeight)
+     local background = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth, display.contentHeight)
         background:setFillColor( 0.745098 ,0.745098 ,0.745098)
         sceneGroup:insert(background)
 
@@ -106,7 +93,7 @@ function scene:show( event )
          function backButton:tap(event)
 
             
-            --writeBehavior:removeSelf()
+            
             
             
             composer.gotoScene("desiredBehaviorList")
@@ -121,6 +108,19 @@ function scene:show( event )
         
         sceneGroup:insert(writeBehavior)
         writeBehavior:addEventListener( "userInput", textListener )
+end
+
+
+-- show()
+function scene:show( event )
+
+    local sceneGroup = self.view
+    local phase = event.phase
+
+    if ( phase == "will" ) then
+        -- Code here runs when the scene is still off screen (but is about to come on screen)
+
+       
 
 
     elseif ( phase == "did" ) then
@@ -139,11 +139,12 @@ function scene:hide( event )
     if ( phase == "will" ) then
         -- Code here runs when the scene is on screen (but is about to go off screen)
 
-        if writeBehavior then
-            writeBehavior:removeSelf()
-            writeBehavior = nil
+        if writeBehavior~=nil then
+           --writeBehavior:removeSelf()
+           -- writeBehavior = nil
+        end
        
-    end
+    
 
     elseif ( phase == "did" ) then
         -- Code here runs immediately after the scene goes entirely off screen
@@ -157,7 +158,20 @@ function scene:destroy( event )
 
     local sceneGroup = self.view
     -- Code here runs prior to the removal of scene's view
-     
+    if ( phase == "will" ) then
+        -- Code here runs when the scene is on screen (but is about to go off screen)
+
+        if writeBehavior~=nil then
+           --writeBehavior:removeSelf()
+           -- writeBehavior = nil
+        end
+       
+    
+
+    elseif ( phase == "did" ) then
+        -- Code here runs immediately after the scene goes entirely off screen
+
+    end     
 
 end
 
