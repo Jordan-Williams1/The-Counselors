@@ -228,6 +228,11 @@ function scene:show( event )
         --local back = display.newRect(display.contentWidth/2 - 270, display.contentHeight/2 - 480, 70, 75)
         --back:setFillColor(0,1,0)
         --sceneGroup:insert(back)
+        local Manage = display.newRect(display.contentWidth/2+290, 350, 75, 300)
+        Manage:setFillColor(0.372549, 0.619608, 0.627451)
+        sceneGroup:insert(Manage)
+
+
 
         local IDP_Reference = display.newRect(display.contentWidth/2, display.contentHeight/2, 400, 75)
         IDP_Reference:setFillColor(0.372549, 0.619608, 0.627451)
@@ -286,10 +291,6 @@ function scene:show( event )
         sceneGroup:insert(Reward_TEXT)
 
 
-
-
-
-
        -- local options =
        -- {
        --     Password = Password.text,
@@ -301,12 +302,16 @@ function scene:show( event )
         --    }
         --}
 
-        
-        
+    
+    function Manage:tap(event)
 
+      composer.gotoScene("addChild", options)
+    
+    end
 
-         
-
+    -- this listens to see if object has been tapped
+    Manage:addEventListener("tap", Manage)
+    
     function IDP_Reference:tap(event)
 
       composer.gotoScene("IDPReference", options)
@@ -368,7 +373,7 @@ function scene:show( event )
 
 
         -- new sliding panel widget
-    local show = display.newRect(display.contentWidth/2 + 270, display.contentHeight/2 - 480, 70, 75)
+    local show = display.newRect(display.contentWidth/2 + 300, display.contentHeight/2 - 580, 70, 75)
         show:setFillColor(0.372549, 0.619608, 0.627451)
         sceneGroup:insert(show)
     

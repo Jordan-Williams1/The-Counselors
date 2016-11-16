@@ -86,21 +86,14 @@ function scene:create( event )
             childTEXT.text = writeBehavior.text
         
         end
-        
         plus:addEventListener("tap", plus)
 
 
          function backButton:tap(event)
-
-            
-            
-            
             
             composer.gotoScene("desiredBehaviorList")
         
         end
-
-        -- this listens to see if object has been tapped
         backButton:addEventListener("tap", backButton)
 
          -- Create text field
