@@ -141,13 +141,8 @@ function scene:show( event )
      flag = false
 
     if ( phase == "will" ) then
-        -- Code here runs when the scene is still off screen (but is about to come on screen)
 
-       local background = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth, display.contentHeight)
-        background:setFillColor( 0.745098 ,0.745098 ,0.745098)
-        sceneGroup:insert(background)
-        
-        if userName.text == "jordan" and flag == false then
+    if userName.text == "jordan" and flag == false then
 
         local food = display.newText("click a day of the week", display.contentWidth/2, display.contentHeight-display.contentHeight + 200, native.systemFont, 48)
         food:setFillColor(0,1,0)
@@ -155,10 +150,46 @@ function scene:show( event )
 
         flag = true
         
-        end
+    end
+        -- Code here runs when the scene is still off screen (but is about to come on screen)
+    local background = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth, display.contentHeight)
+    background:setFillColor( 0.745098 ,0.745098 ,0.745098)
+    sceneGroup:insert(background)
 
+    local IDP_Reference = display.newRect(display.contentWidth/2, display.contentHeight/2, 400, 75)
+    IDP_Reference:setFillColor(0.372549, 0.619608, 0.627451)
+    sceneGroup:insert(IDP_Reference)
 
+    local IDP_TEXT = display.newText("IDP Reference", display.contentWidth/2+50, display.contentHeight/2, 400, 75)
+    IDP_TEXT.size = 40
+    IDP_TEXT:setFillColor(0,0,0)
+    sceneGroup:insert(IDP_TEXT)
+    function IDP_Reference:tap(event)
 
+      composer.gotoScene("IDPReference", options)
+    
+    end
+
+    -- this listens to see if object has been tapped
+    IDP_Reference:addEventListener("tap", IDP_Reference)
+
+    local function networkListener( event )
+        if ( event.isError ) then
+            print( "Network error: ", event.response )
+            local alert = native.showAlert("Login Error","Server is not available at this time.",{"OK"})
+            composer.gotoScene("signin", options)
+        else
+            serverResponse = event.response
+            print ( "RESPONSE: " .. serverResponse )
+
+            if(serverResponse[0] == 'U') then
+                local Main = display.newText("Account of: "..serverResponse(3,(string.len(serverResponse))), display.contentWidth/2-30, display.contentHeight-display.contentHeight + 100, native.systemFont, 50)
+                Main.size = 40
+                Main:setFillColor(0,0,0)
+                sceneGroup:insert(Main)
+            end
+
+-----------------START CHILD PRIVILEGES
 
     -- ScrollView listener
     local function scrollListener( event )
@@ -198,9 +229,6 @@ function scene:show( event )
     scrollView.x = display.contentWidth/2
     scrollView.y = 350
 
-    -- Create a image and insert it into the scroll view
-
-
     --local box = display.newRect(scrollView.width/2, scrollView.height/2, 70, 75) -- child inside of box
     --box:setFillColor(0,1,0)
     local   myChild = display.newCircle( scrollView.width/2, scrollView.height/2, 30 )
@@ -211,39 +239,27 @@ function scene:show( event )
     childName:setFillColor( 0,0,1 )
     childName.size = 20
     
-
-
     scrollView:insert(childName) 
     scrollView:insert(myChild)
     scrollView:setScrollWidth(800)
 
+    --local back = display.newRect(display.contentWidth/2 - 270, display.contentHeight/2 - 480, 70, 75)
+    --back:setFillColor(0,1,0)
+    --sceneGroup:insert(back)
+    local Manage = display.newRect(display.contentWidth/2+290, 350, 75, 300)
+    Manage:setFillColor(0.372549, 0.619608, 0.627451)
+    sceneGroup:insert(Manage)
 
 
+    function Manage:tap(event)
 
-        local Main = display.newText("Account of: USER", display.contentWidth/2-30, display.contentHeight-display.contentHeight + 100, native.systemFont, 50)
-        Main.size = 40
-        Main:setFillColor(0,0,0)
-        sceneGroup:insert(Main)
+      composer.gotoScene("addChild", options)
+    
+    end
+    Manage:addEventListener("tap", Manage)
 
-        --local back = display.newRect(display.contentWidth/2 - 270, display.contentHeight/2 - 480, 70, 75)
-        --back:setFillColor(0,1,0)
-        --sceneGroup:insert(back)
-        local Manage = display.newRect(display.contentWidth/2+290, 350, 75, 300)
-        Manage:setFillColor(0.372549, 0.619608, 0.627451)
-        sceneGroup:insert(Manage)
-
-
-
-        local IDP_Reference = display.newRect(display.contentWidth/2, display.contentHeight/2, 400, 75)
-        IDP_Reference:setFillColor(0.372549, 0.619608, 0.627451)
-        sceneGroup:insert(IDP_Reference)
-
-
-        local IDP_TEXT = display.newText("IDP Reference", display.contentWidth/2+50, display.contentHeight/2, 400, 75)
-        IDP_TEXT.size = 40
-        IDP_TEXT:setFillColor(0,0,0)
-        sceneGroup:insert(IDP_TEXT)
-
+---------------------END CHILD PRIVILEGES
+---------------------START FAMILY SCHEDULE PRIVILEGES
         local family_Schedule = display.newRect(display.contentWidth/2, display.contentHeight/2 + 100, 400, 75)
         family_Schedule:setFillColor(0.372549, 0.619608, 0.627451)
         sceneGroup:insert(family_Schedule)
@@ -253,6 +269,15 @@ function scene:show( event )
         FAMILY_TEXT.size = 40
         FAMILY_TEXT:setFillColor(0,0,0)
         sceneGroup:insert(FAMILY_TEXT)
+
+        function family_Schedule:tap(event)
+
+          composer.gotoScene("familySchedule")
+        
+        end
+        family_Schedule:addEventListener("tap", family_Schedule)
+----------------------END FAMILY SCHEDULE PRIVILEGES
+----------------------START BEHAVIOR PRIVILEGES
 
         local Problem_Behavior_List = display.newRect(display.contentWidth/2, display.contentHeight/2 + 200, 400, 75)
         Problem_Behavior_List:setFillColor(0.372549, 0.619608, 0.627451)
@@ -272,6 +297,19 @@ function scene:show( event )
         Desired_TEXT:setFillColor(0,0,0)
         sceneGroup:insert(Desired_TEXT)
 
+        function Problem_Behavior_List:tap(event)
+          composer.gotoScene("problemBehaviorList")
+        end
+        Problem_Behavior_List:addEventListener("tap", Problem_Behavior_List)
+
+        function Desired_Behavior_List:tap(event)
+          composer.gotoScene("desiredBehaviorList")
+        end
+        Desired_Behavior_List:addEventListener("tap", Desired_Behavior_List)
+
+-----------------------END BEHAVIOR PRIVILEGES
+
+
         local Consequence_Log = display.newRect(display.contentWidth/2, display.contentHeight/2 + 400, 400, 75)
         Consequence_Log:setFillColor(0.372549, 0.619608, 0.627451)
         sceneGroup:insert(Consequence_Log)
@@ -289,86 +327,23 @@ function scene:show( event )
         Reward_TEXT.size = 40
         Reward_TEXT:setFillColor(0,0,0)
         sceneGroup:insert(Reward_TEXT)
+        
+        function Consequence_Log:tap(event)
+          composer.gotoScene("consequencesLog")
+        end
+        Consequence_Log:addEventListener("tap", Consequence_Log)
 
+        function Reward_Log:tap(event)
+          composer.gotoScene("rewardsLog")
+        end
+        Reward_Log:addEventListener("tap", Reward_Log)
 
-       -- local options =
-       -- {
-       --     Password = Password.text,
-       --     userName = userName.text,
-    
-        --    params = {
-        --        userName, 
-        --        Password
-        --    }
-        --}
-
-    
-    function Manage:tap(event)
-
-      composer.gotoScene("addChild", options)
-    
+        end
     end
-
-    -- this listens to see if object has been tapped
-    Manage:addEventListener("tap", Manage)
-    
-    function IDP_Reference:tap(event)
-
-      composer.gotoScene("IDPReference", options)
-    
-    end
-
-    -- this listens to see if object has been tapped
-    IDP_Reference:addEventListener("tap", IDP_Reference)
-
-
-    function family_Schedule:tap(event)
-
-      composer.gotoScene("familySchedule")
-    
-    end
-
-    -- this listens to see if object has been tapped
-    family_Schedule:addEventListener("tap", family_Schedule)
-
-     function Problem_Behavior_List:tap(event)
-
-      composer.gotoScene("problemBehaviorList")
-    
-    end
-
-    -- this listens to see if object has been tapped
-    Problem_Behavior_List:addEventListener("tap", Problem_Behavior_List)
-
-    function Desired_Behavior_List:tap(event)
-
-      composer.gotoScene("desiredBehaviorList")
-    
-    end
-
-    -- this listens to see if object has been tapped
-    Desired_Behavior_List:addEventListener("tap", Desired_Behavior_List)
-
-    function Consequence_Log:tap(event)
-
-      composer.gotoScene("consequencesLog")
-    
-    end
-
-    -- this listens to see if object has been tapped
-    Consequence_Log:addEventListener("tap", Consequence_Log)
-
-     function Reward_Log:tap(event)
-
-      composer.gotoScene("rewardsLog")
-    
-    end
-
-    -- this listens to see if object has been tapped
-    Reward_Log:addEventListener("tap", Reward_Log)
-
-
-
+    --End of network listener
+    local URL = "http://35.161.136.208/mainMenu.php"
+    -- Access server via post
+    network.request( URL, "GET", networkListener)
 
 
 
@@ -440,57 +415,24 @@ function scene:show( event )
 
 
     function show:tap(event)
-        
         panel:show()
     end
-
 
     show:addEventListener("tap", show)
 
     function panel.slideBack:tap(event)
-        
         panel:hide()
     end
-
-
     panel.slideBack:addEventListener("tap", slideBack)
 
 
     function panel.slideBack:tap(event)
-        
         panel:hide()
     end
 
 
-
-    --function back:tap(event)
-
-     
-      --composer.gotoScene("signIn", options)
-      
-
-   -- end
-
-    -- this listens to see if back button has been tapped
-    
-    --back:addEventListener("tap", back)
-    
-       
-    -- end of implementation code  
-    ---------------------------
-    ---------------------------
-    ---------------------------
-    ---------------------------
-    ---------------------------
-
-
     elseif ( phase == "did" ) then
         -- Code here runs when the scene is entirely on screen
-
-        
-
-
-
     end
 end
 
