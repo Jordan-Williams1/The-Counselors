@@ -7,6 +7,8 @@ local scene = composer.newScene()
 -- the scene is removed entirely (not recycled) via "composer.removeScene()"
 -- -----------------------------------------------------------------------------------
 
+local serverResponse
+
 function widget.newPanel( options )
     local customOptions = options or {}
     local opt = {}

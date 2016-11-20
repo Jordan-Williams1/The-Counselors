@@ -2,6 +2,7 @@
 local composer = require( "composer" )
 local crypto = require("crypto")
 local scene = composer.newScene()
+local json = require("json")
 
 -- -----------------------------------------------------------------------------------
 -- Code outside of the scene event functions below will only be executed ONCE unless
@@ -127,9 +128,9 @@ function signIn:tap(event)
         if ( event.isError ) then
             print( "Network error: ", event.response )
         else
-            print ( "RESPONSE: " .. event.response )
-            serverResponse = event.response
-            if(serverResponse == "Logged in") then
+            serverResponse = json.decode(event.response)
+            print ( "RESPONSE: " .. serverResponse["Logged in"])
+            if(serverResponse) then
                 userName:removeSelf()
                 Password:removeSelf()
                 composer.gotoScene("MainMenu", options)

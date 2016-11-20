@@ -21,9 +21,8 @@ if($count == 1)
 {
 	$_SESSION['username'] = $username;
 	$_SESSION['password'] = $password;
-	echo $_SESSION['username'];
-	echo $_SESSION['password'];
 	echo "Logged in";
+	echo session_id();
 }
 else
 {
