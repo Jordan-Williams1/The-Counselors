@@ -3,6 +3,8 @@ local crypto = require("crypto")
 local scene = composer.newScene()
 local json = require("json")
 
+local serverResponse
+
 function scene:create( event )
 
     local sceneGroup = self.view

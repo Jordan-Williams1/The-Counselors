@@ -29,8 +29,10 @@ $masterP = $userArray[3];
 
 $findChild = "select * from child where username='$masterU' and password='$masterP';";
 $results = mysqli_query($con,$finduser);
-$childArray = $results->fetch_array();
-
+$count = 0;
+while ($row = mysqli_fetch_array($results, MYSQLI_NUM)) {
+      $json["children"][$count] = $row[3];
+}
 
 echo json_encode($json);
 
