@@ -65,119 +65,117 @@ function scene:show( event )
 
 
 
-local defaultField
+        local defaultField
 
-local function textListener( event )
+        local function textListener( event )
 
-    if ( event.phase == "began" ) then
-        -- User begins editing "defaultField"
+            if ( event.phase == "began" ) then
+                -- User begins editing "defaultField"
 
-    elseif ( event.phase == "ended" or event.phase == "submitted" ) then
-        -- Output resulting text from "defaultField"
-        
-        -- once the user inputs their user name then we can use it.
-        if userName.text == "jordan" then
-            print("ok")
-            Password.text = "ok"
+            elseif ( event.phase == "ended" or event.phase == "submitted" ) then
+                -- Output resulting text from "defaultField"
+                
+                -- once the user inputs their user name then we can use it.
+                if userName.text == "jordan" then
+                    print("ok")
+                    Password.text = "ok"
+                end
+
+            elseif ( event.phase == "editing" ) then
+                print( event.newCharacters )
+                print( event.oldText )
+                print( event.startPosition )
+                print( event.text )
+            end
         end
 
-    elseif ( event.phase == "editing" ) then
-        print( event.newCharacters )
-        print( event.oldText )
-        print( event.startPosition )
-        print( event.text )
-    end
-end
+        -- Create text field
+        userName = native.newTextField( display.contentWidth/2, display.contentHeight/2, display.contentWidth/2, 75)
+        userName:addEventListener( "userInput", textListener )
+        sceneGroup:insert(userName)
 
--- Create text field
-userName = native.newTextField( display.contentWidth/2, display.contentHeight/2, display.contentWidth/2, 75)
-userName:addEventListener( "userInput", textListener )
-sceneGroup:insert(userName)
+        Password = native.newTextField( display.contentWidth/2, display.contentHeight/2+ 150, display.contentWidth/2, 75)
+        Password:addEventListener( "userInput", textListener )
+        sceneGroup:insert(Password)
 
-Password = native.newTextField( display.contentWidth/2, display.contentHeight/2+ 150, display.contentWidth/2, 75)
-Password:addEventListener( "userInput", textListener )
-sceneGroup:insert(Password)
-
-PasswordCheck = native.newTextField( display.contentWidth/2, display.contentHeight/2+ 325, display.contentWidth/2, 75)
-Password:addEventListener( "userInput", textListener )
-sceneGroup:insert(PasswordCheck)
+        PasswordCheck = native.newTextField( display.contentWidth/2, display.contentHeight/2+ 325, display.contentWidth/2, 75)
+        Password:addEventListener( "userInput", textListener )
+        sceneGroup:insert(PasswordCheck)
 
 
-options =
-{
-   Password = Password.text,
-   userName = userName.text,
-   PasswordCheck = PasswordCheck.text,
-    
-    params = {
-        userName, 
-        Password,
-        session_ID
-    }
-}
+        options =
+        {
+           Password = Password.text,
+           userName = userName.text,
+           PasswordCheck = PasswordCheck.text,
+            
+            params = {
+                userName, 
+                Password,
+                session_ID
+            }
+        }
 
-function register:tap(event)
-    
-	print("tap")
-	
-	
-    local x = crypto.digest(crypto.md5,userName.text)
-    local y = crypto.digest(crypto.md5,Password.text)
-	local z = crypto.digest(crypto.md5,PasswordCheck.text)
-	
-	if (y ~= z) then
-	
-		local alert = native.showAlert("Registration Error","Passwords do not match.",{"OK"})
-	
-	else
-		local function networkListener( event )
-			if ( event.isError ) then
-				print( "Network error: ", event.response )
-			else
-				serverResponse = json.decode(event.response)
-				print ( "RESPONSE: " .. serverResponse["session_id"])
-				if(serverResponse["Logged in"] == "Logged in") then
-					userName:removeSelf()
-					Password:removeSelf()
-					options.params.session_ID = serverResponse["session_id"]
-					composer.gotoScene("MainMenu", options)
-				elseif serverResponse == "Invalid username or password" then
-					local alert = native.showAlert("Login Error","Invalid username or password.",{"OK"})
-				end
-			end
-		end
-	end
-end
-    local URL = "http://35.161.136.208/Login.php?loginUsername="..x.."&loginPassword="..y
-    -- Access server via post
-    network.request( URL, "GET", networkListener)   
+        function register:tap(event)
+            
+        	print("tap")
+        	
+        	
+            local x = crypto.digest(crypto.md5,userName.text)
+            local y = crypto.digest(crypto.md5,Password.text)
+        	local z = crypto.digest(crypto.md5,PasswordCheck.text)
+        	
+        	if (y ~= z) then
+        	
+        		local alert = native.showAlert("Registration Error","Passwords do not match.",{"OK"})
+        	
+        	else
+        		local function networkListener( event )
+        			if ( event.isError ) then
+        				print( "Network error: ", event.response )
+        			else
+        				serverResponse = json.decode(event.response)
+        				print ( "RESPONSE: " .. serverResponse["session_id"])
+        				if(serverResponse["Logged in"] == "Logged in") then
+        					userName:removeSelf()
+        					Password:removeSelf()
+        					options.params.session_ID = serverResponse["session_id"]
+        					composer.gotoScene("MainMenu", options)
+        				elseif serverResponse == "Invalid username or password" then
+        					local alert = native.showAlert("Login Error","Invalid username or password.",{"OK"})
+        				end
+        			end
+        		end
+        	end
+            local URL = "http://35.161.136.208/Login.php?loginUsername="..x.."&loginPassword="..y
+            -- Access server via post
+            network.request( URL, "GET", networkListener) 
+            
+        end
 
-    --signIn:removeSelf()
-    --signInText:removeSelf()
-    --forgotPassword:removeSelf()
-    --Register:removeSelf()
-    --titleOfApp:removeSelf()
-    
-    
-    --myButton:removeEventListener( "touch", myTouchListener )
-end
+          
 
-
-
-register:addEventListener("tap", signIn)
-
-    
-
-    elseif ( phase == "did" ) then
-        -- Code here runs when the scene is entirely on screen
+        --signIn:removeSelf()
+        --signInText:removeSelf()
+        --forgotPassword:removeSelf()
+        --Register:removeSelf()
+        --titleOfApp:removeSelf()
+        
+        
+        --myButton:removeEventListener( "touch", myTouchListener )
+        register:addEventListener("tap", signIn)
 
         
 
+        elseif ( phase == "did" ) then
+            -- Code here runs when the scene is entirely on screen
+
+            
 
 
-    end
+
+        end
 end
-
 
 -- hide()
 function scene:hide( event )
