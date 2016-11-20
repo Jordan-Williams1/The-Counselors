@@ -56,6 +56,9 @@ DisciplineNotWorked text,
 CONSTRAINT fk_childID1 FOREIGN KEY (username,password) references users(username,password)
 );
 
+INSERT INTO child (childID,username,password,name,age,grade,ExtrovertIntrovert,OutgoingShy,LeaderFollower,ActiveCalm,PlannerImpulsive,CaringUncaring,PersonalityNotes,Strengths,Weaknesses,MaturityLevel,Interests,DisciplineWorked,DisciplineNotWorked)
+values();
+
 CREATE TABLE behaviors
 ( childID int,
 desiredBehavior varchar(255),
