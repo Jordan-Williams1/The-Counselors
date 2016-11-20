@@ -8,6 +8,7 @@ local scene = composer.newScene()
 -- -----------------------------------------------------------------------------------
 
 local serverResponse
+local session
 
 function widget.newPanel( options )
     local customOptions = options or {}
@@ -139,6 +140,8 @@ function scene:show( event )
 
     local sceneGroup = self.view
     local phase = event.phase
+    session = event.params.session_ID
+    --print("SessionID: "..session)
 
      flag = false
 
@@ -343,7 +346,8 @@ function scene:show( event )
         end
     end
     --End of network listener
-    local URL = "http://35.161.136.208/mainMenu.php"
+    print("session ID2: "..session)
+    local URL = "http://35.161.136.208/mainMenu.php?sessionID="..session
     -- Access server via post
     network.request( URL, "GET", networkListener)
 

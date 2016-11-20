@@ -21,8 +21,8 @@ if($count == 1)
 {
 	$_SESSION['username'] = $username;
 	$_SESSION['password'] = $password;
-	echo "Logged in";
-	echo session_id();
+	$array = ["Logged in"=>"Logged in","session_id"=>session_id()];
+	echo json_encode($array);
 }
 else
 {

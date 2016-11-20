@@ -17,6 +17,8 @@ local json = require("json")
 -- -----------------------------------------------------------------------------------
 
 local serverResponse
+local session_ID
+local options
 
 -- create()
 function scene:create( event )
@@ -82,7 +84,7 @@ local function textListener( event )
 
     elseif ( event.phase == "ended" or event.phase == "submitted" ) then
         -- Output resulting text from "defaultField"
-       
+        
         -- once the user inputs their user name then we can use it.
         if userName.text == "jordan" then
             print("ok")
@@ -107,14 +109,15 @@ Password:addEventListener( "userInput", textListener )
 sceneGroup:insert(Password)
 
 
-local options =
+options =
 {
    Password = Password.text,
    userName = userName.text,
     
     params = {
         userName, 
-        Password
+        Password,
+        session_ID
     }
 }
 
@@ -129,10 +132,11 @@ function signIn:tap(event)
             print( "Network error: ", event.response )
         else
             serverResponse = json.decode(event.response)
-            print ( "RESPONSE: " .. serverResponse["Logged in"])
-            if(serverResponse) then
+            print ( "RESPONSE: " .. serverResponse["session_id"])
+            if(serverResponse["Logged in"] == "Logged in") then
                 userName:removeSelf()
                 Password:removeSelf()
+                options.params.session_ID = serverResponse["session_id"]
                 composer.gotoScene("MainMenu", options)
             elseif serverResponse == "Invalid username or password" then
                 local alert = native.showAlert("Login Error","Invalid username or password.",{"OK"})
