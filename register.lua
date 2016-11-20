@@ -28,32 +28,35 @@ function scene:show( event )
         background:setFillColor( 0.745098 ,0.745098 ,0.745098)
         sceneGroup:insert(background)
 		
-		local myText = display.newText( "New Username:", display.contentWidth/2, display.contentHeight/2.25 + 5,300, 50, 8 )
+		local myText = display.newText( "New Username:", display.contentWidth/2.25, display.contentHeight/2.25 + 5,300, 50 )
 		myText:setFillColor( 0, 0, 0 )
 		sceneGroup:insert(myText)
 		
 
-        local signIn = display.newRect(display.contentWidth/2, display.contentHeight/2+ 400, 200, 75)
-        signIn:setFillColor(0.372549, 0.619608, 0.627451)
-        sceneGroup:insert(signIn)
+        local register = display.newRect(display.contentWidth/2, display.contentHeight/2+ 400, 200, 75)
+        register:setFillColor(0.372549, 0.619608, 0.627451)
+        sceneGroup:insert(register)
+		
+		local Ptext = display.newText( "New Password:", display.contentWidth/2.25, display.contentHeight/2 + 175, 300, 230 )
+		Ptext:setFillColor( 0, 0, 0)
+		sceneGroup:insert(Ptext)
+		
+		local signInText2 = display.newText("Reenter Password:", display.contentWidth/2.25, display.contentHeight/2 + 250, 300, 100)
+        signInText2:setFillColor(0,0,0)
+        sceneGroup:insert(signInText2)
+
 		
         local signInText = display.newText("Register", display.contentWidth/2+30, display.contentHeight/2 + 400, 200, 50)
         signInText:setFillColor(0,0,0)
         sceneGroup:insert(signInText)
 		
 		
-		local signInText2 = display.newText("Reenter Password:", display.contentWidth/2+10, display.contentHeight/2 + 250, 300, 100)
-        signInText2:setFillColor(0,0,0)
-        sceneGroup:insert(signInText2)
 
         local titleOfApp = display.newText("Register User", display.contentWidth/2 ,200)
         titleOfApp.size = 110
         titleOfApp:setFillColor(0,0,0)
         sceneGroup:insert(titleOfApp)
 		
-		local Ptext = display.newText( "New Password:", display.contentWidth/2, display.contentHeight/2 + 175, 300, 230 )
-		Ptext:setFillColor( 0, 0, 0)
-		sceneGroup:insert(Ptext)
 
 
 
@@ -104,6 +107,7 @@ options =
 {
    Password = Password.text,
    userName = userName.text,
+   PasswordCheck = PasswordCheck.text,
     
     params = {
         userName, 
@@ -112,11 +116,19 @@ options =
     }
 }
 
-function signIn:tap(event)
-    print("tap")
+function register:tap(event)
+    
+	print("tap")
+	
+	
     local x = crypto.digest(crypto.md5,userName.text)
     local y = crypto.digest(crypto.md5,userName.text)
-
+	
+	if (local x != local y) then
+	
+		print("Password and Reentered Password do not match")
+	
+	else
 
     local function networkListener( event )
         if ( event.isError ) then
@@ -150,7 +162,7 @@ end
 
 
 
-signIn:addEventListener("tap", signIn)
+register:addEventListener("tap", signIn)
 
     
 
