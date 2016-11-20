@@ -124,7 +124,7 @@ function register:tap(event)
     local x = crypto.digest(crypto.md5,userName.text)
     local y = crypto.digest(crypto.md5,userName.text)
 	
-	if (local x != local y) then
+	if (x ~= y) then
 	
 		print("Password and Reentered Password do not match")
 	
@@ -146,6 +146,7 @@ function register:tap(event)
             end
         end
     end
+end
     local URL = "http://35.161.136.208/Login.php?loginUsername="..x.."&loginPassword="..y
     -- Access server via post
     network.request( URL, "GET", networkListener)   
