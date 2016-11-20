@@ -122,30 +122,31 @@ function register:tap(event)
 	
 	
     local x = crypto.digest(crypto.md5,userName.text)
-    local y = crypto.digest(crypto.md5,userName.text)
+    local y = crypto.digest(crypto.md5,Password.text)
+	local z = crypto.digest(crypto.md5,PasswordCheck.text)
 	
-	if (x ~= y) then
+	if (y ~= z) then
 	
-		print("Password and Reentered Password do not match")
+		local alert = native.showAlert("Registration Error","Passwords do not match.",{"OK"})
 	
 	else
-
-    local function networkListener( event )
-        if ( event.isError ) then
-            print( "Network error: ", event.response )
-        else
-            serverResponse = json.decode(event.response)
-            print ( "RESPONSE: " .. serverResponse["session_id"])
-            if(serverResponse["Logged in"] == "Logged in") then
-                userName:removeSelf()
-                Password:removeSelf()
-                options.params.session_ID = serverResponse["session_id"]
-                composer.gotoScene("MainMenu", options)
-            elseif serverResponse == "Invalid username or password" then
-                local alert = native.showAlert("Login Error","Invalid username or password.",{"OK"})
-            end
-        end
-    end
+		local function networkListener( event )
+			if ( event.isError ) then
+				print( "Network error: ", event.response )
+			else
+				serverResponse = json.decode(event.response)
+				print ( "RESPONSE: " .. serverResponse["session_id"])
+				if(serverResponse["Logged in"] == "Logged in") then
+					userName:removeSelf()
+					Password:removeSelf()
+					options.params.session_ID = serverResponse["session_id"]
+					composer.gotoScene("MainMenu", options)
+				elseif serverResponse == "Invalid username or password" then
+					local alert = native.showAlert("Login Error","Invalid username or password.",{"OK"})
+				end
+			end
+		end
+	end
 end
     local URL = "http://35.161.136.208/Login.php?loginUsername="..x.."&loginPassword="..y
     -- Access server via post

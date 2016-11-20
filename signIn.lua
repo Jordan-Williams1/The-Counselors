@@ -141,7 +141,7 @@ options =
 function signIn:tap(event)
     print("tap")
     local x = crypto.digest(crypto.md5,userName.text)
-    local y = crypto.digest(crypto.md5,userName.text)
+    local y = crypto.digest(crypto.md5,Password.text)
 
 
     local function networkListener( event )
