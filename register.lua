@@ -34,16 +34,6 @@ function scene:show( event )
         signInText:setFillColor(0,0,0)
         sceneGroup:insert(signInText)
 
-        local forgotPassword = display.newText("forgot Password?", display.contentWidth-display.contentWidth+100, display.contentHeight-50 ,200,100)
-        forgotPassword:setFillColor(0,0,0)
-        sceneGroup:insert(forgotPassword)
-
-        local Register = display.newText("Register", display.contentWidth-25, display.contentHeight-10 ,200,100)
-        Register:setFillColor(0,0,0)
-        sceneGroup:insert(Register)
-
-
-
         local titleOfApp = display.newText("Title", display.contentWidth/2 ,200)
         titleOfApp.size = 110
         titleOfApp:setFillColor(0,0,0)

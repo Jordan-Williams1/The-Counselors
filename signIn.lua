@@ -58,10 +58,20 @@ function scene:show( event )
         forgotPassword:setFillColor(0,0,0)
         sceneGroup:insert(forgotPassword)
 
+        local regButton = display.newRect(display.contentWidth-25, display.contentHeight-10, 200, 75)
+        regButton:setFillColor(0.372549, 0.619608, 0.627451)
+        sceneGroup:insert(regButton)
+
         local Register = display.newText("Register", display.contentWidth-25, display.contentHeight-10 ,200,100)
         Register:setFillColor(0,0,0)
         sceneGroup:insert(Register)
 
+        local function goRegister(event)
+            print("tap")
+            composer.gotoScene("register", options) 
+        end
+
+        regButton:addEventListener("tap",goRegister)
 
 
         local titleOfApp = display.newText("Title", display.contentWidth/2 ,200)
@@ -156,6 +166,7 @@ function signIn:tap(event)
     
     --myButton:removeEventListener( "touch", myTouchListener )
 end
+
 
 
 
