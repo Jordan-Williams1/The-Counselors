@@ -13,31 +13,46 @@ function scene:create( event )
 end
 
 function scene:show( event )
-
+	composer.removeScene("signin")
     local sceneGroup = self.view
     local phase = event.phase
     
 
     if ( phase == "will" ) then
         -- Code here runs when the scene is still off screen (but is about to come on screen)
-
-       
-        local background = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth, display.contentHeight)
+		
+		
+		local background = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth, display.contentHeight)
         background:setFillColor( 0.745098 ,0.745098 ,0.745098)
         sceneGroup:insert(background)
+		
+		local myText = display.newText( "New Username:", display.contentWidth/2, display.contentHeight/2.25 + 5,300, 50, 8 )
+		myText:setFillColor( 0, 0, 0 )
+		sceneGroup:insert(myText)
+		
 
-        local signIn = display.newRect(display.contentWidth/2, display.contentHeight/2+ 200, 200, 75)
+        local signIn = display.newRect(display.contentWidth/2, display.contentHeight/2+ 400, 200, 75)
         signIn:setFillColor(0.372549, 0.619608, 0.627451)
         sceneGroup:insert(signIn)
-
-        local signInText = display.newText("Sign In ", display.contentWidth/2+50, display.contentHeight/2 + 215, 200, 75)
+		
+        local signInText = display.newText("Register", display.contentWidth/2+30, display.contentHeight/2 + 400, 200, 50)
         signInText:setFillColor(0,0,0)
         sceneGroup:insert(signInText)
+		
+		
+		local signInText2 = display.newText("Reenter Password:", display.contentWidth/2+10, display.contentHeight/2 + 250, 300, 100)
+        signInText2:setFillColor(0,0,0)
+        sceneGroup:insert(signInText2)
 
-        local titleOfApp = display.newText("Title", display.contentWidth/2 ,200)
+        local titleOfApp = display.newText("Register User", display.contentWidth/2 ,200)
         titleOfApp.size = 110
         titleOfApp:setFillColor(0,0,0)
         sceneGroup:insert(titleOfApp)
+		
+		local Ptext = display.newText( "New Password:", display.contentWidth/2, display.contentHeight/2 + 175, 300, 230 )
+		Ptext:setFillColor( 0, 0, 0)
+		sceneGroup:insert(Ptext)
+
 
 
 
@@ -74,9 +89,13 @@ userName = native.newTextField( display.contentWidth/2, display.contentHeight/2,
 userName:addEventListener( "userInput", textListener )
 sceneGroup:insert(userName)
 
-Password = native.newTextField( display.contentWidth/2, display.contentHeight/2+ 100, display.contentWidth/2, 75)
+Password = native.newTextField( display.contentWidth/2, display.contentHeight/2+ 150, display.contentWidth/2, 75)
 Password:addEventListener( "userInput", textListener )
 sceneGroup:insert(Password)
+
+PasswordCheck = native.newTextField( display.contentWidth/2, display.contentHeight/2+ 325, display.contentWidth/2, 75)
+Password:addEventListener( "userInput", textListener )
+sceneGroup:insert(PasswordCheck)
 
 
 options =

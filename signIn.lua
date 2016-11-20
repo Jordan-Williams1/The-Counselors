@@ -66,12 +66,7 @@ function scene:show( event )
         Register:setFillColor(0,0,0)
         sceneGroup:insert(Register)
 
-        local function goRegister(event)
-            print("tap")
-            composer.gotoScene("register", options) 
-        end
-
-        regButton:addEventListener("tap",goRegister)
+        
 
 
         local titleOfApp = display.newText("Title", display.contentWidth/2 ,200)
@@ -122,6 +117,14 @@ sceneGroup:insert(Password)
 Password.text = "testMaster"
 --Password.text = "testSub"
 
+		local function goRegister(event)
+			userName:removeSelf()
+			Password:removeSelf()
+            print("tap")
+            composer.gotoScene("register", options) 
+        end
+
+        regButton:addEventListener("tap",goRegister)
 
 options =
 {

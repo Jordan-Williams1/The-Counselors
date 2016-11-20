@@ -106,7 +106,7 @@ function scene:show( event )
         plus:addEventListener("tap", plus)
 
 
-         function backButton:tap(event)
+        function backButton:tap(event)
 
         
             writeBehavior:removeSelf()
