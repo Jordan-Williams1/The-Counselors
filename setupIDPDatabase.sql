@@ -14,6 +14,7 @@ CREATE TABLE users
 ( username varchar(100),
 password varchar(100),
 masterUserID varchar(100),
+masterPassword varchar(100),
 childrenPriv int,
 childrenIDP boolean,
 childrenBehHist boolean,
@@ -25,9 +26,9 @@ primary key(username,password)
 );
 
 INSERT INTO users (username,password,masterUserID,childrenPriv,childrenIDP,childrenBehHist,childrenDesc,familySchedPriv,behaviorPriv,conRewPriv) 
-values("95cf5007322b0c2a87ebb3d3089c4569","95cf5007322b0c2a87ebb3d3089c4569","95cf5007322b0c2a87ebb3d3089c4569",2,TRUE,TRUE,TRUE,2,2,2);
+values("95cf5007322b0c2a87ebb3d3089c4569","95cf5007322b0c2a87ebb3d3089c4569","95cf5007322b0c2a87ebb3d3089c4569","95cf5007322b0c2a87ebb3d3089c4569",2,TRUE,TRUE,TRUE,2,2,2);
 INSERT INTO users (username,password,masterUserID,childrenPriv,childrenIDP,childrenBehHist,childrenDesc,familySchedPriv,behaviorPriv,conRewPriv) 
-values("cc25eacef7db3c45a4944fb6e3957452","cc25eacef7db3c45a4944fb6e3957452","95cf5007322b0c2a87ebb3d3089c4569",1,TRUE,TRUE,FALSE,2,1,1);
+values("cc25eacef7db3c45a4944fb6e3957452","cc25eacef7db3c45a4944fb6e3957452","95cf5007322b0c2a87ebb3d3089c4569","95cf5007322b0c2a87ebb3d3089c4569",1,TRUE,TRUE,FALSE,2,1,1);
 #test values for testMaster and testSub, representing a master account and a subaccount of the master account.
 
 

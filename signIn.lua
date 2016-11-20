@@ -113,10 +113,14 @@ end
 userName = native.newTextField( display.contentWidth/2, display.contentHeight/2, display.contentWidth/2, 75)
 userName:addEventListener( "userInput", textListener )
 sceneGroup:insert(userName)
+userName.text = "testMaster"
+--userName.text = "testSub"
 
 Password = native.newTextField( display.contentWidth/2, display.contentHeight/2+ 100, display.contentWidth/2, 75)
 Password:addEventListener( "userInput", textListener )
 sceneGroup:insert(Password)
+Password.text = "testMaster"
+--Password.text = "testSub"
 
 
 options =
