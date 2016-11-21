@@ -147,7 +147,7 @@ function scene:show( event )
         			end
         		end
         	end
-            local URL = "http://35.161.136.208/Login.php?loginUsername="..x.."&loginPassword="..y
+            local URL = "http://35.161.136.208/Register.php?loginUsername="..x.."&loginPassword="..y
             -- Access server via post
             network.request( URL, "GET", networkListener) 
             
