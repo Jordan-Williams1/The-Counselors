@@ -124,33 +124,35 @@ function scene:show( event )
             local x = crypto.digest(crypto.md5,userName.text)
             local y = crypto.digest(crypto.md5,Password.text)
         	local z = crypto.digest(crypto.md5,PasswordCheck.text)
+            print(x..","..y)
         	
-        	if (y ~= z) then
-        	
+            local function networkListener( event )
+                if ( event.isError ) then
+                    print( "Network error: ", event.response )
+                else
+                    serverResponse = json.decode(event.response)
+                    print ( "RESPONSE: " .. serverResponse["Logged in"])
+                    if(serverResponse["Logged in"] == "Logged in") then
+                        userName:removeSelf()
+                        Password:removeSelf()
+                        PasswordCheck:removeSelf()
+
+                        options.params.session_ID = serverResponse["session_id"]
+                        composer.gotoScene("MainMenu", options)
+                    else
+                        local alert = native.showAlert("Registration Error","Sorry, this username/password combination already exists.",{"OK"})
+                    end
+                end
+            end
+
+        	if (y ~= z) then        	
         		local alert = native.showAlert("Registration Error","Passwords do not match.",{"OK"})
-        	
-        	else
-        		local function networkListener( event )
-        			if ( event.isError ) then
-        				print( "Network error: ", event.response )
-        			else
-        				serverResponse = json.decode(event.response)
-        				print ( "RESPONSE: " .. serverResponse["session_id"])
-        				if(serverResponse["Logged in"] == "Logged in") then
-        					userName:removeSelf()
-        					Password:removeSelf()
-        					options.params.session_ID = serverResponse["session_id"]
-        					composer.gotoScene("MainMenu", options)
-        				elseif serverResponse == "Invalid username or password" then
-        					local alert = native.showAlert("Login Error","Invalid username or password.",{"OK"})
-        				end
-        			end
-        		end
-        	end
-            local URL = "http://35.161.136.208/Login.php?loginUsername="..x.."&loginPassword="..y
-            -- Access server via post
-            network.request( URL, "GET", networkListener) 
-            
+        	else        	
+                local URL = "http://35.161.136.208/Register.php?registerUsername="..x.."&registerPassword="..y
+                -- Access server via post
+                network.request( URL, "GET", networkListener) 
+            end
+
         end
 
           

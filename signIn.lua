@@ -143,7 +143,6 @@ function signIn:tap(event)
     local x = crypto.digest(crypto.md5,userName.text)
     local y = crypto.digest(crypto.md5,Password.text)
 
-
     local function networkListener( event )
         if ( event.isError ) then
             print( "Network error: ", event.response )
