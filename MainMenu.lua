@@ -522,6 +522,8 @@ function scene:show( event )
     panel.slideBack = display.newRect(-100, -500, 70, 75)
     panel.slideBack:setFillColor(0.372549, 0.619608, 0.627451)
     panel:insert(panel.slideBack)
+    
+
         
         --sceneGroup:insert(back)
 

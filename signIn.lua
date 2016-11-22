@@ -74,11 +74,11 @@ function scene:show( event )
         forgotPassword:setFillColor(0,0,0)
         sceneGroup:insert(forgotPassword)
 
-        local regButton = display.newRect(display.contentWidth-25, display.contentHeight-10, 200, 75)
+        local regButton = display.newRect(display.contentWidth-50, display.contentHeight-20, 200, 75)
         regButton:setFillColor(0.372549, 0.619608, 0.627451)
         sceneGroup:insert(regButton)
 
-        local Register = display.newText("Register", display.contentWidth-25, display.contentHeight-10 ,200,100)
+        local Register = display.newText("Register", display.contentWidth-50, display.contentHeight-10 ,200,100)
         Register:setFillColor(0,0,0)
         sceneGroup:insert(Register)
 

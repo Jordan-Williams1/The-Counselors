@@ -1,5 +1,5 @@
 local composer = require( "composer" )
-
+local widget = require("widget")
 local scene = composer.newScene()
 
 
@@ -37,11 +37,9 @@ function scene:show( event )
         background:setFillColor( 0.745098 ,0.745098 ,0.745098)
         sceneGroup:insert(background)
 
-        local backButton = display.newRect(display.contentWidth/2 - 270, display.contentHeight/2 - 480, 70, 75)
-        backButton:setFillColor(0.372549, 0.619608, 0.627451)
-        sceneGroup:insert(backButton)
+       
 
-        local pickText = display.newText("Child NAME", display.contentWidth/2, display.contentHeight-display.contentHeight + 100, native.systemFont, 50)
+        local pickText = display.newText("Child Information Scene", display.contentWidth/2, display.contentHeight-display.contentHeight + 100, native.systemFont, 50)
         pickText.size = 40
         pickText:setFillColor(0,0,0)
         sceneGroup:insert(pickText)
@@ -73,15 +71,40 @@ function scene:show( event )
         behavioralHistoryText:setFillColor(0,0,0)
         sceneGroup:insert(behavioralHistoryText)
 
-         function backButton:tap(event)
+
+        local backButtonNew = widget.newButton(
+		    {
+		        --width = 500,
+		        --heigth = 500,
+		        id = "backButtonNew",
+		        defaultFile = "backArrow3.png",
+		        onEvent = handleButtonEvent
+		    }
+		)
+
+		backButtonNew.x = display.contentWidth/2 - 320 
+		backButtonNew.y = display.contentHeight - display.contentHeight + 100
+		sceneGroup:insert(backButtonNew)
+
+         function backButtonNew:tap(event)
 
             composer.gotoScene("addChild")
         
         end
 
         -- this listens to see if object has been tapped
-        backButton:addEventListener("tap", backButton)
+        backButtonNew:addEventListener("tap", backButtonNew)
+         
 
+        function IDP:tap(event)
+
+            composer.gotoScene("childIDP")
+        
+        end
+
+        -- this listens to see if object has been tapped
+        IDP:addEventListener("tap", IDP)
+         
 
 
        -- function childButton:tap(event)

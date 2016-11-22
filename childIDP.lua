@@ -1,5 +1,5 @@
 local composer = require( "composer" )
-
+local widget = require("widget")
 local scene = composer.newScene()
 
 
@@ -42,29 +42,46 @@ function scene:show( event )
         pickText:setFillColor(0,0,0)
         sceneGroup:insert(pickText)
 
-       
+       local childButton = display.newRect(display.contentWidth/2, display.contentHeight/2-200, 400, 75)
+        childButton:setFillColor(0.372549, 0.619608, 0.627451)
+        sceneGroup:insert(childButton)
+
 
         local childTEXT = display.newText("Johnny", display.contentWidth/2+140, display.contentHeight/2-200, 400, 75)
         childTEXT.size = 40
         childTEXT:setFillColor(0,0,0)
         sceneGroup:insert(childTEXT)
 
-        
+        local backButtonNew = widget.newButton(
+		    {
+		        --width = 500,
+		        --heigth = 500,
+		        id = "backButtonNew",
+		        defaultFile = "backArrow3.png",
+		        onEvent = handleButtonEvent
+		    }
+		)
 
-         function backButton:tap(event)
+		backButtonNew.x = display.contentWidth/2 - 320 
+		backButtonNew.y = display.contentHeight - display.contentHeight + 100
+		sceneGroup:insert(backButtonNew)
 
-            composer.gotoScene("MainMenu")
+         function backButtonNew:tap(event)
+
+            composer.gotoScene("childInformation")
         
         end
 
         -- this listens to see if object has been tapped
-        backButton:addEventListener("tap", backButton)
+        backButtonNew:addEventListener("tap", backButtonNew)
+
+       
 
 
 
         function childButton:tap(event)
 
-            composer.gotoScene("childInformation")
+            --composer.gotoScene("childInformation")
         
         end
 

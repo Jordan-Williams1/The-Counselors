@@ -1,5 +1,5 @@
 local composer = require( "composer" )
-
+local widget = require("widget")
 local scene = composer.newScene()
 
 -- -----------------------------------------------------------------------------------
@@ -55,9 +55,22 @@ function scene:show( event )
         addTEXT:setFillColor(0,0,0)
         sceneGroup:insert(addTEXT)
 
-        local backButton = display.newRect(display.contentWidth/2 - 270, display.contentHeight/2 - 480, 70, 75)
-        backButton:setFillColor(0.372549, 0.619608, 0.627451)
-        sceneGroup:insert(backButton)
+       local backButtonNew = widget.newButton(
+		    {
+		        --width = 500,
+		        --heigth = 500,
+		        id = "backButtonNew",
+		        defaultFile = "backArrow3.png",
+		        onEvent = handleButtonEvent
+		    }
+		)
+
+		backButtonNew.x = display.contentWidth/2 - 320 
+		backButtonNew.y = display.contentHeight - display.contentHeight + 100
+		sceneGroup:insert(backButtonNew)
+
+         
+        
 
         local defaultField
 
@@ -106,17 +119,16 @@ function scene:show( event )
         plus:addEventListener("tap", plus)
 
 
-        function backButton:tap(event)
+        function backButtonNew:tap(event)
 
-        
-            writeBehavior:removeSelf()
             
-            composer.gotoScene("problemBehaviorList")
+            writeBehavior:removeSelf()
+			composer.gotoScene("problemBehaviorList")
         
         end
 
         -- this listens to see if object has been tapped
-        backButton:addEventListener("tap", backButton)
+        backButtonNew:addEventListener("tap", backButtonNew)
 
 
     elseif ( phase == "did" ) then

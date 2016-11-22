@@ -1,5 +1,5 @@
 local composer = require( "composer" )
-
+local widget = require("widget")
 local scene = composer.newScene()
 
 -- -----------------------------------------------------------------------------------
@@ -36,18 +36,31 @@ function scene:show( event )
         background:setFillColor( 0.745098 ,0.745098 ,0.745098)
         sceneGroup:insert(background)
 
-        local backButton = display.newRect(display.contentWidth/2 - 270, display.contentHeight/2 - 480, 70, 75)
-        backButton:setFillColor(0.372549, 0.619608, 0.627451)
-        sceneGroup:insert(backButton)
+       
 
-         function backButton:tap(event)
+        -- Create the widget
+		local backButtonNew = widget.newButton(
+		    {
+		        --width = 500,
+		        --heigth = 500,
+		        id = "backButtonNew",
+		        defaultFile = "backArrow3.png",
+		        onEvent = handleButtonEvent
+		    }
+		)
+
+		backButtonNew.x = display.contentWidth/2 - 320 
+		backButtonNew.y = display.contentHeight - display.contentHeight + 100
+		sceneGroup:insert(backButtonNew)
+
+         function backButtonNew:tap(event)
 
             composer.gotoScene("MainMenu")
         
         end
 
         -- this listens to see if object has been tapped
-        backButton:addEventListener("tap", backButton)
+        backButtonNew:addEventListener("tap", backButtonNew)
 
         local IDP_TEXT = display.newText("Family Schedule (Calendar probably not possible. Any other preference?) Maybe a Log to keep track of everything", display.contentWidth/2+50, display.contentHeight/2, 400, 400)
         IDP_TEXT.size = 40

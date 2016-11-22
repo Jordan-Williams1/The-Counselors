@@ -84,7 +84,7 @@ function scene:show( event )
 		        --width = 500,
 		        --heigth = 500,
 		        id = "IDP_Reference",
-		        defaultFile = "Rectangle3.png",
+		        defaultFile = "part1.png",
 		        onEvent = handleButtonEvent
 		    }
 		)
@@ -93,47 +93,121 @@ function scene:show( event )
 		IDP_Reference.y = display.contentHeight/2-200
 		sceneGroup:insert(IDP_Reference)
 
-        local family_Schedule = display.newRect(display.contentWidth/2, display.contentHeight/2 - 100, 400, 75)
-        family_Schedule:setFillColor(0.372549, 0.619608, 0.627451)
-        sceneGroup:insert(family_Schedule)
+        --local family_Schedule = display.newRect(display.contentWidth/2, display.contentHeight/2 - 100, 400, 75)
+       -- family_Schedule:setFillColor(0.372549, 0.619608, 0.627451)
+        --sceneGroup:insert(family_Schedule)
 
-        local IDPTextII = display.newText("Part II Understand Parent Roles and Responsibilities ", display.contentWidth/2, display.contentHeight/2 - 100, 400, 75)
-        IDPTextII:setFillColor(0,0,0)
-        sceneGroup:insert(IDPTextII)
+       -- local IDPTextII = display.newText("Part II Understand Parent Roles and Responsibilities ", display.contentWidth/2, display.contentHeight/2 - 100, 400, 75)
+       -- IDPTextII:setFillColor(0,0,0)
+       -- sceneGroup:insert(IDPTextII)
 
-         local Problem_Behavior_List = display.newRect(display.contentWidth/2, display.contentHeight/2, 400, 75)
-        Problem_Behavior_List:setFillColor(0.372549, 0.619608, 0.627451)
-        sceneGroup:insert(Problem_Behavior_List)
+        -- Create the widget
+		local family_Schedule = widget.newButton(
+		    {
+		        --width = 500,
+		        --heigth = 500,
+		        id = "family_Schedule",
+		        defaultFile = "part2.png",
+		        onEvent = handleButtonEvent
+		    }
+		)
 
-        local IDPTextIII = display.newText("Part III Know the Basics", display.contentWidth/2, display.contentHeight/2, 400, 75)
-        IDPTextIII:setFillColor(0,0,0)
-        sceneGroup:insert(IDPTextIII)
+		family_Schedule.x = display.contentWidth/2 
+		family_Schedule.y = display.contentHeight/2-80
+		sceneGroup:insert(family_Schedule)
+
+        --local Problem_Behavior_List = display.newRect(display.contentWidth/2, display.contentHeight/2, 400, 75)
+        --Problem_Behavior_List:setFillColor(0.372549, 0.619608, 0.627451)
+        --sceneGroup:insert(Problem_Behavior_List)
+
+        --local IDPTextIII = display.newText("Part III Know the Basics", display.contentWidth/2, display.contentHeight/2, 400, 75)
+        --IDPTextIII:setFillColor(0,0,0)
+        --sceneGroup:insert(IDPTextIII)
+
+         -- Create the widget
+		local Problem_Behavior_List = widget.newButton(
+		    {
+		        --width = 500,
+		        --heigth = 500,
+		        id = "Problem_Behavior_List",
+		        defaultFile = "part3.png",
+		        onEvent = handleButtonEvent
+		    }
+		)
+
+		Problem_Behavior_List.x = display.contentWidth/2 
+		Problem_Behavior_List.y = display.contentHeight/2 + 40
+		sceneGroup:insert(Problem_Behavior_List)
+
+        --local Desired_Behavior_List = display.newRect(display.contentWidth/2, display.contentHeight/2 + 100, 400, 75)
+        --Desired_Behavior_List:setFillColor(0.372549, 0.619608, 0.627451)
+        --sceneGroup:insert(Desired_Behavior_List)
+
+        --local IDPTextIV = display.newText("Part IV Develope an Individualized Discipline Plan", display.contentWidth/2, display.contentHeight/2 + 100, 400, 75)
+        --IDPTextIV:setFillColor(0,0,0)
+        --sceneGroup:insert(IDPTextIV)
+
+         -- Create the widget
+		local Desired_Behavior_List = widget.newButton(
+		    {
+		        --width = 500,
+		        --heigth = 500,
+		        id = "Desired_Behavior_List",
+		        defaultFile = "part4.png",
+		        onEvent = handleButtonEvent
+		    }
+		)
+
+		Desired_Behavior_List.x = display.contentWidth/2 
+		Desired_Behavior_List.y = display.contentHeight/2+160
+		sceneGroup:insert(Desired_Behavior_List)
+
+        --local Consequence_Log = display.newRect(display.contentWidth/2, display.contentHeight/2 + 200, 400, 75)
+        --Consequence_Log:setFillColor(0.372549, 0.619608, 0.627451)
+        --sceneGroup:insert(Consequence_Log)
+
+        --local IDPTextV = display.newText("Part V Implement the Individualized Discipline Plan", display.contentWidth/2, display.contentHeight/2 + 200, 400, 75)
+        --IDPTextV:setFillColor(0,0,0)
+        --sceneGroup:insert(IDPTextV)
+
+         -- Create the widget
+		local Consequence_Log = widget.newButton(
+		    {
+		        --width = 500,
+		        --heigth = 500,
+		        id = "Consequence_Log",
+		        defaultFile = "part5.png",
+		        onEvent = handleButtonEvent
+		    }
+		)
+
+		Consequence_Log.x = display.contentWidth/2 
+		Consequence_Log.y = display.contentHeight/2+280
+		sceneGroup:insert(Consequence_Log)
 
 
-        local Desired_Behavior_List = display.newRect(display.contentWidth/2, display.contentHeight/2 + 100, 400, 75)
-        Desired_Behavior_List:setFillColor(0.372549, 0.619608, 0.627451)
-        sceneGroup:insert(Desired_Behavior_List)
+        --local Reward_Log = display.newRect(display.contentWidth/2, display.contentHeight/2 + 300, 400, 75)
+        --Reward_Log:setFillColor(0.372549, 0.619608, 0.627451)
+        --sceneGroup:insert(Reward_Log)
 
-        local IDPTextIV = display.newText("Part IV Develope an Individualized Discipline Plan", display.contentWidth/2, display.contentHeight/2 + 100, 400, 75)
-        IDPTextIV:setFillColor(0,0,0)
-        sceneGroup:insert(IDPTextIV)
+        --local IDPTextVI = display.newText("Part VI Evaluate", display.contentWidth/2, display.contentHeight/2 + 300, 400, 75)
+        --IDPTextVI:setFillColor(0,0,0)
+        --sceneGroup:insert(IDPTextVI)
 
-        local Consequence_Log = display.newRect(display.contentWidth/2, display.contentHeight/2 + 200, 400, 75)
-        Consequence_Log:setFillColor(0.372549, 0.619608, 0.627451)
-        sceneGroup:insert(Consequence_Log)
+        -- Create the widget
+		local Reward_Log = widget.newButton(
+		    {
+		        --width = 500,
+		        --heigth = 500,
+		        id = "Reward_Log",
+		        defaultFile = "part6.png",
+		        onEvent = handleButtonEvent
+		    }
+		)
 
-        local IDPTextV = display.newText("Part V Implement the Individualized Discipline Plan", display.contentWidth/2, display.contentHeight/2 + 200, 400, 75)
-        IDPTextV:setFillColor(0,0,0)
-        sceneGroup:insert(IDPTextV)
-
-
-        local Reward_Log = display.newRect(display.contentWidth/2, display.contentHeight/2 + 300, 400, 75)
-        Reward_Log:setFillColor(0.372549, 0.619608, 0.627451)
-        sceneGroup:insert(Reward_Log)
-
-        local IDPTextVI = display.newText("Part VI Evaluate", display.contentWidth/2, display.contentHeight/2 + 300, 400, 75)
-        IDPTextVI:setFillColor(0,0,0)
-        sceneGroup:insert(IDPTextVI)
+		Reward_Log.x = display.contentWidth/2 
+		Reward_Log.y = display.contentHeight/2+400
+		sceneGroup:insert(Reward_Log)
 
 
         function backButtonNew:tap(event)
