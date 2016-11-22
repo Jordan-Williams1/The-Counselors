@@ -152,7 +152,6 @@ function scene:show( event )
                 -- Access server via post
                 network.request( URL, "GET", networkListener) 
             end
-
         end
 
           
