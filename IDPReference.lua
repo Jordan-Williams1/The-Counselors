@@ -1,5 +1,5 @@
 local composer = require( "composer" )
-
+local widget = require( "widget" )
 local scene = composer.newScene()
 
 -- -----------------------------------------------------------------------------------
@@ -40,10 +40,35 @@ function scene:show( event )
         background:setFillColor( 0.745098 ,0.745098 ,0.745098)
         sceneGroup:insert(background)
 
+
+
+		-- Function to handle button events
+		local function handleButtonEvent( event )
+
+		    if ( "ended" == event.phase ) then
+		        print( "Button was pressed and released" )
+		    end
+		end
+
+		-- Create the widget
+		local backButtonNew = widget.newButton(
+		    {
+		        --width = 500,
+		        --heigth = 500,
+		        id = "backButtonNew",
+		        defaultFile = "backArrow3.png",
+		        onEvent = handleButtonEvent
+		    }
+		)
+
+		backButtonNew.x = display.contentWidth/2 - 270 
+		backButtonNew.y = display.contentHeight/2 - 480
+		sceneGroup:insert(backButtonNew)
+
        
-        local backButton = display.newRect(display.contentWidth/2 - 270, display.contentHeight/2 - 480, 70, 75)
-        backButton:setFillColor(0.372549, 0.619608, 0.627451)
-        sceneGroup:insert(backButton)
+       -- local backButton = display.newRect(display.contentWidth/2 - 270, display.contentHeight/2 - 480, 70, 75)
+        --backButton:setFillColor(0.372549, 0.619608, 0.627451)
+        --sceneGroup:insert(backButton)
 
         local IDP_Reference = display.newRect(display.contentWidth/2, display.contentHeight/2-200, 400, 75)
         IDP_Reference:setFillColor(0.372549, 0.619608, 0.627451)
@@ -96,14 +121,14 @@ function scene:show( event )
         sceneGroup:insert(IDPTextVI)
 
 
-        function backButton:tap(event)
+        --function backButton:tap(event)
 
-            composer.gotoScene("MainMenu")
+        --    composer.gotoScene("MainMenu")
         
-        end
+        --end
 
         -- this listens to see if object has been tapped
-        backButton:addEventListener("tap", backButton)
+       -- backButton:addEventListener("tap", backButton)
 
 
 

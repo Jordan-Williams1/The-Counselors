@@ -175,6 +175,8 @@ function scene:show( event )
     
     end
 
+
+
     -- this listens to see if object has been tapped
     IDP_Reference:addEventListener("tap", IDP_Reference)
 
@@ -194,7 +196,7 @@ function scene:show( event )
                 sceneGroup:insert(Main)
             end
 
------------------START CHILD PRIVILEGES
+            -----------------START CHILD PRIVILEGES
 
     -- ScrollView listener
     local function scrollListener( event )
@@ -344,6 +346,7 @@ function scene:show( event )
         Reward_Log:addEventListener("tap", Reward_Log)
 
         end
+
     end
     --End of network listener
     print("session ID2: "..session)
@@ -353,7 +356,7 @@ function scene:show( event )
 
 
 
-        -- new sliding panel widget
+    -- new hambuger sliding panel widget
     local show = display.newRect(display.contentWidth/2 + 300, display.contentHeight/2 - 580, 70, 75)
         show:setFillColor(0.372549, 0.619608, 0.627451)
         sceneGroup:insert(show)
@@ -364,11 +367,8 @@ function scene:show( event )
         onComplete = panelTransDone,
         width = display.contentWidth/2,
         height = display.contentHeight
-       
-       
     }
     
-    --panel.y = display.contentHeight-display.contentHeight+400
 
     sceneGroup:insert(panel)
 
@@ -388,29 +388,32 @@ function scene:show( event )
     panel.panelButton:setFillColor(0.372549, 0.619608, 0.627451)
     panel:insert(panel.panelButton)
 
-
+    -- idp button on panel
     panel.Quick_IDP = display.newRect( panel.width/8,-300 , 200, 75)
     panel.Quick_IDP:setFillColor(0.372549, 0.619608, 0.627451)
     panel:insert(panel.Quick_IDP)
 
+    -- account Managment button on panel
     panel.accountManagment = display.newRect( panel.width/8, -200 , 200, 75)
     panel.accountManagment:setFillColor(0.372549, 0.619608, 0.627451)
     panel:insert(panel.accountManagment)
 
+    -- words in panel
     panel.IDP_words = display.newText("Quick IDP", panel.width/8, -400,  native.systemFontBold, 18  )
     panel.IDP_words:setFillColor( 0, 0, 0 )
     panel:insert( panel.IDP_words )
 
+    -- words in panel
     panel.signOut = display.newText("Sign Out", panel.width/8, -200,  native.systemFontBold, 18  )
     panel.signOut:setFillColor( 0, 0, 0 )
     panel:insert( panel.signOut )
 
+    -- words in panel
     panel.accountManagmentText = display.newText( "Account Managment", panel.width/8, -300 , native.systemFontBold, 18 )
     panel.accountManagmentText:setFillColor( 0, 0, 0 )
     panel:insert( panel.accountManagmentText )
 
-        
-
+    -- slide back button
     panel.slideBack = display.newRect(-100, -500, 70, 75)
     panel.slideBack:setFillColor(0.372549, 0.619608, 0.627451)
     panel:insert(panel.slideBack)
