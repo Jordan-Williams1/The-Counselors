@@ -70,22 +70,29 @@ function scene:show( event )
         --signInText:setFillColor(0,0,0)
         --sceneGroup:insert(signInText)
 
-        local forgotPassword = display.newText("forgot Password?", display.contentWidth-display.contentWidth+100, display.contentHeight-50 ,200,100)
+        local forgotPassword = display.newText("Forgot Password?", display.contentWidth-display.contentWidth+100, display.contentHeight-50 ,200,100)
         forgotPassword:setFillColor(0,0,0)
         sceneGroup:insert(forgotPassword)
 
-        local regButton = display.newRect(display.contentWidth-50, display.contentHeight-20, 200, 75)
+        local regButton = display.newRect(display.contentWidth-70, display.contentHeight-30, 200, 75)
         regButton:setFillColor(0.372549, 0.619608, 0.627451)
         sceneGroup:insert(regButton)
 
-        local Register = display.newText("Register", display.contentWidth-50, display.contentHeight-10 ,200,100)
+        local Register = display.newText("Register", display.contentWidth-60, display.contentHeight-10 ,200,100)
         Register:setFillColor(0,0,0)
         sceneGroup:insert(Register)
 
         
+        local titleOptions = {
+            text = "Discipline App for Parents", 
+            x = display.contentWidth/2,
+            y = display.contentHeight/4,
+            width = display.contentWidth-20,
+            height = 400,
+            align = "center"
+        }
 
-
-        local titleOfApp = display.newText("Title", display.contentWidth/2 ,200)
+        local titleOfApp = display.newText(titleOptions)
         titleOfApp.size = 110
         titleOfApp:setFillColor(0,0,0)
         sceneGroup:insert(titleOfApp)
