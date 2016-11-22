@@ -3,6 +3,7 @@ local composer = require( "composer" )
 local crypto = require("crypto")
 local scene = composer.newScene()
 local json = require("json")
+local widget = require("widget")
 
 -- -----------------------------------------------------------------------------------
 -- Code outside of the scene event functions below will only be executed ONCE unless
@@ -46,13 +47,28 @@ function scene:show( event )
         background:setFillColor( 0.745098 ,0.745098 ,0.745098)
         sceneGroup:insert(background)
 
-        local signIn = display.newRect(display.contentWidth/2, display.contentHeight/2+ 200, 200, 75)
-        signIn:setFillColor(0.372549, 0.619608, 0.627451)
-        sceneGroup:insert(signIn)
+        --local signIn = display.newRect(display.contentWidth/2, display.contentHeight/2+ 200, 200, 75)
+        --signIn:setFillColor(0.372549, 0.619608, 0.627451)
+        --sceneGroup:insert(signIn)
 
-        local signInText = display.newText("Sign In ", display.contentWidth/2+50, display.contentHeight/2 + 215, 200, 75)
-        signInText:setFillColor(0,0,0)
-        sceneGroup:insert(signInText)
+         -- Create the widget
+		local signIn = widget.newButton(
+		    {
+		        --width = 500,
+		        --heigth = 500,
+		        id = "signIn",
+		        defaultFile = "signIn.png",
+		        onEvent = handleButtonEvent
+		    }
+		)
+
+		signIn.x = display.contentWidth/2 
+		signIn.y = display.contentHeight/2+ 200
+		sceneGroup:insert(signIn)
+
+        --local signInText = display.newText("Sign In ", display.contentWidth/2+50, display.contentHeight/2 + 215, 200, 75)
+        --signInText:setFillColor(0,0,0)
+        --sceneGroup:insert(signInText)
 
         local forgotPassword = display.newText("forgot Password?", display.contentWidth-display.contentWidth+100, display.contentHeight-50 ,200,100)
         forgotPassword:setFillColor(0,0,0)

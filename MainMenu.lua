@@ -161,14 +161,29 @@ function scene:show( event )
     background:setFillColor( 0.745098 ,0.745098 ,0.745098)
     sceneGroup:insert(background)
 
-    local IDP_Reference = display.newRect(display.contentWidth/2, display.contentHeight/2, 400, 75)
-    IDP_Reference:setFillColor(0.372549, 0.619608, 0.627451)
-    sceneGroup:insert(IDP_Reference)
+    --local IDP_Reference = display.newRect(display.contentWidth/2, display.contentHeight/2, 400, 75)
+    --IDP_Reference:setFillColor(0.372549, 0.619608, 0.627451)
+    --sceneGroup:insert(IDP_Reference)
 
-    local IDP_TEXT = display.newText("IDP Reference", display.contentWidth/2+50, display.contentHeight/2, 400, 75)
-    IDP_TEXT.size = 40
-    IDP_TEXT:setFillColor(0,0,0)
-    sceneGroup:insert(IDP_TEXT)
+    --local IDP_TEXT = display.newText("IDP Reference", display.contentWidth/2+50, display.contentHeight/2, 400, 75)
+    --IDP_TEXT.size = 40
+    --IDP_TEXT:setFillColor(0,0,0)
+    --sceneGroup:insert(IDP_TEXT)
+
+    local IDP_Reference = widget.newButton(
+		    {
+		        --width = 500,
+		        --heigth = 500,
+		        id = "IDP_Reference",
+		        defaultFile = "IDPReference.png",
+		        onEvent = handleButtonEvent
+		    }
+		)
+
+		IDP_Reference.x = display.contentWidth/2 
+		IDP_Reference.y = display.contentHeight/2
+		sceneGroup:insert(IDP_Reference)
+
     function IDP_Reference:tap(event)
 
       composer.gotoScene("IDPReference", options)
@@ -267,15 +282,29 @@ function scene:show( event )
 
 ---------------------END CHILD PRIVILEGES
 ---------------------START FAMILY SCHEDULE PRIVILEGES
-        local family_Schedule = display.newRect(display.contentWidth/2, display.contentHeight/2 + 100, 400, 75)
-        family_Schedule:setFillColor(0.372549, 0.619608, 0.627451)
-        sceneGroup:insert(family_Schedule)
+        --local family_Schedule = display.newRect(display.contentWidth/2, display.contentHeight/2 + 100, 400, 75)
+        --family_Schedule:setFillColor(0.372549, 0.619608, 0.627451)
+        --sceneGroup:insert(family_Schedule)
 
         
-        local FAMILY_TEXT = display.newText("Family Schedule", display.contentWidth/2+50, display.contentHeight/2 + 100, 400, 75)
-        FAMILY_TEXT.size = 40
-        FAMILY_TEXT:setFillColor(0,0,0)
-        sceneGroup:insert(FAMILY_TEXT)
+        --local FAMILY_TEXT = display.newText("Family Schedule", display.contentWidth/2+50, display.contentHeight/2 + 100, 400, 75)
+        --FAMILY_TEXT.size = 40
+        --FAMILY_TEXT:setFillColor(0,0,0)
+        --sceneGroup:insert(FAMILY_TEXT)
+
+        local family_Schedule = widget.newButton(
+		    {
+		        --width = 500,
+		        --heigth = 500,
+		        id = "family_Schedule",
+		        defaultFile = "FamilySchedule.png",
+		        onEvent = handleButtonEvent
+		    }
+		)
+
+		family_Schedule.x = display.contentWidth/2 
+		family_Schedule.y = display.contentHeight/2 + 120
+		sceneGroup:insert(family_Schedule)
 
         function family_Schedule:tap(event)
 
@@ -286,23 +315,52 @@ function scene:show( event )
 ----------------------END FAMILY SCHEDULE PRIVILEGES
 ----------------------START BEHAVIOR PRIVILEGES
 
-        local Problem_Behavior_List = display.newRect(display.contentWidth/2, display.contentHeight/2 + 200, 400, 75)
-        Problem_Behavior_List:setFillColor(0.372549, 0.619608, 0.627451)
-        sceneGroup:insert(Problem_Behavior_List)
+        --local Problem_Behavior_List = display.newRect(display.contentWidth/2, display.contentHeight/2 + 200, 400, 75)
+        --Problem_Behavior_List:setFillColor(0.372549, 0.619608, 0.627451)
+        --sceneGroup:insert(Problem_Behavior_List)
 
-        local Problem_TEXT = display.newText("Problem Behavior List", display.contentWidth/2+5, display.contentHeight/2 + 200, 400, 75)
-        Problem_TEXT.size = 40
-        Problem_TEXT:setFillColor(0,0,0)
-        sceneGroup:insert(Problem_TEXT)
+        --local Problem_TEXT = display.newText("Problem Behavior List", display.contentWidth/2+5, display.contentHeight/2 + 200, 400, 75)
+        --Problem_TEXT.size = 40
+        --Problem_TEXT:setFillColor(0,0,0)
+        --sceneGroup:insert(Problem_TEXT)
 
-        local Desired_Behavior_List = display.newRect(display.contentWidth/2, display.contentHeight/2 + 300, 400, 75)
-        Desired_Behavior_List:setFillColor(0.372549, 0.619608, 0.627451)
-        sceneGroup:insert(Desired_Behavior_List)
+         local Problem_Behavior_List = widget.newButton(
+		    {
+		        --width = 500,
+		        --heigth = 500,
+		        id = "Problem_Behavior_List",
+		        defaultFile = "ProblemBehaviorList.png",
+		        onEvent = handleButtonEvent
+		    }
+		)
 
-        local Desired_TEXT = display.newText("Desired Behavior List", display.contentWidth/2+ 5, display.contentHeight/2 + 300, 400, 75)
-        Desired_TEXT.size = 40
-        Desired_TEXT:setFillColor(0,0,0)
-        sceneGroup:insert(Desired_TEXT)
+		Problem_Behavior_List.x = display.contentWidth/2 
+		Problem_Behavior_List.y = display.contentHeight/2 + 240
+		sceneGroup:insert(Problem_Behavior_List)
+
+
+        --local Desired_Behavior_List = display.newRect(display.contentWidth/2, display.contentHeight/2 + 300, 400, 75)
+        --Desired_Behavior_List:setFillColor(0.372549, 0.619608, 0.627451)
+        --sceneGroup:insert(Desired_Behavior_List)
+
+        --local Desired_TEXT = display.newText("Desired Behavior List", display.contentWidth/2+ 5, display.contentHeight/2 + 300, 400, 75)
+        --Desired_TEXT.size = 40
+        --Desired_TEXT:setFillColor(0,0,0)
+        --sceneGroup:insert(Desired_TEXT)
+
+        local Desired_Behavior_List = widget.newButton(
+		    {
+		        --width = 500,
+		        --heigth = 500,
+		        id = "Desired_Behavior_List",
+		        defaultFile = "DesiredBehaviorList.png",
+		        onEvent = handleButtonEvent
+		    }
+		)
+
+		Desired_Behavior_List.x = display.contentWidth/2 
+		Desired_Behavior_List.y = display.contentHeight/2 + 360
+		sceneGroup:insert(Desired_Behavior_List)
 
         function Problem_Behavior_List:tap(event)
           composer.gotoScene("problemBehaviorList")
@@ -317,23 +375,53 @@ function scene:show( event )
 -----------------------END BEHAVIOR PRIVILEGES
 
 
-        local Consequence_Log = display.newRect(display.contentWidth/2, display.contentHeight/2 + 400, 400, 75)
-        Consequence_Log:setFillColor(0.372549, 0.619608, 0.627451)
-        sceneGroup:insert(Consequence_Log)
+        --local Consequence_Log = display.newRect(display.contentWidth/2, display.contentHeight/2 + 400, 400, 75)
+        --Consequence_Log:setFillColor(0.372549, 0.619608, 0.627451)
+        --sceneGroup:insert(Consequence_Log)
 
-        local Consequence_TEXT = display.newText("Consequence Log", display.contentWidth/2+ 5, display.contentHeight/2 + 400, 400, 75)
-        Consequence_TEXT.size = 40
-        Consequence_TEXT:setFillColor(0,0,0)
-        sceneGroup:insert(Consequence_TEXT)
+        --local Consequence_TEXT = display.newText("Consequence Log", display.contentWidth/2+ 5, display.contentHeight/2 + 400, 400, 75)
+        --Consequence_TEXT.size = 40
+        --Consequence_TEXT:setFillColor(0,0,0)
+        --sceneGroup:insert(Consequence_TEXT)
+ 		
+ 		local Consequence_Log = widget.newButton(
+		    {
+		        --width = 500,
+		        --heigth = 500,
+		        id = "Consequence_Log",
+		        defaultFile = "ConsequenceLog.png",
+		        onEvent = handleButtonEvent
+		    }
+		)
 
-        local Reward_Log = display.newRect(display.contentWidth/2, display.contentHeight/2 + 500, 400, 75)
-        Reward_Log:setFillColor(0.372549, 0.619608, 0.627451)
-        sceneGroup:insert(Reward_Log)
+		Consequence_Log.x = display.contentWidth/2 
+		Consequence_Log.y = display.contentHeight/2 + 480
+		sceneGroup:insert(Consequence_Log)
 
-        local Reward_TEXT = display.newText("Rewards Log", display.contentWidth/2+ 5, display.contentHeight/2 + 500, 400, 75)
-        Reward_TEXT.size = 40
-        Reward_TEXT:setFillColor(0,0,0)
-        sceneGroup:insert(Reward_TEXT)
+
+
+        --local Reward_Log = display.newRect(display.contentWidth/2, display.contentHeight/2 + 500, 400, 75)
+        --Reward_Log:setFillColor(0.372549, 0.619608, 0.627451)
+        --sceneGroup:insert(Reward_Log)
+
+        --local Reward_TEXT = display.newText("Rewards Log", display.contentWidth/2+ 5, display.contentHeight/2 + 500, 400, 75)
+        --Reward_TEXT.size = 40
+        --Reward_TEXT:setFillColor(0,0,0)
+        --sceneGroup:insert(Reward_TEXT)
+
+        local Reward_Log = widget.newButton(
+		    {
+		        --width = 500,
+		        --heigth = 500,
+		        id = "Reward_Log",
+		        defaultFile = "RewardLog.png",
+		        onEvent = handleButtonEvent
+		    }
+		)
+
+		Reward_Log.x = display.contentWidth/2 
+		Reward_Log.y = display.contentHeight/2 + 600
+		sceneGroup:insert(Reward_Log)
         
         function Consequence_Log:tap(event)
           composer.gotoScene("consequencesLog")
@@ -356,10 +444,27 @@ function scene:show( event )
 
 
 
+    
+    --local show = display.newRect(display.contentWidth/2 + 300, display.contentHeight/2 - 580, 70, 75)
+    --    show:setFillColor(0.372549, 0.619608, 0.627451)
+    --    sceneGroup:insert(show)
+
     -- new hambuger sliding panel widget
-    local show = display.newRect(display.contentWidth/2 + 300, display.contentHeight/2 - 580, 70, 75)
-        show:setFillColor(0.372549, 0.619608, 0.627451)
-        sceneGroup:insert(show)
+    local show = widget.newButton(
+		    {
+		        --width = 500,
+		        --heigth = 500,
+		        id = "show",
+		        defaultFile = "hamburger.png",
+		        onEvent = handleButtonEvent
+		    }
+		)
+
+		show.x = display.contentWidth/2 + 330 
+		show.y = display.contentHeight/2 - 600
+		sceneGroup:insert(show)
+
+
     
     local panel = widget.newPanel
     {

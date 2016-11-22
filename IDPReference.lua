@@ -61,8 +61,8 @@ function scene:show( event )
 		    }
 		)
 
-		backButtonNew.x = display.contentWidth/2 - 270 
-		backButtonNew.y = display.contentHeight/2 - 480
+		backButtonNew.x = display.contentWidth/2 - 320 
+		backButtonNew.y = display.contentHeight - display.contentHeight + 100
 		sceneGroup:insert(backButtonNew)
 
        
@@ -70,13 +70,28 @@ function scene:show( event )
         --backButton:setFillColor(0.372549, 0.619608, 0.627451)
         --sceneGroup:insert(backButton)
 
-        local IDP_Reference = display.newRect(display.contentWidth/2, display.contentHeight/2-200, 400, 75)
-        IDP_Reference:setFillColor(0.372549, 0.619608, 0.627451)
-        sceneGroup:insert(IDP_Reference)
+        --local IDP_Reference = display.newRect(display.contentWidth/2, display.contentHeight/2-200, 400, 75)
+        --IDP_Reference:setFillColor(0.372549, 0.619608, 0.627451)
+        --sceneGroup:insert(IDP_Reference)
 
-        local IDPText = display.newText("Part I Guide for Parenting ", display.contentWidth/2, display.contentHeight/2-200, 200, 75)
-        IDPText:setFillColor(0,0,0)
-        sceneGroup:insert(IDPText)
+        --local IDPText = display.newText("Part I Guide for Parenting ", display.contentWidth/2, display.contentHeight/2-200, 200, 75)
+        --IDPText:setFillColor(0,0,0)
+        --sceneGroup:insert(IDPText)
+
+        -- Create the widget
+		local IDP_Reference = widget.newButton(
+		    {
+		        --width = 500,
+		        --heigth = 500,
+		        id = "IDP_Reference",
+		        defaultFile = "Rectangle3.png",
+		        onEvent = handleButtonEvent
+		    }
+		)
+
+		IDP_Reference.x = display.contentWidth/2 
+		IDP_Reference.y = display.contentHeight/2-200
+		sceneGroup:insert(IDP_Reference)
 
         local family_Schedule = display.newRect(display.contentWidth/2, display.contentHeight/2 - 100, 400, 75)
         family_Schedule:setFillColor(0.372549, 0.619608, 0.627451)
@@ -121,14 +136,14 @@ function scene:show( event )
         sceneGroup:insert(IDPTextVI)
 
 
-        --function backButton:tap(event)
+        function backButtonNew:tap(event)
 
-        --    composer.gotoScene("MainMenu")
+            composer.gotoScene("MainMenu")
         
-        --end
+     end
 
         -- this listens to see if object has been tapped
-       -- backButton:addEventListener("tap", backButton)
+        backButtonNew:addEventListener("tap", backButtonNew)
 
 
 
