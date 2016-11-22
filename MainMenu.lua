@@ -422,6 +422,7 @@ function scene:show( event )
 
     function show:tap(event)
         panel:show()
+        panel:toFront()
     end
 
     show:addEventListener("tap", show)
