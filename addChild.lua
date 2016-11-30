@@ -37,7 +37,7 @@ function scene:show( event )
         background:setFillColor( 0.745098 ,0.745098 ,0.745098)
         sceneGroup:insert(background)
 
-        local pickText = display.newText("Pick a Child", display.contentWidth/2, display.contentHeight-display.contentHeight + 100, native.systemFont, 50)
+        local pickText = display.newText("addChild", display.contentWidth/2, display.contentHeight-display.contentHeight + 100, native.systemFont, 50)
         pickText.size = 40
         pickText:setFillColor(0,0,0)
         sceneGroup:insert(pickText)
@@ -46,7 +46,7 @@ function scene:show( event )
         childButton:setFillColor(0.372549, 0.619608, 0.627451)
         sceneGroup:insert(childButton)
 
-        local childTEXT = display.newText("Johnny", display.contentWidth/2+140, display.contentHeight/2-200, 400, 75)
+        local childTEXT = display.newText("bob", display.contentWidth/2+140, display.contentHeight/2-200, 400, 75)
         childTEXT.size = 40
         childTEXT:setFillColor(0,0,0)
         sceneGroup:insert(childTEXT)

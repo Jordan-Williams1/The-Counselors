@@ -72,6 +72,7 @@ function scene:show( event )
 
         -- this listens to see if object has been tapped
         backButtonNew:addEventListener("tap", backButtonNew)
+         
          function childButton:tap(event)
 
             composer.gotoScene("problemBehaviorListFinal")
