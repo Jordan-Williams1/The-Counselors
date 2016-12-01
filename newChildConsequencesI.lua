@@ -127,8 +127,6 @@ function scene:show( event )
         swattPunshiment.y = display.contentHeight/2-400
         sceneGroup:insert(swattPunshiment)
 
-
-
         -- Create the checkbox
         local swattPunshimentButton = widget.newSwitch(
             {
@@ -391,10 +389,6 @@ function scene:show( event )
         apologyPunshimentButton.x = apologyPunshiment.x - 250
         apologyPunshimentButton.y = RewindPunshiment.y + 120
         sceneGroup:insert(apologyPunshimentButton)
-
-
-
-
 -----------------------------------------------------------------------     
         -- SERVICE PUNISHMENT
 ----------------------------------------------------------------------- 
