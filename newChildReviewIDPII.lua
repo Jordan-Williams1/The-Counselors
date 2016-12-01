@@ -27,7 +27,7 @@ function scene:create( event )
         sceneGroup:insert(background)
 
 
-       local pickText = display.newText("          New Child:\n          Rewards I", display.contentWidth/2, display.contentHeight-display.contentHeight + 100, native.systemFont, 50)
+       local pickText = display.newText("          New Child:\n          Review IDP II", display.contentWidth/2, display.contentHeight-display.contentHeight + 100, native.systemFont, 50)
         pickText.size = 40
         pickText.width = 600
         pickText.align = "center"
@@ -55,14 +55,14 @@ function scene:create( event )
 
         function nextButton:tap(event)
 
-            composer.gotoScene("newChildRewardsII")
+            composer.gotoScene("mainMenu")
         
         end
         nextButton:addEventListener("tap", nextButton)
 
         function backButtonNew:tap(event)
             
-            composer.gotoScene("newChildDesiredBehaviors")
+            composer.gotoScene("newChildReviewIDPI")
         
         end
         backButtonNew:addEventListener("tap", backButtonNew)

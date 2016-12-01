@@ -58,7 +58,8 @@ function scene:show( event )
     Soptions =
     {
         params = {
-            session_ID = session
+            session_ID = session,
+            Fbehaviors = {}
         }
     } 
 
@@ -92,9 +93,7 @@ function scene:show( event )
             return true
         end
 
-        if (Soptions.params) then
-            Soptions.params.Fbehaviors = {}
-        end
+        
 
         local scrollView = widget.newScrollView(
             {
@@ -136,7 +135,9 @@ function scene:show( event )
             sceneGroup:insert(newBehavior)
             scrollView:insert(newBehavior)
             count = count + 1
-            table.insert(Soptions.params.Fbehaviors,{Soptions.params.behaviors1.behaviors[k][1],Soptions.params.behaviors1.behaviors[k][2]})
+            if(Soptions.params) then
+                table.insert(Soptions.params.Fbehaviors,{Soptions.params.behaviors1.behaviors[k][1],Soptions.params.behaviors1.behaviors[k][2]})
+            end
         end
 
         local newBehaviorButton = display.newRect(3*(display.contentWidth/4) + 100, 7*(display.contentHeight/8), 75, 75)
@@ -161,7 +162,9 @@ function scene:show( event )
             sceneGroup:insert(newBehavior)
             scrollView:insert(newBehavior)
             count = count + 1
-            table.insert(Soptions.params.Fbehaviors,{newPBehavior.text,newDBehavior.text})
+            if(Soptions.params) then
+                table.insert(Soptions.params.Fbehaviors,{newPBehavior.text,newDBehavior.text})
+            end
         end
 
         newBehaviorButton:addEventListener( "tap", newBehaviorButton )
@@ -181,10 +184,11 @@ function scene:show( event )
 		sceneGroup:insert(backButtonNew)
         scrollView:insert( backButtonNew )
 
-        local nextButton = display.newRect(display.contentWidth/2 + display.contentWidth/2  - 100, display.contentHeight/2 , 70, 75)
+        local nextButton = display.newRect(display.contentWidth - 50, display.contentHeight-display.contentHeight + 100, 70, 75)
         nextButton:setFillColor(0.372549, 0.619608, 0.627451)
         sceneGroup:insert(nextButton)
         scrollView:insert( nextButton )
+
 
         function nextButton:tap(event)
             newPBehavior:removeSelf()
@@ -197,8 +201,7 @@ function scene:show( event )
          function backButtonNew:tap(event)
             newPBehavior:removeSelf()
             newDBehavior:removeSelf()
-            composer.gotoScene("newChildProblemBehaviorsII",Soptions)
-        
+            composer.gotoScene("newChildProblemBehaviorsI",Soptions)        
         end
 
         -- this listens to see if object has been tapped
