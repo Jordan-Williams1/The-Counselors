@@ -91,8 +91,25 @@ function scene:show( event )
         sceneGroup:insert(backButtonNew)
 
        
-       
+       --[[
+        -- Create the widget
+        local lyingButton = widget.newSwitch(
+            {
+                left = 250,
+                top = 200,
+                style = "checkbox",
+                id = "Checkbox",
+                onPress = onSwitchPress
+            }
+        )
+        lyingButton.x = display.contentWidth/2 - display.contentWidth/2 + 100 
+        lyingButton.y = pickText.y + 200
+        scrollView:insert(lyingButton)
+--]]
 
+-----------------------------------------------------------------------     
+        -- SWATTS WITH PADDLE
+-----------------------------------------------------------------------  
         -- Create the widget
         local swattPunshiment = widget.newButton(
             {
@@ -108,6 +125,35 @@ function scene:show( event )
         swattPunshiment.y = display.contentHeight/2-400
         sceneGroup:insert(swattPunshiment)
 
+
+
+        -- Create the checkbox
+        local swattPunshimentButton = widget.newSwitch(
+            {
+                left = 250,
+                top = 200,
+                style = "checkbox",
+                id = "Checkbox",
+                onPress = onSwitchPress
+            }
+        )
+        swattPunshimentButton.x = display.contentWidth/2 - 250
+        swattPunshimentButton.y = display.contentHeight/2-400
+        sceneGroup:insert(swattPunshimentButton)
+
+        --function swattPunshiment:tap(event)
+
+        --    swattPunshimentButton = swattPunshimentButton.isOn
+            
+       -- end
+
+        -- this listens to see if object has been tapped
+       -- swattPunshiment:addEventListener("tap", swattPunshiment)
+
+
+-----------------------------------------------------------------------     
+        -- TIME-OUT
+-----------------------------------------------------------------------  
         
         -- Create the widget
         local timeOutPunshiment = widget.newButton(
@@ -124,7 +170,23 @@ function scene:show( event )
         timeOutPunshiment.y = swattPunshiment.y + 120
         sceneGroup:insert(timeOutPunshiment)
 
-       
+        -- Create the checkbox
+        local timeOutPunshimentButton = widget.newSwitch(
+            {
+                left = 250,
+                top = 200,
+                style = "checkbox",
+                id = "Checkbox",
+                onPress = onSwitchPress
+            }
+        )
+        timeOutPunshimentButton.x = display.contentWidth/2 - 250
+        timeOutPunshimentButton.y = swattPunshiment.y + 120
+        sceneGroup:insert(timeOutPunshimentButton)
+
+-----------------------------------------------------------------------     
+        -- TALKING TIME-OUT
+-----------------------------------------------------------------------  
 
          -- Create the widget
         local talkingTimeOutPunshiment = widget.newButton(
@@ -141,7 +203,23 @@ function scene:show( event )
         talkingTimeOutPunshiment.y = timeOutPunshiment.y + 120
         sceneGroup:insert(talkingTimeOutPunshiment)
 
-       
+        -- Create the checkbox
+        local talkingTimeOutPunshimentButton = widget.newSwitch(
+            {
+                left = 250,
+                top = 200,
+                style = "checkbox",
+                id = "Checkbox",
+                onPress = onSwitchPress
+            }
+        )
+        talkingTimeOutPunshimentButton.x = talkingTimeOutPunshiment.x - 250
+        talkingTimeOutPunshimentButton.y = timeOutPunshiment.y + 120
+        sceneGroup:insert(talkingTimeOutPunshimentButton)
+
+-----------------------------------------------------------------------     
+        -- TOY PUNISHMENT
+-----------------------------------------------------------------------   
 
          -- Create the widget
         local toyPunshiment = widget.newButton(
@@ -158,8 +236,25 @@ function scene:show( event )
         toyPunshiment.y = talkingTimeOutPunshiment.y + 120
         sceneGroup:insert(toyPunshiment)
 
-       
+         -- Create the checkbox
+        local toyPunshimentButton = widget.newSwitch(
+            {
+                left = 250,
+                top = 200,
+                style = "checkbox",
+                id = "Checkbox",
+                onPress = onSwitchPress
+            }
+        )
+        toyPunshimentButton.x = toyPunshiment.x - 250
+        toyPunshimentButton.y = talkingTimeOutPunshiment.y + 120
+        sceneGroup:insert(toyPunshimentButton)
 
+
+-----------------------------------------------------------------------     
+        -- LOSS OF TOY PUNISHMENT
+-----------------------------------------------------------------------   
+       
          -- Create the widget
         local lossToyPunshiment = widget.newButton(
             {
@@ -176,6 +271,26 @@ function scene:show( event )
         sceneGroup:insert(lossToyPunshiment)
 
 
+         -- Create the checkbox
+        local lossToyPunshimentButton = widget.newSwitch(
+            {
+                left = 250,
+                top = 200,
+                style = "checkbox",
+                id = "Checkbox",
+                onPress = onSwitchPress
+            }
+        )
+        lossToyPunshimentButton.x = lossToyPunshiment.x - 250
+        lossToyPunshimentButton.y = toyPunshiment.y+120
+        sceneGroup:insert(lossToyPunshimentButton)
+
+
+
+
+-----------------------------------------------------------------------     
+        -- OBEDIENCE PUNISHMENT
+----------------------------------------------------------------------- 
        
 
         -- Create the widget
@@ -193,6 +308,24 @@ function scene:show( event )
         obediencePunshiment.y = lossToyPunshiment.y + 120
         sceneGroup:insert(obediencePunshiment)
 
+          -- Create the checkbox
+        local obediencePunshimentButton = widget.newSwitch(
+            {
+                left = 250,
+                top = 200,
+                style = "checkbox",
+                id = "Checkbox",
+                onPress = onSwitchPress
+            }
+        )
+        obediencePunshimentButton.x = obediencePunshiment.x - 250
+        obediencePunshimentButton.y = lossToyPunshiment.y + 120
+        sceneGroup:insert(obediencePunshimentButton)
+
+-----------------------------------------------------------------------     
+        -- REWIND PUNISHMENT
+----------------------------------------------------------------------- 
+
         -- Create the widget
         local RewindPunshiment = widget.newButton(
             {
@@ -207,6 +340,26 @@ function scene:show( event )
         RewindPunshiment.x = display.contentWidth/2 
         RewindPunshiment.y = obediencePunshiment.y + 120
         sceneGroup:insert(RewindPunshiment)
+
+          -- Create the checkbox
+        local RewindPunshimentButton = widget.newSwitch(
+            {
+                left = 250,
+                top = 200,
+                style = "checkbox",
+                id = "Checkbox",
+                onPress = onSwitchPress
+            }
+        )
+        RewindPunshimentButton.x = RewindPunshiment.x - 250
+        RewindPunshimentButton.y = obediencePunshiment.y + 120
+        sceneGroup:insert(RewindPunshimentButton)
+
+
+-----------------------------------------------------------------------     
+        -- APOLOGY PUNISHMENT
+----------------------------------------------------------------------- 
+
 
         -- Create the widget
         local apologyPunshiment = widget.newButton(
@@ -223,6 +376,26 @@ function scene:show( event )
         apologyPunshiment.y = RewindPunshiment.y + 120
         sceneGroup:insert(apologyPunshiment)
 
+          -- Create the checkbox
+        local apologyPunshimentButton = widget.newSwitch(
+            {
+                left = 250,
+                top = 200,
+                style = "checkbox",
+                id = "Checkbox",
+                onPress = onSwitchPress
+            }
+        )
+        apologyPunshimentButton.x = apologyPunshiment.x - 250
+        apologyPunshimentButton.y = RewindPunshiment.y + 120
+        sceneGroup:insert(apologyPunshimentButton)
+
+
+
+
+-----------------------------------------------------------------------     
+        -- SERVICE PUNISHMENT
+----------------------------------------------------------------------- 
          -- Create the widget
         local servicePunshiment = widget.newButton(
             {
@@ -237,7 +410,25 @@ function scene:show( event )
         servicePunshiment.y = apologyPunshiment.y + 120
         sceneGroup:insert(servicePunshiment)
 
+         -- Create the checkbox
+        local servicePunshimentButton = widget.newSwitch(
+            {
+                left = 250,
+                top = 200,
+                style = "checkbox",
+                id = "Checkbox",
+                onPress = onSwitchPress
+            }
+        )
+        servicePunshimentButton.x = servicePunshiment.x - 250
+        servicePunshimentButton.y = apologyPunshiment.y + 120
+        sceneGroup:insert(servicePunshimentButton)
 
+-----------------------------------------------------------------------     
+        -- BUTTONS
+----------------------------------------------------------------------- 
+
+      
         function backButtonNew:tap(event)
 
             composer.gotoScene("newChildProblemBehaviorsII",Soptions)
@@ -246,10 +437,41 @@ function scene:show( event )
         -- this listens to see if object has been tapped
         backButtonNew:addEventListener("tap", backButtonNew)
 
-         function nextButton:tap(event)
+        function nextButton:tap(event)
 
-            composer.gotoScene("newChildConsequencesII",Soptions)
-        end
+            if (event.params) then
+                Soptions.params.Consequences = {}
+                
+                if (swattPunshimentButton.isOn) then
+                   table.insert(Soptions.params.Consequences,{"Swatts with the paddle"}) 
+                end
+                if (timeOutPunshimentButton.isOn) then
+                   table.insert(Soptions.params.Consequences,{"Time-Out"}) 
+                end
+                if (talkingTimeOutPunshimentButton.isOn) then
+                   table.insert(Soptions.params.Consequences,{"Talking Time-Out"}) 
+                end
+                 if (toyPunshimentButton.isOn) then
+                   table.insert(Soptions.params.Consequences,{"Toy/Device Time-Out"}) 
+                end
+                 if (lossToyPunshimentButton.isOn) then
+                   table.insert(Soptions.params.Consequences,{"Permanent loss of Toy/Device"}) 
+                end
+                if (obediencePunshimentButton.isOn) then
+                   table.insert(Soptions.params.Consequences,{"Practice Obedience/Respect"}) 
+                end
+                if (RewindPunshimentButton.isOn) then
+                   table.insert(Soptions.params.Consequences,{"Rewind and Say-It-Again"}) 
+                end
+                if (apologyPunshimentButton.isOn) then
+                   table.insert(Soptions.params.Consequences,{"Write an apology note"}) 
+                end
+                if (servicePunshimentButton.isOn) then
+                   table.insert(Soptions.params.Consequences,{"Service to Others"}) 
+                end
+                composer.gotoScene("newChildConsequencesII",Soptions)
+           end
+       end
 
         -- this listens to see if object has been tapped
         nextButton:addEventListener("tap", nextButton)
