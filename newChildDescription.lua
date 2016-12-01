@@ -54,43 +54,6 @@ function scene:show( event )
         -- Code here runs when the scene is still off screen (but is about to come on screen)
         -- ScrollView listener
 	
-
-		local function scrollListener( event )
-
-		    local phase = event.phase
-		    if ( phase == "began" ) then print( "Scroll view was touched" )
-		    elseif ( phase == "moved" ) then print( "Scroll view was moved" )
-		    elseif ( phase == "ended" ) then print( "Scroll view was released" )
-		    end
-
-		    -- In the event a scroll limit is reached...
-		    if ( event.limitReached ) then
-		        if ( event.direction == "up" ) then print( "Reached bottom limit" )
-		        elseif ( event.direction == "down" ) then print( "Reached top limit" )
-		        elseif ( event.direction == "left" ) then print( "Reached right limit" )
-		        elseif ( event.direction == "right" ) then print( "Reached left limit" )
-		        end
-		    end
-
-		    return true
-		end
-
-
-
-		-- Create the widget
-		local scrollView = widget.newScrollView(
-		    {
-		        --top = 100,
-		        --left = 10,
-		        width = display.contentWidth,
-		        height = display.contentHeight,
-		        scrollWidth = 600,
-		        scrollHeight = 3200,
-		        listener = scrollListener
-		    }
-		)
-
-		sceneGroup:insert(scrollView)
 		
         local background = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth,6000)
 
@@ -479,67 +442,64 @@ function scene:show( event )
        
         function nextButton:tap(event)
 
- 		if (event.params) then
-	        Soptions.params.userName = event.params.userName 
-	        Soptions.params.Password = event.params.Password
+	 		if (event.params) then
+		        Soptions.params.userName = event.params.userName 
+		        Soptions.params.Password = event.params.Password
 
-	        Soptions.params.name = childName.text
-	        Soptions.params.age = childAge.text
-	        Soptions.params.grade = childGrade.text
-	        
-	        if (extrovert.isOn) then
-	        	Soptions.params.extrovertIntrovert = "extrovert"
-	        else
-	        	Soptions.params.extrovertIntrovert = "introvert"
+		        Soptions.params.name = childName.text
+		        Soptions.params.age = childAge.text
+		        Soptions.params.grade = childGrade.text
+		        
+		        if (extrovert.isOn) then
+		        	Soptions.params.extrovertIntrovert = "extrovert"
+		        else
+		        	Soptions.params.extrovertIntrovert = "introvert"
+		        end
+
+
+		        
+		        if (outgoing.isOn) then
+		        	Soptions.params.outgoingShy = "outgoing"
+		        else
+		        	Soptions.params.outgoingShy = "shy"
+
+		        end
+		        
+		        if (leader.isOn) then
+		        	Soptions.params.leaderFollower = "leader"
+		        else
+		        	Soptions.params.leaderFollower = "follower"
+
+		        end
+		        
+		        if (active.isOn) then
+		        	Soptions.params.activeCalm = "active"
+		        else
+		        	Soptions.params.activeCalm = "calm"
+
+		        end
+		        
+		        if (planner.isOn) then
+		        	Soptions.params.plannerImpulsive = "planner"
+		        else
+		        	Soptions.params.plannerImpulsive = "impulsive"
+		        end
+		        
+		        if (caring.isOn) then
+		        	Soptions.params.caringUncaring = "caring"
+		        else
+		        	Soptions.params.caringUncaring = "uncaring"
+
+		        end
+	            
+	            
 	        end
-
-
-	        
-	        if (outgoing.isOn) then
-	        	Soptions.params.outgoingShy = "outgoing"
-	        else
-	        	Soptions.params.outgoingShy = "shy"
-
-	        end
-	        
-	        if (leader.isOn) then
-	        	Soptions.params.leaderFollower = "leader"
-	        else
-	        	Soptions.params.leaderFollower = "follower"
-
-	        end
-	        
-	        if (active.isOn) then
-	        	Soptions.params.activeCalm = "active"
-	        else
-	        	Soptions.params.activeCalm = "calm"
-
-	        end
-	        
-	        if (planner.isOn) then
-	        	Soptions.params.plannerImpulsive = "planner"
-	        else
-	        	Soptions.params.plannerImpulsive = "impulsive"
-	        end
-	        
-	        if (caring.isOn) then
-	        	Soptions.params.caringUncaring = "caring"
-	        else
-	        	Soptions.params.caringUncaring = "uncaring"
-
-	        end
-            
-            composer.gotoScene("newChildDescriptionpart2",Soptions)
+	        composer.gotoScene("newChildDescriptionpart2",Soptions)
         end
 
         function backButton:tap(event)
             composer.gotoScene("addChild",Soptions)
         end
-
-       
-
-        
-		scrollView:setScrollHeight(3200)
 
 
         -- this listens to see if object has been tapped
@@ -549,7 +509,7 @@ function scene:show( event )
 
 
 
-
+         
         --function childButton:tap(event)
 
        --     composer.gotoScene("childInformation")
