@@ -69,16 +69,13 @@ CONSTRAINT fk_childID2 FOREIGN KEY (childID) references child(childID)
 
 CREATE TABLE consequences
 ( childID int,
-PBehavior varchar(255),
 name varchar(255) primary key,
-description text NOT NULL,
 CONSTRAINT fk_childID3 FOREIGN KEY (childID) references child(childID)
 );
 
 CREATE TABLE rewards
 ( childID int,
 name varchar(255) primary key,
-description text NOT NULL,
 CONSTRAINT fk_childID4 FOREIGN KEY (childID) references child(childID)
 );
 

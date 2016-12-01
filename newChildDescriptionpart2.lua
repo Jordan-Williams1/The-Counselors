@@ -11,6 +11,20 @@ local scene = composer.newScene()
 local session
 
 
+function deepcopy(orig)
+    local orig_type = type(orig)
+    local copy
+    if orig_type == 'table' then
+        copy = {}
+        for orig_key, orig_value in next, orig, nil do
+            copy[deepcopy(orig_key)] = deepcopy(orig_value)
+        end
+        setmetatable(copy, deepcopy(getmetatable(orig)))
+    else -- number, string, boolean, etc
+        copy = orig
+    end
+    return copy
+end
 -- -----------------------------------------------------------------------------------
 -- Scene event functions
 -- -----------------------------------------------------------------------------------
@@ -50,7 +64,9 @@ function scene:show( event )
     if (event.params) then
         Soptions.params.userName = event.params.userName 
         Soptions.params.Password = event.params.Password
-        Soptions.params.description1 = event.params
+        for k in pairs(event.params) do print(k) end
+        Soptions.params.description1 = deepcopy(event.params)
+        print("-----"..Soptions.params.description1.name)
     end
 
     if ( phase == "will" ) then

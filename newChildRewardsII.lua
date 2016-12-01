@@ -1,6 +1,7 @@
 local composer = require( "composer" )
 local widget = require("widget")
 local scene = composer.newScene()
+local json = require("json")
 
 -- -----------------------------------------------------------------------------------
 -- Code outside of the scene event functions below will only be executed ONCE unless
@@ -8,7 +9,7 @@ local scene = composer.newScene()
 -- -----------------------------------------------------------------------------------
 
 
-
+local session
 -- -----------------------------------------------------------------------------------
 -- Scene event functions
 -- -----------------------------------------------------------------------------------
@@ -172,9 +173,74 @@ function scene:create( event )
         end
         backButtonNew:addEventListener("tap", backButtonNew)
 
+        local confirm = 1
+        local function onComplete( event )
+            if ( event.action == "clicked" ) then
+                local i = event.index
+                if ( i == 1 ) then
+                    confirm = 1
+                elseif ( i == 2 ) then
+                    confirm = 2
+                end
+            end
+        end
+
         function nextButton:tap(event)
-            
-            composer.gotoScene("mainMenu",Soptions)
+            local alert = native.showAlert("Confirmation","Are you sure you are finished?",{"Yes","No"},onComplete)
+            if confirm == 1 then
+                local function networkListener( event )
+                    if ( event.isError ) then
+                        print( "Network error: ", event.response )
+                        local alert = native.showAlert("Login Error","Server is not available at this time.",{"OK"})
+                        composer.gotoScene("signin", Soptions)
+                    else
+                        print("NO error")
+                    end
+                end
+                if (session~="null session") then
+                    local URL = "http://35.161.136.208/mainMenu.php?sessionID="..session
+                    childName = Soptions.params.rewards1.consequences2.consequences1.behaviors2.behaviors1.description2.description1.name
+                    childAge =  Soptions.params.rewards1.consequences2.consequences1.behaviors2.behaviors1.description2.description1.age
+                    childGrade = Soptions.params.rewards1.consequences2.consequences1.behaviors2.behaviors1.description2.description1.grade
+                    childEI = Soptions.params.rewards1.consequences2.consequences1.behaviors2.behaviors1.description2.description1.extrovertIntrovert
+                    childOS = Soptions.params.rewards1.consequences2.consequences1.behaviors2.behaviors1.description2.description1.outgoingShy
+                    childLF = Soptions.params.rewards1.consequences2.consequences1.behaviors2.behaviors1.description2.description1.leaderFollower
+                    childAC = Soptions.params.rewards1.consequences2.consequences1.behaviors2.behaviors1.description2.description1.activeCalm
+                    childPI = Soptions.params.rewards1.consequences2.consequences1.behaviors2.behaviors1.description2.description1.plannerImpulse
+                    childCU = Soptions.params.rewards1.consequences2.consequences1.behaviors2.behaviors1.description2.description1.caringUncaring
+                    childStr = Soptions.params.rewards1.consequences2.consequences1.behaviors2.behaviors1.description2.Strengths
+                    childWea = Soptions.params.rewards1.consequences2.consequences1.behaviors2.behaviors1.description2.Weaknesses
+                    childMat = Soptions.params.rewards1.consequences2.consequences1.behaviors2.behaviors1.description2.Maturity
+                    childInt = Soptions.params.rewards1.consequences2.consequences1.behaviors2.behaviors1.description2.Interests
+                    childSD = Soptions.params.rewards1.consequences2.consequences1.behaviors2.behaviors1.description2.successfulDiscipline
+                    childUD = Soptions.params.rewards1.consequences2.consequences1.behaviors2.behaviors1.description2.unsuccessfulDiscipline
+                    URL = URL.."&cName="..childName.."&cAge="..tonumber(childAge).."&cGrade="..childGrade.."&EI="..tonumber(childEI).."&OS="..tonumber(childOS).."&LF="..tonumber(childLF).."&AC="..tonumber(childAC)
+                    URL = URL.."&PI="..tonumber(childPI).."&CU="..tonumber(childCU).."&Strengths="..childStr.."&Weaknesses="..childWea.."&MLevel="..childMat.."&Interests="..childInt.."&Dworked="..childSD.."&DNWorked="..childUD
+
+                    jsonBehaviors = json.encode(Soptions.params.rewards1.consequences2.consequences1.behaviors2.Fbehaviors)
+                    jsonConsequences = json.encode(Soptions.params.rewards1.consequences2.Fconsequences)
+                    jsonRewards = json.encode(Soption.params.Frewards)
+
+                    print(jsonBehaviors)
+                    print(jsonConsequences)
+                    print(jsonRewards)
+
+                    URL = URL..'&Behaviors='..jsonBehaviors..'&Consequences='..jsonConsequences..'&Rewards='..jsonRewards
+
+
+
+                    --network.request(URL,"GET",networkListener)
+                else
+                    local alert = native.showAlert("Session Invalid","Sorry, please re-login to resume.",{"OK"})
+                    local URL = "http://35.161.136.208/Signout.php"
+                    network.request( URL, "GET", networkListener)
+                    composer.gotoScene("signIn")
+                end
+
+                composer.gotoScene("mainMenu",Soptions)
+            else
+
+            end
         
         end
         nextButton:addEventListener("tap", nextButton)

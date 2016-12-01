@@ -155,8 +155,8 @@ options =
    userName = userName.text,
     
     params = {
-        userName, 
-        Password,
+        userName = userName.text, 
+        Password = Password.text,
         session_ID
     }
 }

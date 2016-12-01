@@ -447,10 +447,7 @@ function scene:show( event )
        
         function nextButton:tap(event)
 
-	 		if (event.params) then
-		        Soptions.params.userName = event.params.userName 
-		        Soptions.params.Password = event.params.Password
-
+	 		if (Soptions.params) then
 		        Soptions.params.name = childName.text
 		        Soptions.params.age = childAge.text
 		        Soptions.params.grade = childGrade.text
