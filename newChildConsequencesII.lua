@@ -160,7 +160,7 @@ function scene:create( event )
 
         function nextButton:tap(event)
 
-            composer.gotoScene("newChildDesiredBehaviors")
+            composer.gotoScene("newChildRewardsI")
         
         end
         nextButton:addEventListener("tap", nextButton)

@@ -62,7 +62,7 @@ function scene:create( event )
 
         function backButtonNew:tap(event)
             
-            composer.gotoScene("newChildDesiredBehaviors")
+            composer.gotoScene("newChildConsequencesII")
         
         end
         backButtonNew:addEventListener("tap", backButtonNew)
