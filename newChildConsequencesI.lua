@@ -44,6 +44,11 @@ function scene:show( event )
         }
     } 
 
+    if (event.params) then
+        Soptions.params.userName = event.params.userName 
+        Soptions.params.Password = event.params.Password
+    end
+
     if ( phase == "will" ) then
         -- Code here runs when the scene is still off screen (but is about to come on screen)
 

@@ -48,6 +48,11 @@ function scene:show( event )
         }
     } 
 
+    if (event.params) then
+        Soptions.params.userName = event.params.userName 
+        Soptions.params.Password = event.params.Password
+    end
+
     if ( phase == "will" ) then
         -- Code here runs when the scene is still off screen (but is about to come on screen)
 
@@ -98,7 +103,7 @@ function scene:show( event )
         scrollView:insert( background )
 
 
-        local pickText = display.newText("Child Problem Behaviors", display.contentWidth/2, display.contentHeight-display.contentHeight + 100, native.systemFont, 50)
+        local pickText = display.newText("Child Problem/Desired Behaviors", display.contentWidth/2, display.contentHeight-display.contentHeight + 100, native.systemFont, 50)
         pickText.size = 40
         pickText:setFillColor(0,0,0)
         scrollView:insert(pickText)
@@ -129,7 +134,7 @@ function scene:show( event )
         scrollView:insert(lyingButton)
 
 
-        local lyingText = display.newText("lying", display.contentWidth/2 - display.contentWidth/2 + 200 , pickText.y + 200, native.systemFont, 50)
+        local lyingText = display.newText("lying/speaking truthfully", display.contentWidth/2 - display.contentWidth/2 + 200 , pickText.y + 200, native.systemFont, 50)
         lyingText.size = 35
         lyingText:setFillColor(0,0,0)
         scrollView:insert(lyingText)
@@ -153,7 +158,7 @@ function scene:show( event )
         deceivingButton.y = lyingButton.y + 50
         scrollView:insert(deceivingButton)
 
-        local deceivingText = display.newText("deceiving", display.contentWidth/2 - display.contentWidth/2 + 220 , lyingText.y + 50, native.systemFont, 50)
+        local deceivingText = display.newText("deceiving/acting earnestly", display.contentWidth/2 - display.contentWidth/2 + 220 , lyingText.y + 50, native.systemFont, 50)
         deceivingText.size = 35
         deceivingText:setFillColor(0,0,0)
         scrollView:insert(deceivingText)
@@ -174,7 +179,7 @@ function scene:show( event )
         yellingButton.y = deceivingButton.y + 50
         scrollView:insert(yellingButton)
 
-        local yellingText = display.newText("yelling", display.contentWidth/2 - display.contentWidth/2 + 220 , deceivingText.y + 50, native.systemFont, 50)
+        local yellingText = display.newText("yelling/speaking more quietly", display.contentWidth/2 - display.contentWidth/2 + 220 , deceivingText.y + 50, native.systemFont, 50)
         yellingText.size = 35
         yellingText:setFillColor(0,0,0)
         scrollView:insert(yellingText)     
@@ -195,7 +200,7 @@ function scene:show( event )
         sarcasamButton.y = yellingButton.y + 50
         scrollView:insert(sarcasamButton)
 
-        local sarcasamText = display.newText("sarcasam", display.contentWidth/2 - display.contentWidth/2 + 220 , yellingText.y + 50, native.systemFont, 50)
+        local sarcasamText = display.newText("sarcasm/speaking respectfully", display.contentWidth/2 - display.contentWidth/2 + 220 , yellingText.y + 50, native.systemFont, 50)
         sarcasamText.size = 35
         sarcasamText:setFillColor(0,0,0)
         scrollView:insert(sarcasamText)   
@@ -217,7 +222,7 @@ function scene:show( event )
         backTalkButton.y = sarcasamButton.y + 50
         scrollView:insert(backTalkButton)
 
-        local backTalkText = display.newText("back-talk", display.contentWidth/2 - display.contentWidth/2 + 220 , sarcasamText.y + 50, native.systemFont, 50)
+        local backTalkText = display.newText("back-talk/speaking respectfully", display.contentWidth/2 - display.contentWidth/2 + 220 , sarcasamText.y + 50, native.systemFont, 50)
         backTalkText.size = 35
         backTalkText:setFillColor(0,0,0)
         scrollView:insert(backTalkText)     
@@ -237,7 +242,7 @@ function scene:show( event )
         loudVoiceButton.y = backTalkButton.y + 50
         scrollView:insert(loudVoiceButton)
 
-        local loudVoiceText = display.newText("loud voice", display.contentWidth/2 - display.contentWidth/2 + 220 , backTalkText.y + 50, native.systemFont, 50)
+        local loudVoiceText = display.newText("loud voice/inside voice", display.contentWidth/2 - display.contentWidth/2 + 220 , backTalkText.y + 50, native.systemFont, 50)
         loudVoiceText.size = 35
         loudVoiceText:setFillColor(0,0,0)
         scrollView:insert(loudVoiceText)     
@@ -257,7 +262,7 @@ function scene:show( event )
         incessantTalkingButton.y = loudVoiceButton.y + 50
         scrollView:insert(incessantTalkingButton)
 
-        local incessantTalkingText = display.newText("incessant talking", incessantTalkingButton.x + 160, loudVoiceText.y + 50, native.systemFont, 50)
+        local incessantTalkingText = display.newText("incessant talking/moderated speech", incessantTalkingButton.x + 160, loudVoiceText.y + 50, native.systemFont, 50)
         incessantTalkingText.size = 35
         incessantTalkingText:setFillColor(0,0,0)
         scrollView:insert(incessantTalkingText)     
@@ -280,7 +285,7 @@ function scene:show( event )
         whiningButton.y = incessantTalkingButton.y + 50
         scrollView:insert(whiningButton)
 
-        local whiningText = display.newText("whining", display.contentWidth/2 - display.contentWidth/2 + 220 , incessantTalkingText.y + 50, native.systemFont, 50)
+        local whiningText = display.newText("whining/calm", display.contentWidth/2 - display.contentWidth/2 + 220 , incessantTalkingText.y + 50, native.systemFont, 50)
         whiningText.size = 35
         whiningText:setFillColor(0,0,0)
         scrollView:insert(whiningText)     
@@ -302,7 +307,7 @@ function scene:show( event )
         complainingButton.y = whiningButton.y + 50
         scrollView:insert(complainingButton)
 
-        local complainingText = display.newText("complaining", display.contentWidth/2 - display.contentWidth/2 + 220 , whiningText.y + 50, native.systemFont, 50)
+        local complainingText = display.newText("complaining/patience", display.contentWidth/2 - display.contentWidth/2 + 220 , whiningText.y + 50, native.systemFont, 50)
         complainingText.size = 35
         complainingText:setFillColor(0,0,0)
         scrollView:insert(complainingText)     
@@ -324,7 +329,7 @@ function scene:show( event )
         arguingButton.y = complainingButton.y + 50
         scrollView:insert(arguingButton)
 
-        local arguingText = display.newText("arguing", display.contentWidth/2 - display.contentWidth/2 + 220 , complainingText.y + 50, native.systemFont, 50)
+        local arguingText = display.newText("arguing/agreeable", display.contentWidth/2 - display.contentWidth/2 + 220 , complainingText.y + 50, native.systemFont, 50)
         arguingText.size = 35
         arguingText:setFillColor(0,0,0)
         scrollView:insert(arguingText)   
@@ -369,7 +374,7 @@ function scene:show( event )
         noEyeContactButton.y = critizingParentDecisionsButton.y + 50
         scrollView:insert(noEyeContactButton)
 
-        local noEyeContactText = display.newText("no eye contact", display.contentWidth/2 - display.contentWidth/2 + 250 , critizingParentDecisionsText.y + 50, native.systemFont, 50)
+        local noEyeContactText = display.newText("no eye contact/eye contact", display.contentWidth/2 - display.contentWidth/2 + 250 , critizingParentDecisionsText.y + 50, native.systemFont, 50)
         noEyeContactText.size = 35
         noEyeContactText:setFillColor(0,0,0)
         scrollView:insert(noEyeContactText)   
@@ -391,7 +396,7 @@ function scene:show( event )
         cursingButton.y = noEyeContactButton.y + 50
         scrollView:insert(cursingButton)
 
-        local cursingText = display.newText("cursing", display.contentWidth/2 - display.contentWidth/2 + 220 , noEyeContactText.y + 50, native.systemFont, 50)
+        local cursingText = display.newText("cursing/moderated speech", display.contentWidth/2 - display.contentWidth/2 + 220 , noEyeContactText.y + 50, native.systemFont, 50)
         cursingText.size = 35
         cursingText:setFillColor(0,0,0)
         scrollView:insert(cursingText)
@@ -413,7 +418,7 @@ function scene:show( event )
         interruptingButton.y = cursingButton.y + 50
         scrollView:insert(interruptingButton)
 
-        local interruptingText = display.newText("interrupting", display.contentWidth/2 - display.contentWidth/2 + 220 , cursingText.y + 50, native.systemFont, 50)
+        local interruptingText = display.newText("interrupting/waiting turn to talk", display.contentWidth/2 - display.contentWidth/2 + 220 , cursingText.y + 50, native.systemFont, 50)
         interruptingText.size = 35
         interruptingText:setFillColor(0,0,0)
         scrollView:insert(interruptingText)
@@ -436,7 +441,7 @@ function scene:show( event )
         rudenessButton.y = interruptingButton.y + 50
         scrollView:insert(rudenessButton)
 
-        local rudenessText = display.newText("rudeness", display.contentWidth/2 - display.contentWidth/2 + 220 , interruptingText.y + 50, native.systemFont, 50)
+        local rudenessText = display.newText("rudeness/politeness", display.contentWidth/2 - display.contentWidth/2 + 220 , interruptingText.y + 50, native.systemFont, 50)
         rudenessText.size = 35
         rudenessText:setFillColor(0,0,0)
         scrollView:insert(rudenessText)
@@ -457,7 +462,7 @@ function scene:show( event )
         naggingButton.y = rudenessButton.y + 50
         scrollView:insert(naggingButton)
 
-        local naggingText = display.newText("nagging", display.contentWidth/2 - display.contentWidth/2 + 220 , rudenessText.y + 50, native.systemFont, 50)
+        local naggingText = display.newText("nagging/patience", display.contentWidth/2 - display.contentWidth/2 + 220 , rudenessText.y + 50, native.systemFont, 50)
         naggingText.size = 35
         naggingText:setFillColor(0,0,0)
         scrollView:insert(naggingText)
@@ -479,7 +484,7 @@ function scene:show( event )
         tantrumsButton.y = naggingButton.y + 50
         scrollView:insert(tantrumsButton)
 
-        local tantrumsText = display.newText("tantrums", display.contentWidth/2 - display.contentWidth/2 + 220 , naggingText.y + 50, native.systemFont, 50)
+        local tantrumsText = display.newText("tantrums/calm", display.contentWidth/2 - display.contentWidth/2 + 220 , naggingText.y + 50, native.systemFont, 50)
         tantrumsText.size = 35
         tantrumsText:setFillColor(0,0,0)
         scrollView:insert(tantrumsText)
@@ -500,7 +505,7 @@ function scene:show( event )
         walkingOffButton.y = tantrumsButton.y + 50
         scrollView:insert(walkingOffButton)
 
-        local walkingOffText = display.newText("walking off", display.contentWidth/2 - display.contentWidth/2 + 220 , tantrumsText.y + 50, native.systemFont, 50)
+        local walkingOffText = display.newText("walking off/patient listening", display.contentWidth/2 - display.contentWidth/2 + 220 , tantrumsText.y + 50, native.systemFont, 50)
         walkingOffText.size = 35
         walkingOffText:setFillColor(0,0,0)
         scrollView:insert(walkingOffText) 
@@ -520,7 +525,7 @@ function scene:show( event )
         ignoringButton.y = walkingOffButton.y + 50
         scrollView:insert(ignoringButton)
 
-        local ignoringText = display.newText("ignoring", display.contentWidth/2 - display.contentWidth/2 + 220 , walkingOffText.y + 50, native.systemFont, 50)
+        local ignoringText = display.newText("ignoring/attentiveness", display.contentWidth/2 - display.contentWidth/2 + 220 , walkingOffText.y + 50, native.systemFont, 50)
         ignoringText.size = 35
         ignoringText:setFillColor(0,0,0)
         scrollView:insert(ignoringText)   
@@ -540,7 +545,7 @@ function scene:show( event )
         manipulatingButton.y = ignoringButton.y + 50
         scrollView:insert(manipulatingButton)
 
-        local manipulatingText = display.newText("manipulating", display.contentWidth/2 - display.contentWidth/2 + 230 , ignoringText.y + 50, native.systemFont, 50)
+        local manipulatingText = display.newText("manipulating/respect", display.contentWidth/2 - display.contentWidth/2 + 230 , ignoringText.y + 50, native.systemFont, 50)
         manipulatingText.size = 35
         manipulatingText:setFillColor(0,0,0)
         scrollView:insert(manipulatingText)    
@@ -560,7 +565,7 @@ function scene:show( event )
         lazinessLackOfEffortButton.y = manipulatingButton.y + 50
         scrollView:insert(lazinessLackOfEffortButton)
 
-        local lazinessLackOfEffortText = display.newText("laziness/lack of effort", display.contentWidth/2 - display.contentWidth/2 + 300 , manipulatingText.y + 50, native.systemFont, 50)
+        local lazinessLackOfEffortText = display.newText("laziness or lack of effort/effort", display.contentWidth/2 - display.contentWidth/2 + 300 , manipulatingText.y + 50, native.systemFont, 50)
         lazinessLackOfEffortText.size = 35
         lazinessLackOfEffortText:setFillColor(0,0,0)
         scrollView:insert(lazinessLackOfEffortText)    
@@ -582,7 +587,7 @@ function scene:show( event )
         inconsiderateButton.y = lazinessLackOfEffortButton.y + 50
         scrollView:insert(inconsiderateButton)
 
-        local inconsiderateText = display.newText("inconsiderate", display.contentWidth/2 - display.contentWidth/2 + 230 , lazinessLackOfEffortText.y + 50, native.systemFont, 50)
+        local inconsiderateText = display.newText("inconsiderate/considerate", display.contentWidth/2 - display.contentWidth/2 + 230 , lazinessLackOfEffortText.y + 50, native.systemFont, 50)
         inconsiderateText.size = 35
         inconsiderateText:setFillColor(0,0,0)
         scrollView:insert(inconsiderateText)    
@@ -602,7 +607,7 @@ function scene:show( event )
         refusingAuthorityButton.y = inconsiderateButton.y + 50
         scrollView:insert(refusingAuthorityButton)
 
-        local refusingAuthorityText = display.newText("refusing to do as told by authority", display.contentWidth/2 - display.contentWidth/2 + 390 , inconsiderateText.y + 50, native.systemFont, 50)
+        local refusingAuthorityText = display.newText("refusing to do as told by authority/respect for authority", display.contentWidth/2 - display.contentWidth/2 + 390 , inconsiderateText.y + 50, native.systemFont, 50)
         refusingAuthorityText.size = 35
         refusingAuthorityText:setFillColor(0,0,0)
         scrollView:insert(refusingAuthorityText)    
@@ -625,7 +630,7 @@ function scene:show( event )
         refusingBoundariesButton.y = refusingAuthorityButton.y + 50
         scrollView:insert(refusingBoundariesButton)
 
-        local refusingBoundariesText = display.newText("refusing to honor boundaries", display.contentWidth/2 - display.contentWidth/2 + 350 , refusingAuthorityText.y + 50, native.systemFont, 50)
+        local refusingBoundariesText = display.newText("refusing to honor boundaries/respect for boundaries", display.contentWidth/2 - display.contentWidth/2 + 350 , refusingAuthorityText.y + 50, native.systemFont, 50)
         refusingBoundariesText.size = 35
         refusingBoundariesText:setFillColor(0,0,0)
         scrollView:insert(refusingBoundariesText)   
@@ -646,7 +651,7 @@ function scene:show( event )
         damagingPropertyButton.y = refusingBoundariesButton.y + 50
         scrollView:insert(damagingPropertyButton)
 
-        local damagingPropertyText = display.newText("damaging property", display.contentWidth/2 - display.contentWidth/2 + 280 , refusingBoundariesText.y + 50, native.systemFont, 50)
+        local damagingPropertyText = display.newText("damaging property/respecting property", display.contentWidth/2 - display.contentWidth/2 + 280 , refusingBoundariesText.y + 50, native.systemFont, 50)
         damagingPropertyText.size = 35
         damagingPropertyText:setFillColor(0,0,0)
         scrollView:insert(damagingPropertyText)   
@@ -667,7 +672,7 @@ function scene:show( event )
         throwingThingsButton.y = damagingPropertyButton.y + 50
         scrollView:insert(throwingThingsButton)
 
-        local throwingThingsText = display.newText("throwing things", display.contentWidth/2 - display.contentWidth/2 + 270 , damagingPropertyText.y + 50, native.systemFont, 50)
+        local throwingThingsText = display.newText("throwing things/not throwing things", display.contentWidth/2 - display.contentWidth/2 + 270 , damagingPropertyText.y + 50, native.systemFont, 50)
         throwingThingsText.size = 35
         throwingThingsText:setFillColor(0,0,0)
         scrollView:insert(throwingThingsText)    
@@ -687,7 +692,7 @@ function scene:show( event )
         actingWithoutPermissionButton.y = throwingThingsButton.y + 50
         scrollView:insert(actingWithoutPermissionButton)
 
-        local actingWithoutPermissionText = display.newText("acting without permission", display.contentWidth/2 - display.contentWidth/2 + 350 , throwingThingsText.y + 50, native.systemFont, 50)
+        local actingWithoutPermissionText = display.newText("acting without permission/seeks permission", display.contentWidth/2 - display.contentWidth/2 + 350 , throwingThingsText.y + 50, native.systemFont, 50)
         actingWithoutPermissionText.size = 35
         actingWithoutPermissionText:setFillColor(0,0,0)
         scrollView:insert(actingWithoutPermissionText)    
@@ -707,7 +712,7 @@ function scene:show( event )
         mistreatingOthersButton.y = actingWithoutPermissionButton.y + 50
         scrollView:insert(mistreatingOthersButton)
 
-        local mistreatingOthersText = display.newText("mistreating others", display.contentWidth/2 - display.contentWidth/2 + 300 , actingWithoutPermissionText.y + 50, native.systemFont, 50)
+        local mistreatingOthersText = display.newText("mistreating others/treating others fairly", display.contentWidth/2 - display.contentWidth/2 + 300 , actingWithoutPermissionText.y + 50, native.systemFont, 50)
         mistreatingOthersText.size = 35
         mistreatingOthersText:setFillColor(0,0,0)
         scrollView:insert(mistreatingOthersText)             
@@ -728,7 +733,7 @@ function scene:show( event )
         hurtingPhysicallyButton.y = mistreatingOthersButton.y + 50
         scrollView:insert(hurtingPhysicallyButton)
 
-        local hurtingPhysicallyText = display.newText("hurting others physically", display.contentWidth/2 - display.contentWidth/2 + 320 , mistreatingOthersText.y + 50, native.systemFont, 50)
+        local hurtingPhysicallyText = display.newText("hurting others physically/respectful of others well being", display.contentWidth/2 - display.contentWidth/2 + 320 , mistreatingOthersText.y + 50, native.systemFont, 50)
         hurtingPhysicallyText.size = 35
         hurtingPhysicallyText:setFillColor(0,0,0)
         scrollView:insert(hurtingPhysicallyText)      
@@ -748,7 +753,7 @@ function scene:show( event )
         drugButton.y = hurtingPhysicallyButton.y + 50
         scrollView:insert(drugButton)
 
-        local drugText = display.newText("drug/alcohol/tobacco use", display.contentWidth/2 - display.contentWidth/2 + 320 , hurtingPhysicallyText.y + 50, native.systemFont, 50)
+        local drugText = display.newText("drug,alcohol,tobacco use/remaining clean", display.contentWidth/2 - display.contentWidth/2 + 320 , hurtingPhysicallyText.y + 50, native.systemFont, 50)
         drugText.size = 35
         drugText:setFillColor(0,0,0)
         scrollView:insert(drugText)    
@@ -768,7 +773,7 @@ function scene:show( event )
         sexualButton.y = drugButton.y + 50
         scrollView:insert(sexualButton)
 
-        local sexualText = display.newText("sexual behavior", display.contentWidth/2 - display.contentWidth/2 + 280 , drugText.y + 50, native.systemFont, 50)
+        local sexualText = display.newText("sexual behavior/abstinence", display.contentWidth/2 - display.contentWidth/2 + 280 , drugText.y + 50, native.systemFont, 50)
         sexualText.size = 35
         sexualText:setFillColor(0,0,0)
         scrollView:insert(sexualText) 
@@ -793,7 +798,99 @@ function scene:show( event )
         scrollView:insert(nextButton)
 
         function nextButton:tap(event)
-
+            if (event.params) then
+                Soptions.params.behaviors = {}
+                if(lyingButton.isOn) then 
+                    table.insert(Soptions.params.behaviors,{"lying","speaking truthfully"}) 
+                end
+                if(deceivingButton.isOn) then 
+                    table.insert(Soptions.params.behaviors,{"deceiving","acting earnestly"}) 
+                end
+                if(yellingButton.isOn) then 
+                    table.insert(Soptions.params.behaviors,{"yelling","speaking more quietly"}) 
+                end
+                if(sarcasamButton.isOn) then 
+                    table.insert(Soptions.params.behaviors,{"sarcasm","speaking respectfully"}) 
+                end
+                if(backTalkButton.isOn) then 
+                    table.insert(Soptions.params.behaviors,{"back-talk","speaking respectfully"}) 
+                end
+                if(loudVoiceButton.isOn) then 
+                    table.insert(Soptions.params.behaviors,{"loud voice","inside voice"}) 
+                end
+                if(incessantTalkingButton.isOn) then 
+                    table.insert(Soptions.params.behaviors,{"incessant talking","moderated speech"}) 
+                end
+                if(whiningButton.isOn) then 
+                    table.insert(Soptions.params.behaviors,{"whining","calm"}) 
+                end
+                if(complainingButton.isOn) then 
+                    table.insert(Soptions.params.behaviors,{"complaining","patience"}) 
+                end
+                if(arguingButton.isOn) then 
+                    table.insert(Soptions.params.behaviors,{"arguing","agreeable"}) 
+                end
+                if(critizingParentDecisionsButton.isOn) then 
+                    table.insert(Soptions.params.behaviors,{"critizing parent decisions","accepting parent decision"}) 
+                end
+                if(noEyeContactButton.isOn) then 
+                    table.insert(Soptions.params.behaviors,{"no eye contact","eye contact"}) 
+                end
+                if(cursingButton.isOn) then 
+                    table.insert(Soptions.params.behaviors,{"cursing","moderated speech"}) 
+                end
+                if(interruptingButton.isOn) then 
+                    table.insert(Soptions.params.behaviors,{"interrupting","waiting turn to talk"}) 
+                end
+                if(rudenessButton.isOn) then 
+                    table.insert(Soptions.params.behaviors,{"rudeness","politeness"}) 
+                end
+                if(naggingButton.isOn) then 
+                    table.insert(Soptions.params.behaviors,{"nagging","patience"}) 
+                end
+                if(tantrumsButton.isOn) then 
+                    table.insert(Soptions.params.behaviors,{"tantrums","calm"}) 
+                end
+                if(walkingOffButton.isOn) then 
+                    table.insert(Soptions.params.behaviors,{"walking off","patient listening"}) 
+                end
+                if(manipulatingButton.isOn) then 
+                    table.insert(Soptions.params.behaviors,{"manipulating","respect"}) 
+                end
+                if(lazinessLackOfEffortButton.isOn) then 
+                    table.insert(Soptions.params.behaviors,{"laziness or lack of effort","effort"}) 
+                end
+                if(inconsiderateButton.isOn) then 
+                    table.insert(Soptions.params.behaviors,{"inconsiderate","considerate"}) 
+                end
+                if(refusingAuthorityButton.isOn) then 
+                    table.insert(Soptions.params.behaviors,{"refusing to do as told by authority","respecting authority"}) 
+                end
+                if(refusingBoundariesButton.isOn) then 
+                    table.insert(Soptions.params.behaviors,{"refusing to honor boundaries","honoring boundaries"}) 
+                end
+                if(damagingPropertyButton.isOn) then 
+                    table.insert(Soptions.params.behaviors,{"damaging property","respecting property"}) 
+                end
+                if(throwingThingsButton.isOn) then 
+                    table.insert(Soptions.params.behaviors,{"throwing things","not throwing things"}) 
+                end
+                if(actingWithoutPermissionButton.isOn) then 
+                    table.insert(Soptions.params.behaviors,{"acting without permission","seeks permission"}) 
+                end
+                if(mistreatingOthersButton.isOn) then 
+                    table.insert(Soptions.params.behaviors,{"mistreating others","treating others fairly"}) 
+                end
+                if(hurtingPhysicallyButton.isOn) then 
+                    table.insert(Soptions.params.behaviors,{"hurting others physically","respectful of others well being"}) 
+                end
+                if(drugButton.isOn) then 
+                    table.insert(Soptions.params.behaviors,{"drug,alcohol,tobacco use","remaining clean"}) 
+                end
+                if(sexualButton.isOn) then 
+                    table.insert(Soptions.params.behaviors,{"sexual behavior","abstinence"}) 
+                end
+            end
             composer.gotoScene("newChildProblemBehaviorsII",Soptions)
         end
 
