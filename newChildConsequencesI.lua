@@ -44,25 +44,180 @@ function scene:show( event )
 
         
 
-       
+       -- Function to handle button events
+        local function handleButtonEvent( event )
+
+            if ( "ended" == event.phase ) then
+                print( "Button was pressed and released" )
+            end
+        end
+
+        -- Create the widget
         local backButtonNew = widget.newButton(
-		    {
-		        --width = 500,
-		        --heigth = 500,
-		        id = "backButtonNew",
-		        defaultFile = "backArrow3.png",
-		        onEvent = handleButtonEvent
-		    }
-		)
+            {
+                --width = 500,
+                --heigth = 500,
+                id = "backButtonNew",
+                defaultFile = "backArrow3.png",
+                onEvent = handleButtonEvent
+            }
+        )
 
-		backButtonNew.x = display.contentWidth/2 - 320 
-		backButtonNew.y = display.contentHeight - display.contentHeight + 100
-		sceneGroup:insert(backButtonNew)
+        backButtonNew.x = display.contentWidth/2 - 320 
+        backButtonNew.y = display.contentHeight - display.contentHeight + 100
+        sceneGroup:insert(backButtonNew)
 
-         function backButtonNew:tap(event)
+       
+       
+
+        -- Create the widget
+        local swattPunshiment = widget.newButton(
+            {
+                --width = 500,
+                --heigth = 500,
+                id = "IDP_Reference",
+                defaultFile = "swatts.png",
+                onEvent = handleButtonEvent
+            }
+        )
+
+        swattPunshiment.x = display.contentWidth/2 
+        swattPunshiment.y = display.contentHeight/2-400
+        sceneGroup:insert(swattPunshiment)
+
+        
+        -- Create the widget
+        local timeOutPunshiment = widget.newButton(
+            {
+                --width = 500,
+                --heigth = 500,
+                id = "family_Schedule",
+                defaultFile = "time-out.png",
+                onEvent = handleButtonEvent
+            }
+        )
+
+        timeOutPunshiment.x = display.contentWidth/2 
+        timeOutPunshiment.y = swattPunshiment.y + 120
+        sceneGroup:insert(timeOutPunshiment)
+
+       
+
+         -- Create the widget
+        local talkingTimeOutPunshiment = widget.newButton(
+            {
+                --width = 500,
+                --heigth = 500,
+                id = "Problem_Behavior_List",
+                defaultFile = "talking time-out.png",
+                onEvent = handleButtonEvent
+            }
+        )
+
+        talkingTimeOutPunshiment.x = display.contentWidth/2 
+        talkingTimeOutPunshiment.y = timeOutPunshiment.y + 120
+        sceneGroup:insert(talkingTimeOutPunshiment)
+
+       
+
+         -- Create the widget
+        local toyPunshiment = widget.newButton(
+            {
+                --width = 500,
+                --heigth = 500,
+                id = "Desired_Behavior_List",
+                defaultFile = "toy:device.png",
+                onEvent = handleButtonEvent
+            }
+        )
+
+        toyPunshiment.x = display.contentWidth/2 
+        toyPunshiment.y = talkingTimeOutPunshiment.y + 120
+        sceneGroup:insert(toyPunshiment)
+
+       
+
+         -- Create the widget
+        local lossToyPunshiment = widget.newButton(
+            {
+                --width = 500,
+                --heigth = 500,
+                id = "Consequence_Log",
+                defaultFile = "PermanentLoss.png",
+                onEvent = handleButtonEvent
+            }
+        )
+
+        lossToyPunshiment.x = display.contentWidth/2 
+        lossToyPunshiment.y = toyPunshiment.y+120
+        sceneGroup:insert(lossToyPunshiment)
+
+
+       
+
+        -- Create the widget
+        local obediencePunshiment = widget.newButton(
+            {
+                --width = 500,
+                --heigth = 500,
+                id = "Reward_Log",
+                defaultFile = "ObedienceRespect.png",
+                onEvent = handleButtonEvent
+            }
+        )
+
+        obediencePunshiment.x = display.contentWidth/2 
+        obediencePunshiment.y = lossToyPunshiment.y + 120
+        sceneGroup:insert(obediencePunshiment)
+
+        -- Create the widget
+        local RewindPunshiment = widget.newButton(
+            {
+                --width = 500,
+                --heigth = 500,
+                id = "Reward_Log",
+                defaultFile = "Rewind.png",
+                onEvent = handleButtonEvent
+            }
+        )
+
+        RewindPunshiment.x = display.contentWidth/2 
+        RewindPunshiment.y = obediencePunshiment.y + 120
+        sceneGroup:insert(RewindPunshiment)
+
+        -- Create the widget
+        local apologyPunshiment = widget.newButton(
+            {
+                --width = 500,
+                --heigth = 500,
+                id = "Reward_Log",
+                defaultFile = "WriteNote.png",
+                onEvent = handleButtonEvent
+            }
+        )
+
+        apologyPunshiment.x = display.contentWidth/2 
+        apologyPunshiment.y = RewindPunshiment.y + 120
+        sceneGroup:insert(apologyPunshiment)
+
+         -- Create the widget
+        local servicePunshiment = widget.newButton(
+            {
+                
+                id = "Reward_Log",
+                defaultFile = "Service.png",
+                onEvent = handleButtonEvent
+            }
+        )
+
+        servicePunshiment.x = display.contentWidth/2 
+        servicePunshiment.y = apologyPunshiment.y + 120
+        sceneGroup:insert(servicePunshiment)
+
+
+        function backButtonNew:tap(event)
 
             composer.gotoScene("MainMenu")
-        
         end
 
         -- this listens to see if object has been tapped
