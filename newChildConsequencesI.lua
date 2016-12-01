@@ -26,7 +26,7 @@ end
 
 -- show()
 function scene:show( event )
-    composer.removeScene("newChildProblemBehaviorsII")
+    composer.removeScene("newChildConsequencesII")
     local sceneGroup = self.view
     local phase = event.phase
     if (not event.params) then 
@@ -55,6 +55,10 @@ function scene:show( event )
         pickText.size = 40
         pickText:setFillColor(0,0,0)
         sceneGroup:insert(pickText)
+
+        local nextButton = display.newRect(display.contentWidth - 50, display.contentHeight-display.contentHeight + 100, 70, 75)
+        nextButton:setFillColor(0.372549, 0.619608, 0.627451)
+        sceneGroup:insert(nextButton)
 
         
 
@@ -236,6 +240,14 @@ function scene:show( event )
 
         -- this listens to see if object has been tapped
         backButtonNew:addEventListener("tap", backButtonNew)
+
+         function nextButton:tap(event)
+
+            composer.gotoScene("newChildConsequencesII",Soptions)
+        end
+
+        -- this listens to see if object has been tapped
+        nextButton:addEventListener("tap", nextButton)
 
 
     elseif ( phase == "did" ) then
