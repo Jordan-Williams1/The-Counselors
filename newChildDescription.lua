@@ -29,6 +29,7 @@ function scene:show( event )
     composer.removeScene("addChild")
     composer.removeScene("newChildProblemBehaviorsI")
 
+
     local sceneGroup = self.view
     local phase = event.phase
     if (not event.params) then 
@@ -45,7 +46,6 @@ function scene:show( event )
             session_ID = session
         }
     } 
-
     if ( phase == "will" ) then
         -- Code here runs when the scene is still off screen (but is about to come on screen)
         -- ScrollView listener
@@ -81,7 +81,7 @@ function scene:show( event )
 		        width = display.contentWidth,
 		        height = display.contentHeight,
 		        scrollWidth = 600,
-		        scrollHeight = 2000,
+		        scrollHeight = 3200,
 		        listener = scrollListener
 		    }
 		)
@@ -91,7 +91,7 @@ function scene:show( event )
 		
         
 
-        local background = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth, display.contentHeight*2)
+        local background = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth,6000)
         background:setFillColor( 0.745098 ,0.745098 ,0.745098)
         sceneGroup:insert(background)
         scrollView:insert( background )
@@ -136,7 +136,7 @@ function scene:show( event )
         scrollView:insert(pickText)
 
          -- Create text field Name
-        childName = native.newTextField( display.contentWidth/1.5, display.contentHeight-display.contentHeight + 200, display.contentWidth/2, 75)
+        local childName = native.newTextField( display.contentWidth/1.5, display.contentHeight-display.contentHeight + 200, display.contentWidth/2, 75)
         scrollView:insert(childName)
         childName:addEventListener( "userInput", textListener )
 
@@ -588,7 +588,7 @@ function scene:show( event )
         
 
 
-		scrollView:setScrollHeight(2000)
+		scrollView:setScrollHeight(3200)
 
         -- this listens to see if object has been tapped
         backButton:addEventListener("tap", backButton)

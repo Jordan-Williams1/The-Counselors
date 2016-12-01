@@ -26,8 +26,8 @@ end
 
 -- show()
 function scene:show( event )
-    composer.removeScene("newChildDescription")
     composer.removeScene("mainMenu")
+    composer.removeScene("newChildDescription")
     local sceneGroup = self.view
     local phase = event.phase
     if (not event.params) then 

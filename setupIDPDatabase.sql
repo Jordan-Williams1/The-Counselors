@@ -33,7 +33,7 @@ values("cc25eacef7db3c45a4944fb6e3957452","cc25eacef7db3c45a4944fb6e3957452","95
 
 
 CREATE TABLE child
-( childID int primary key,
+( childID int primary key AUTO_INCREMENT,
 username varchar(100),
 password varchar(100),
 name varchar(100),
@@ -55,8 +55,8 @@ DisciplineNotWorked text,
 CONSTRAINT fk_childID1 FOREIGN KEY (username,password) references users(username,password)
 );
 
-INSERT INTO child (childID,username,password,name,age) values (1,"95cf5007322b0c2a87ebb3d3089c4569","95cf5007322b0c2a87ebb3d3089c4569","Ricky",12);
-INSERT INTO child (childID,username,password,name,age) values (2,"95cf5007322b0c2a87ebb3d3089c4569","95cf5007322b0c2a87ebb3d3089c4569","Bobby",8);
+INSERT INTO child (username,password,name,age) values ("95cf5007322b0c2a87ebb3d3089c4569","95cf5007322b0c2a87ebb3d3089c4569","Ricky",12);
+INSERT INTO child (username,password,name,age) values ("95cf5007322b0c2a87ebb3d3089c4569","95cf5007322b0c2a87ebb3d3089c4569","Bobby",8);
 
 
 CREATE TABLE behaviors
