@@ -138,13 +138,8 @@ function scene:show( event )
         sceneGroup:insert(pickText)
 
          -- Create text field Name
-<<<<<<< HEAD
-        local childName = native.newTextField( display.contentWidth/1.5, display.contentHeight-display.contentHeight + 200, display.contentWidth/2, 75)
-        scrollView:insert(childName)
-=======
         childName = native.newTextField( display.contentWidth/1.5, display.contentHeight-display.contentHeight + 200, display.contentWidth/2, 75)
         sceneGroup:insert(childName)
->>>>>>> origin/master
         childName:addEventListener( "userInput", textListener )
 
         local childNameText = display.newText("Name: ", display.contentWidth/2-140, display.contentHeight-display.contentHeight + 200, 400, 75)
