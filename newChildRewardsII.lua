@@ -174,7 +174,7 @@ function scene:create( event )
 
         function nextButton:tap(event)
 
-            composer.gotoScene("newChildReviewIDPI",Soptions)
+            --composer.gotoScene("newChildReviewIDPI",Soptions)
         
         end
         nextButton:addEventListener("tap", nextButton)
