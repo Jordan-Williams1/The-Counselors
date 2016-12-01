@@ -15,29 +15,65 @@ local scene = composer.newScene()
 
 -- create()
 function scene:create( event )
+    composer.removeScene("newChildConsequencesII")
+    composer.removeScene("newChildRewardsI")
 
     local sceneGroup = self.view
     -- Code here runs when the scene is first created but has not yet appeared on screen
-    composer.removeScene("newChildDesiredBehaviors")
+    
      local background = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth, display.contentHeight)
         background:setFillColor( 0.745098 ,0.745098 ,0.745098)
         sceneGroup:insert(background)
 
 
-        local pickText = display.newText("          New Child:\n        Consequences II", display.contentWidth/2, display.contentHeight-display.contentHeight + 100, native.systemFont, 50)
+       local pickText = display.newText("          New Child:\n      Desired Behaviors", display.contentWidth/2, display.contentHeight-display.contentHeight + 100, native.systemFont, 50)
         pickText.size = 40
         pickText.width = 600
         pickText.align = "center"
         pickText:setFillColor(0,0,0)
         sceneGroup:insert(pickText)
 
+         local backButtonNew = widget.newButton(
+            {
+                --width = 500,
+                --heigth = 500,
+                id = "backButtonNew",
+                defaultFile = "backArrow3.png",
+                onEvent = handleButtonEvent
+            }
+        )
+
+        backButtonNew.x = display.contentWidth/2 - 320 
+        backButtonNew.y = display.contentHeight - display.contentHeight + 100
+        sceneGroup:insert(backButtonNew)
+
+
+        local nextButton = display.newRect(display.contentWidth - 50, display.contentHeight-display.contentHeight + 100, 70, 75)
+        nextButton:setFillColor(0.372549, 0.619608, 0.627451)
+        sceneGroup:insert(nextButton)
+
+        function nextButton:tap(event)
+
+            composer.gotoScene("newChildRewardsI")
         
+        end
+        nextButton:addEventListener("tap", nextButton)
+
+        function backButtonNew:tap(event)
+            
+            composer.gotoScene("newChildConsequencesII")
+        
+        end
+        backButtonNew:addEventListener("tap", backButtonNew)
+
+
+        --[[
         local childTEXT = display.newText("", display.contentWidth/2+140, display.contentHeight/2, 400, 75)
         childTEXT.size = 40
         childTEXT:setFillColor(0,0,0)
         sceneGroup:insert(childTEXT)
 
-        local addTEXT = display.newText("Add Consequence", display.contentWidth/2+40, display.contentHeight/2+250, 400, 75)
+        local addTEXT = display.newText("Add Desired Behavior", display.contentWidth/2+40, display.contentHeight/2+250, 400, 75)
         addTEXT.size = 25
         addTEXT:setFillColor(0,0,0)
         sceneGroup:insert(addTEXT)
@@ -93,10 +129,6 @@ function scene:create( event )
         plus:setFillColor(0,0,0)
         sceneGroup:insert(plus)
 
-        local nextButton = display.newRect(display.contentWidth - 50, display.contentHeight-display.contentHeight + 100, 70, 75)
-        nextButton:setFillColor(0.372549, 0.619608, 0.627451)
-        sceneGroup:insert(nextButton)
-
         function plus:tap(event)
 
             childTEXT.text = writeBehavior.text
@@ -107,37 +139,17 @@ function scene:create( event )
 
          function backButtonNew:tap(event)
             
-            composer.gotoScene("newChildConsequencesI")
+            composer.gotoScene("desiredBehaviorList")
         
         end
         backButtonNew:addEventListener("tap", backButtonNew)
 
-        function nextButton:tap(event)
-
-            composer.gotoScene("newChildDesiredBehaviors")
-        
-        end
-        nextButton:addEventListener("tap", nextButton)
-
          -- Create text field
         writeBehavior = native.newTextField( display.contentWidth/2, display.contentHeight/2+300, display.contentWidth/2, 75)
+        
         sceneGroup:insert(writeBehavior)
         writeBehavior:addEventListener( "userInput", textListener )
-        writeBehavior.size = 40
-        writeBehavior.text = "Consequence Name"
-        
-        consequenceDescription = native.newTextBox( display.contentWidth/2, writeBehavior.y + 150, 600, 200 )
-        consequenceDescription.isEditable = true
-        consequenceDescription:addEventListener( "userInput", textListener )
-        sceneGroup:insert(consequenceDescription)
-        consequenceDescription.text = "Consequence Description"
-
-
-
-
-
-
-
+        --]]
 end
 
 
