@@ -73,15 +73,7 @@ function scene:show( event )
         backButtonNew.y = display.contentHeight - display.contentHeight + 100
         sceneGroup:insert(backButtonNew)
 
-         function backButtonNew:tap(event)
 
-            composer.gotoScene("MainMenu")
-        
-        end
-
-        -- this listens to see if object has been tapped
-        backButtonNew:addEventListener("tap", backButtonNew)
-		
 
 
 
@@ -140,6 +132,20 @@ function scene:show( event )
                 session_ID
             }
         }
+
+         function backButtonNew:tap(event)
+
+            userName:removeSelf()
+            Password:removeSelf()
+            PasswordCheck:removeSelf()
+            
+            composer.gotoScene("signIn")
+        
+        end
+
+        -- this listens to see if object has been tapped
+        backButtonNew:addEventListener("tap", backButtonNew)
+        
 
         function register:tap(event)
             

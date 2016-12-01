@@ -41,7 +41,7 @@ function scene:show( event )
 
     if ( phase == "will" ) then
         -- Code here runs when the scene is still off screen (but is about to come on screen)
-
+        composer.removeScene("register")
        
         local background = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth, display.contentHeight)
         background:setFillColor( 0.745098 ,0.745098 ,0.745098)
