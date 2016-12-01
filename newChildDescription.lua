@@ -28,6 +28,8 @@ end
 function scene:show( event )
     composer.removeScene("addChild")
     composer.removeScene("newChildProblemBehaviorsI")
+    composer.removeScene("newChildDescriptionpart2")
+
     
 
     local sceneGroup = self.view
@@ -71,31 +73,13 @@ function scene:show( event )
 
 		    return true
 		end
-
-
-
-		-- Create the widget
-		local scrollView = widget.newScrollView(
-		    {
-		        --top = 100,
-		        --left = 10,
-		        width = display.contentWidth,
-		        height = display.contentHeight,
-		        scrollWidth = 600,
-		        scrollHeight = 2000,
-		        listener = scrollListener
-		    }
-		)
-
-		sceneGroup:insert(scrollView)
-
 		
         
 
         local background = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth, display.contentHeight*4)
         background:setFillColor( 0.745098 ,0.745098 ,0.745098)
-        --sceneGroup:insert(background)
-        scrollView:insert( background )
+        
+        sceneGroup:insert( background )
 
 
 
@@ -124,55 +108,55 @@ function scene:show( event )
 
         local backButton = display.newRect(display.contentWidth/2 - display.contentWidth/2 + 50, display.contentHeight-display.contentHeight + 100, 70, 75)
         backButton:setFillColor(0.372549, 0.619608, 0.627451)
-        scrollView:insert(backButton)
+        sceneGroup:insert(backButton)
 
-        local backButton2 = display.newRect(display.contentWidth/2 - display.contentWidth/2 + 50, display.contentHeight-display.contentHeight + 200, 70, 75)
-        backButton2:setFillColor(0.372549, 0.619608, 0.627451)
-        scrollView:insert(backButton2)
+        local nextButton = display.newRect(display.contentWidth - 50, display.contentHeight-display.contentHeight + 100, 70, 75)
+        nextButton:setFillColor(0.372549, 0.619608, 0.627451)
+        sceneGroup:insert(nextButton)
 
 
         local pickText = display.newText("New Child Description", display.contentWidth/2, display.contentHeight-display.contentHeight + 100, native.systemFont, 50)
         pickText.size = 40
         pickText:setFillColor(0,0,0)
-        scrollView:insert(pickText)
+        sceneGroup:insert(pickText)
 
          -- Create text field Name
         childName = native.newTextField( display.contentWidth/1.5, display.contentHeight-display.contentHeight + 200, display.contentWidth/2, 75)
-        scrollView:insert(childName)
+        sceneGroup:insert(childName)
         childName:addEventListener( "userInput", textListener )
 
         local childNameText = display.newText("Name: ", display.contentWidth/2-140, display.contentHeight-display.contentHeight + 200, 400, 75)
         childNameText.size = 40
         childNameText:setFillColor(0,0,0)
-        scrollView:insert(childNameText)
+        sceneGroup:insert(childNameText)
 
         -- Create text field Age
         childAge = native.newTextField(  display.contentWidth/1.5, display.contentHeight-display.contentHeight + 350, display.contentWidth/2, 75)
-        scrollView:insert(childAge)
+        sceneGroup:insert(childAge)
         childAge:addEventListener( "userInput", textListener )
 
         local childAgeText = display.newText("Age: ", display.contentWidth/2-140, display.contentHeight-display.contentHeight + 350, 400, 75)
         childAgeText.size = 40
         childAgeText:setFillColor(0,0,0)
-        scrollView:insert(childAgeText)
+        sceneGroup:insert(childAgeText)
 
         local GradeText = display.newText("Grade: ", display.contentWidth/2-140, display.contentHeight/2-150, 400, 75)
         GradeText.size = 40
         GradeText:setFillColor(0,0,0)
-        scrollView:insert(GradeText)
+        sceneGroup:insert(GradeText)
 
         -- Create text field Age
         childGrade = native.newTextField(  display.contentWidth/1.5, display.contentHeight/2-150, display.contentWidth/2, 75)
-        scrollView:insert(childGrade)
+        sceneGroup:insert(childGrade)
         childGrade:addEventListener( "userInput", textListener )
 
         local DateText = display.newText("Date: ", display.contentWidth/2-140, display.contentHeight/2, 400, 75)
         DateText.size = 40
         DateText:setFillColor(0,0,0)
-        scrollView:insert(DateText)
+        sceneGroup:insert(DateText)
 
         dateField = native.newTextField(  display.contentWidth/1.5, display.contentHeight/2, display.contentWidth/2, 75)
-        scrollView:insert(dateField)
+        sceneGroup:insert(dateField)
         dateField:addEventListener( "userInput", textListener )
 
         -- function for all radion buttons
@@ -187,7 +171,7 @@ function scene:show( event )
 
 		-- Create a group for the radio button set
 		local extrovertIntrovert = display.newGroup()
-		scrollView:insert(extrovertIntrovert)
+		sceneGroup:insert(extrovertIntrovert)
 
 
 		-- Create two associated radio buttons (inserted into the same display group)
@@ -208,7 +192,7 @@ function scene:show( event )
 		local extrovertText = display.newText("extrovert", display.contentWidth/2 - 220, display.contentWidth/2 + 420 )--, 400, 75)
         extrovertText.size = 30
         extrovertText:setFillColor(0,0,0)
-        scrollView:insert(extrovertText)
+        sceneGroup:insert(extrovertText)
 
 		
 
@@ -229,7 +213,7 @@ function scene:show( event )
 		local introvertText = display.newText("introvert", display.contentWidth/2 - 220, display.contentWidth/2 + 500 )--, 400, 75)
         introvertText.size = 30
         introvertText:setFillColor(0,0,0)
-        scrollView:insert(introvertText)
+        sceneGroup:insert(introvertText)
 		
 
 -----------------------------------------------------------------------		
@@ -237,7 +221,7 @@ function scene:show( event )
 -----------------------------------------------------------------------		
 
 		local activeCalm = display.newGroup()
-		scrollView:insert(activeCalm)
+		sceneGroup:insert(activeCalm)
 
 		local active = widget.newSwitch(
 		    {
@@ -256,7 +240,7 @@ function scene:show( event )
 		local activeText = display.newText("active", display.contentWidth/2 - 220, display.contentWidth/2 + 620 )--, 400, 75)
         activeText.size = 30
         activeText:setFillColor(0,0,0)
-        scrollView:insert(activeText)
+        sceneGroup:insert(activeText)
 		
 		
 
@@ -277,14 +261,14 @@ function scene:show( event )
 		local calmText = display.newText("calm", display.contentWidth/2 - 220, display.contentWidth/2 + 700 )--, 400, 75)
         calmText.size = 30
         calmText:setFillColor(0,0,0)
-        scrollView:insert(calmText)
+        sceneGroup:insert(calmText)
 
 -----------------------------------------------------------------------		
 		-- NEW GROUP OUTGOING OR SHY
 -----------------------------------------------------------------------
 	
 		local outgoingShy = display.newGroup()
-		scrollView:insert(outgoingShy)
+		sceneGroup:insert(outgoingShy)
 
 		local outgoing = widget.newSwitch(
 		    {
@@ -303,7 +287,7 @@ function scene:show( event )
 		local outgoingText = display.newText("outgoing", display.contentWidth/2 + 20, display.contentWidth/2 + 420 )
         outgoingText.size = 30
         outgoingText:setFillColor(0,0,0)
-        scrollView:insert(outgoingText)
+        sceneGroup:insert(outgoingText)
 		
 
 		local shy = widget.newSwitch(
@@ -323,14 +307,14 @@ function scene:show( event )
 		local shyText = display.newText("shy", display.contentWidth/2 + 20, display.contentWidth/2 + 500 )
         shyText.size = 30
         shyText:setFillColor(0,0,0)
-        scrollView:insert(shyText)
+        sceneGroup:insert(shyText)
 
 -----------------------------------------------------------------------		
 		-- NEW GROUP PLANNER OR IMPULSIVE
 -----------------------------------------------------------------------
 
 		local plannerImpulsive = display.newGroup()
-		scrollView:insert(plannerImpulsive)
+		sceneGroup:insert(plannerImpulsive)
 
 		local planner = widget.newSwitch(
 		    {
@@ -349,7 +333,7 @@ function scene:show( event )
 		local plannerText = display.newText("planner", display.contentWidth/2 + 20, display.contentWidth/2 + 620 )
         plannerText.size = 30
         plannerText:setFillColor(0,0,0)
-        scrollView:insert(plannerText)
+        sceneGroup:insert(plannerText)
 		
 
 		local impulsive = widget.newSwitch(
@@ -369,14 +353,14 @@ function scene:show( event )
 		local impulsiveText = display.newText("impulsive", display.contentWidth/2 + 20, display.contentWidth/2 + 700 )
         impulsiveText.size = 30
         impulsiveText:setFillColor(0,0,0)
-        scrollView:insert(impulsiveText)
+        sceneGroup:insert(impulsiveText)
 
 -----------------------------------------------------------------------		
 		-- NEW GROUP LEADER OR FOLLOWER
 -----------------------------------------------------------------------
 		
 		local leaderFollower = display.newGroup()
-		scrollView:insert(leaderFollower)
+		sceneGroup:insert(leaderFollower)
 
 		local leader = widget.newSwitch(
 		    {
@@ -395,7 +379,7 @@ function scene:show( event )
 		local leaderText = display.newText("leader", display.contentWidth/2 + 250, display.contentWidth/2 + 420 )
         leaderText.size = 30
         leaderText:setFillColor(0,0,0)
-        scrollView:insert(leaderText)
+        sceneGroup:insert(leaderText)
 
 		
 
@@ -416,7 +400,7 @@ function scene:show( event )
 		local followerText = display.newText("follower", display.contentWidth/2 + 250, display.contentWidth/2 + 500 )
         followerText.size = 30
         followerText:setFillColor(0,0,0)
-        scrollView:insert(followerText)
+        sceneGroup:insert(followerText)
 
 
 -----------------------------------------------------------------------		
@@ -424,7 +408,7 @@ function scene:show( event )
 -----------------------------------------------------------------------
 
         local caringUncaring = display.newGroup()
-		scrollView:insert(caringUncaring)
+		sceneGroup:insert(caringUncaring)
 
 		local caring = widget.newSwitch(
 		    {
@@ -444,7 +428,7 @@ function scene:show( event )
 		local caringText = display.newText("caring", display.contentWidth/2 + 250, display.contentWidth/2 + 620 )
         caringText.size = 30
         caringText:setFillColor(0,0,0)
-        scrollView:insert(caringText)
+        sceneGroup:insert(caringText)
 
 		local uncaring = widget.newSwitch(
 		    {
@@ -464,105 +448,7 @@ function scene:show( event )
 		local uncaringText = display.newText("uncaring", display.contentWidth/2 + 250, display.contentWidth/2 + 700 )
         uncaringText.size = 30
         uncaringText:setFillColor(0,0,0)
-        scrollView:insert(uncaringText)
-
------------------------------------------------------------------------		
-		-- STRENGTHS TEXTBOX
------------------------------------------------------------------------
-
-		local strengthsText = display.newText("Strengths", display.contentWidth/2, display.contentWidth/2 + 800 )
-        strengthsText.size = 40
-        strengthsText:setFillColor(0,0,0)
-        scrollView:insert(strengthsText)
-
-        strengthsBox = native.newTextBox( display.contentWidth/2, display.contentWidth/2 + 900 , 600, 150 )
-		strengthsBox.isEditable = true
-		strengthsBox:addEventListener( "userInput", textListener )
-		scrollView:insert(strengthsBox)
-
------------------------------------------------------------------------		
-		-- WEAKNESS TEXTBOX
------------------------------------------------------------------------
-
-		local weaknessText = display.newText("Weaknesses", display.contentWidth/2, strengthsBox.y + 200 )
-        weaknessText.size = 40
-        weaknessText:setFillColor(0,0,0)
-        scrollView:insert(weaknessText)
- 		
- 		weaknessBox = native.newTextBox( display.contentWidth/2, strengthsBox.y + 300, 600, 150 )
-		weaknessBox.isEditable = true
-		weaknessBox:addEventListener( "userInput", textListener )
-		scrollView:insert(weaknessBox)
-
------------------------------------------------------------------------		
-		-- MATURITY LEVEL
------------------------------------------------------------------------
-         
-        local maturityText = display.newText("Maturity Level", display.contentWidth/2, weaknessBox.y + 220 )
-        maturityText.size = 40
-        maturityText:setFillColor(0,0,0)
-        scrollView:insert(maturityText)
- 		
- 		maturityBox = native.newTextBox( display.contentWidth/2, weaknessBox.y + 300, 600, 110 )
-		maturityBox.isEditable = true
-		maturityBox:addEventListener( "userInput", textListener )
-		scrollView:insert(maturityBox)
-
------------------------------------------------------------------------		
-		-- INTERESTS
------------------------------------------------------------------------
-
-		local interestsText = display.newText("Interests", display.contentWidth/2, maturityBox.y + 200 )
-        interestsText.size = 40
-        interestsText:setFillColor(0,0,0)
-        scrollView:insert(interestsText)
-
-        interestsBox = native.newTextBox( display.contentWidth/2, maturityBox.y + 300, 600, 150 )
-		interestsBox.isEditable = true
-		interestsBox:addEventListener( "userInput", textListener )
-		scrollView:insert(interestsBox)
-
------------------------------------------------------------------------		
-		-- DISCIPLINE WORKED IN PAST
------------------------------------------------------------------------
-
-		local successfulDiscliplineText = display.newText("Discipline that has worked in the past", display.contentWidth/2, interestsBox.y + 200 )
-        successfulDiscliplineText.size = 35
-        successfulDiscliplineText:setFillColor(0,0,0)
-        scrollView:insert(successfulDiscliplineText)
-
-        successfulDiscliplineBox = native.newTextBox( display.contentWidth/2, interestsBox.y + 300, 600, 150 )
-		successfulDiscliplineBox.isEditable = true
-		successfulDiscliplineBox:addEventListener( "userInput", textListener )
-		scrollView:insert(successfulDiscliplineBox)
-
------------------------------------------------------------------------		
-		-- DISCIPLINE THAT HAS WORKED IN PAST
------------------------------------------------------------------------
-
-		local successfulDiscliplineText = display.newText("Discipline that has worked in the past", display.contentWidth/2, interestsBox.y + 200 )
-        successfulDiscliplineText.size = 35
-        successfulDiscliplineText:setFillColor(0,0,0)
-        scrollView:insert(successfulDiscliplineText)
-
-        successfulDiscliplineBox = native.newTextBox( display.contentWidth/2, interestsBox.y + 300, 600, 150 )
-		successfulDiscliplineBox.isEditable = true
-		successfulDiscliplineBox:addEventListener( "userInput", textListener )
-		scrollView:insert(successfulDiscliplineBox)
-
------------------------------------------------------------------------		
-		-- DISCIPLINE THAT HAS NOT WORKED IN PAST
------------------------------------------------------------------------
-
-		local unsuccessfulDiscliplineText = display.newText("Discipline that has not worked in the past", display.contentWidth/2, successfulDiscliplineBox.y + 200 )
-        unsuccessfulDiscliplineText.size = 35
-        unsuccessfulDiscliplineText:setFillColor(0,0,0)
-        scrollView:insert(unsuccessfulDiscliplineText)
-
-        unsuccessfulDiscliplineBox = native.newTextBox( display.contentWidth/2, successfulDiscliplineBox.y + 300, 600, 150 )
-		unsuccessfulDiscliplineBox.isEditable = true
-		unsuccessfulDiscliplineBox:addEventListener( "userInput", textListener )
-		scrollView:insert(unsuccessfulDiscliplineBox)
+        sceneGroup:insert(uncaringText)
 
 -----------------------------------------------------------------------		
 		-- Bottom Buttons
@@ -570,37 +456,31 @@ function scene:show( event )
 
  		local cancelButton = display.newRect(display.contentWidth/2 - display.contentWidth/2 + 100, 3100, 70, 75)
         cancelButton:setFillColor(0.372549, 0.619608, 0.627451)
-        scrollView:insert(cancelButton)
+        sceneGroup:insert(cancelButton)
 
-        local nextButton = display.newRect(display.contentWidth/2 + display.contentWidth/2  - 100, 3100, 70, 75)
-        nextButton:setFillColor(0.372549, 0.619608, 0.627451)
-        scrollView:insert(nextButton)
-
-
+        
 
         function nextButton:tap(event)
-            composer.gotoScene("newChildProblemBehaviorsI",Soptions)
+            composer.gotoScene("newChildDescriptionpart2",Soptions)
         end
 
         function backButton:tap(event)
             composer.gotoScene("addChild",Soptions)
         end
 
-        function backButton2:tap(event)
-            composer.gotoScene("addChild",Soptions)
-        end
+       
 
         
 
         
 
 
-		scrollView:setScrollHeight(3100)
+		
 
         -- this listens to see if object has been tapped
         backButton:addEventListener("tap", backButton)
         nextButton:addEventListener("tap", nextButton)
-        backButton2:addEventListener("tap", backButton2)
+   
 
 
 
