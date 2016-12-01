@@ -20,6 +20,27 @@ function scene:create( event )
 
 
     local sceneGroup = self.view
+    local phase = event.phase
+    if (not event.params) then 
+        session = "null session"
+        print("Session: "..session)
+    else
+        session = event.params.session_ID
+        print("Session: "..session)
+    end
+
+    Soptions =
+    {
+        params = {
+            session_ID = session
+        }
+    } 
+
+    if (event.params) then
+        Soptions.params.userName = event.params.userName 
+        Soptions.params.Password = event.params.Password
+        Soptions.params.consequences2 = event.params
+    end
     -- Code here runs when the scene is first created but has not yet appeared on screen
     
      local background = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth, display.contentHeight)
@@ -161,43 +182,35 @@ function scene:create( event )
         choreTextButton.y = display.contentHeight-display.contentHeight + 900
         sceneGroup:insert(choreTextButton)
 
-
-
-
-        
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         local nextButton = display.newRect(display.contentWidth - 50, display.contentHeight-display.contentHeight + 100, 70, 75)
         nextButton:setFillColor(0.372549, 0.619608, 0.627451)
         sceneGroup:insert(nextButton)
 
         function nextButton:tap(event)
-
-            composer.gotoScene("newChildRewardsII")
-        
+            if (Soptions.params) then
+                Soptions.params.Rewards = {}
+                if (verbalAffirmButton.isOn) then
+                   table.insert(Soptions.params.Rewards,"Verbal affirmations") 
+                end
+                if (affectionTextButton.isOn) then
+                   table.insert(Soptions.params.Rewards,"Hugs & appropriate affection") 
+                end
+                if (emailsTextButton.isOn) then
+                   table.insert(Soptions.params.Rewards,"Texts or Emails") 
+                end
+                if (tvTimeButton.isOn) then
+                   table.insert(Soptions.params.Rewards,"Extra TV Time") 
+                end
+                if (choreTextButton.isOn) then
+                   table.insert(Soptions.params.Rewards,"Parent does child's chore") 
+                end
+            end
+            composer.gotoScene("newChildRewardsII",Soptions)
         end
         nextButton:addEventListener("tap", nextButton)
 
-        function backButtonNew:tap(event)
-            
-            composer.gotoScene("newChildConsequencesII")
-        
+        function backButtonNew:tap(event)            
+            composer.gotoScene("newChildConsequencesII",Soptions)
         end
         backButtonNew:addEventListener("tap", backButtonNew)
 

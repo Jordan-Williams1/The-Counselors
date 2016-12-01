@@ -37,12 +37,12 @@ function scene:create( event )
     if (event.params) then
         Soptions.params.userName = event.params.userName 
         Soptions.params.Password = event.params.Password
-        Soptions.params.consequences1 = event.params
+        Soptions.params.rewards1 = event.params
     end
     -- Code here runs when the scene is first created but has not yet appeared on screen
     
         if (Soptions.params) then
-            Soptions.params.Fconsequences = {}
+            Soptions.params.Frewards = {}
         end
 
         local scrollView = widget.newScrollView(
@@ -76,20 +76,20 @@ function scene:create( event )
         pickText.align = "center"
         pickText:setFillColor(0,0,0)
         sceneGroup:insert(pickText)
---[[
+
         count = 0
-        for k in pairs(Soptions.params.consequences1.Consequences) do
+        for k in pairs(Soptions.params.rewards1.Rewards) do
             --print(Soptions.params.behaviors1.behaviors[k][1])
-            local newConsequence = display.newText(Soptions.params.consequences1.Consequences[k],display.contentWidth/2,display.contentHeight-display.contentHeight + 150+50*k,native.systemFont,44)
-            newConsequence:setFillColor(0,0,0)
-            sceneGroup:insert(newConsequence)
-            scrollView:insert(newConsequence)
+            local newReward = display.newText(Soptions.params.rewards1.Rewards[k],display.contentWidth/2,display.contentHeight-display.contentHeight + 150+50*k,native.systemFont,44)
+            newReward:setFillColor(0,0,0)
+            sceneGroup:insert(newReward)
+            scrollView:insert(newReward)
             count = count + 1
             if(Soptions.params) then
-                table.insert(Soptions.params.Fconsequences,Soptions.params.consequences1.Consequences[k])
+                table.insert(Soptions.params.Frewards,Soptions.params.rewards1.Rewards[k])
             end
         end
---]]
+
         local backButtonNew = widget.newButton(
             {
                 --width = 500,
@@ -149,17 +149,17 @@ function scene:create( event )
         sceneGroup:insert(writeBehavior)
         writeBehavior:addEventListener( "userInput", textListener )
         writeBehavior.size = 40
-        writeBehavior.text = "New Consequence"
+        writeBehavior.text = "New Reward"
 
         function plus:tap(event)
             print("tap")
-            local newConsequence = display.newText(writeBehavior.text,display.contentWidth/2,display.contentHeight-display.contentHeight + 150+50*(count+1),native.systemFont,44)
-            newConsequence:setFillColor(0,0,0)
-            sceneGroup:insert(newConsequence)
-            scrollView:insert(newConsequence)
+            local newReward = display.newText(writeBehavior.text,display.contentWidth/2,display.contentHeight-display.contentHeight + 150+50*(count+1),native.systemFont,44)
+            newReward:setFillColor(0,0,0)
+            sceneGroup:insert(newReward)
+            scrollView:insert(newReward)
             count = count + 1
             if(Soptions.params) then
-                table.insert(Soptions.params.Fconsequences,writeBehavior.text)
+                table.insert(Soptions.params.Frewards,writeBehavior.text)
             end       
         end
         plus:addEventListener("tap", plus)
@@ -173,8 +173,8 @@ function scene:create( event )
         backButtonNew:addEventListener("tap", backButtonNew)
 
         function nextButton:tap(event)
-
-            --composer.gotoScene("newChildReviewIDPI",Soptions)
+            
+            composer.gotoScene("mainMenu",Soptions)
         
         end
         nextButton:addEventListener("tap", nextButton)
