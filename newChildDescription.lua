@@ -91,7 +91,7 @@ function scene:show( event )
 		
         
 
-        local background = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth, display.contentHeight*4)
+        local background = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth, display.contentHeight*2)
         background:setFillColor( 0.745098 ,0.745098 ,0.745098)
         sceneGroup:insert(background)
         scrollView:insert( background )
@@ -464,7 +464,6 @@ function scene:show( event )
         uncaringText.size = 30
         uncaringText:setFillColor(0,0,0)
         scrollView:insert(uncaringText)
-
 -----------------------------------------------------------------------		
 		-- STRENGTHS TEXTBOX
 -----------------------------------------------------------------------
@@ -587,13 +586,19 @@ function scene:show( event )
 
         function backButton2:tap(event)
             composer.gotoScene("newChildProblemBehaviorsI",Soptions)        
+
+         function backButton:tap(event)
+
+            composer.gotoScene("addChild")
+            --childAge:removeSelf()
+            --childGrade:removeSelf()
         end
 
 
         
 
 
-		scrollView:setScrollHeight(3200)
+		scrollView:setScrollHeight(2000)
 
         -- this listens to see if object has been tapped
         backButton:addEventListener("tap", backButton)
