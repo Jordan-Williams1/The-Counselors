@@ -471,6 +471,7 @@ function scene:show( event )
                 end
                 composer.gotoScene("newChildConsequencesII",Soptions)
            end
+
        end
 
         -- this listens to see if object has been tapped
