@@ -161,14 +161,6 @@ function scene:show( event )
     background:setFillColor( 0.745098 ,0.745098 ,0.745098)
     sceneGroup:insert(background)
 
-    --local IDP_Reference = display.newRect(display.contentWidth/2, display.contentHeight/2, 400, 75)
-    --IDP_Reference:setFillColor(0.372549, 0.619608, 0.627451)
-    --sceneGroup:insert(IDP_Reference)
-
-    --local IDP_TEXT = display.newText("IDP Reference", display.contentWidth/2+50, display.contentHeight/2, 400, 75)
-    --IDP_TEXT.size = 40
-    --IDP_TEXT:setFillColor(0,0,0)
-    --sceneGroup:insert(IDP_TEXT)
 
     local IDP_Reference = widget.newButton(
 		    {
@@ -313,16 +305,8 @@ function scene:show( event )
         end
         family_Schedule:addEventListener("tap", family_Schedule)
 ----------------------END FAMILY SCHEDULE PRIVILEGES
+
 ----------------------START BEHAVIOR PRIVILEGES
-
-        --local Problem_Behavior_List = display.newRect(display.contentWidth/2, display.contentHeight/2 + 200, 400, 75)
-        --Problem_Behavior_List:setFillColor(0.372549, 0.619608, 0.627451)
-        --sceneGroup:insert(Problem_Behavior_List)
-
-        --local Problem_TEXT = display.newText("Problem Behavior List", display.contentWidth/2+5, display.contentHeight/2 + 200, 400, 75)
-        --Problem_TEXT.size = 40
-        --Problem_TEXT:setFillColor(0,0,0)
-        --sceneGroup:insert(Problem_TEXT)
 
          local Problem_Behavior_List = widget.newButton(
 		    {
@@ -338,15 +322,6 @@ function scene:show( event )
 		Problem_Behavior_List.y = display.contentHeight/2 + 240
 		sceneGroup:insert(Problem_Behavior_List)
 
-
-        --local Desired_Behavior_List = display.newRect(display.contentWidth/2, display.contentHeight/2 + 300, 400, 75)
-        --Desired_Behavior_List:setFillColor(0.372549, 0.619608, 0.627451)
-        --sceneGroup:insert(Desired_Behavior_List)
-
-        --local Desired_TEXT = display.newText("Desired Behavior List", display.contentWidth/2+ 5, display.contentHeight/2 + 300, 400, 75)
-        --Desired_TEXT.size = 40
-        --Desired_TEXT:setFillColor(0,0,0)
-        --sceneGroup:insert(Desired_TEXT)
 
         local Desired_Behavior_List = widget.newButton(
 		    {
@@ -373,16 +348,6 @@ function scene:show( event )
         Desired_Behavior_List:addEventListener("tap", Desired_Behavior_List)
 
 -----------------------END BEHAVIOR PRIVILEGES
-
-
-        --local Consequence_Log = display.newRect(display.contentWidth/2, display.contentHeight/2 + 400, 400, 75)
-        --Consequence_Log:setFillColor(0.372549, 0.619608, 0.627451)
-        --sceneGroup:insert(Consequence_Log)
-
-        --local Consequence_TEXT = display.newText("Consequence Log", display.contentWidth/2+ 5, display.contentHeight/2 + 400, 400, 75)
-        --Consequence_TEXT.size = 40
-        --Consequence_TEXT:setFillColor(0,0,0)
-        --sceneGroup:insert(Consequence_TEXT)
  		
  		local Consequence_Log = widget.newButton(
 		    {
@@ -399,15 +364,6 @@ function scene:show( event )
 		sceneGroup:insert(Consequence_Log)
 
 
-
-        --local Reward_Log = display.newRect(display.contentWidth/2, display.contentHeight/2 + 500, 400, 75)
-        --Reward_Log:setFillColor(0.372549, 0.619608, 0.627451)
-        --sceneGroup:insert(Reward_Log)
-
-        --local Reward_TEXT = display.newText("Rewards Log", display.contentWidth/2+ 5, display.contentHeight/2 + 500, 400, 75)
-        --Reward_TEXT.size = 40
-        --Reward_TEXT:setFillColor(0,0,0)
-        --sceneGroup:insert(Reward_TEXT)
 
         local Reward_Log = widget.newButton(
 		    {
@@ -443,11 +399,6 @@ function scene:show( event )
     network.request( URL, "GET", networkListener)
 
 
-
-    
-    --local show = display.newRect(display.contentWidth/2 + 300, display.contentHeight/2 - 580, 70, 75)
-    --    show:setFillColor(0.372549, 0.619608, 0.627451)
-    --    sceneGroup:insert(show)
 
     -- new hambuger sliding panel widget
     local show = widget.newButton(

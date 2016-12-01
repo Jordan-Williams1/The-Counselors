@@ -110,6 +110,11 @@ function scene:show( event )
         backButton:setFillColor(0.372549, 0.619608, 0.627451)
         scrollView:insert(backButton)
 
+        local backButton2 = display.newRect(display.contentWidth/2 - display.contentWidth/2 + 50, display.contentHeight-display.contentHeight + 200, 70, 75)
+        backButton2:setFillColor(0.372549, 0.619608, 0.627451)
+        scrollView:insert(backButton2)
+
+
         local pickText = display.newText("New Child Description", display.contentWidth/2, display.contentHeight-display.contentHeight + 100, native.systemFont, 50)
         pickText.size = 40
         pickText:setFillColor(0,0,0)
@@ -557,15 +562,25 @@ function scene:show( event )
 
 
 
+        function nextButton:tap(event)
+
+            composer.gotoScene("newChildProblemBehaviorsI")
+        end
 
 
 
-
-         function backButton:tap(event)
+        function backButton:tap(event)
 
             composer.gotoScene("addChild")
         
         end
+
+        function backButton2:tap(event)
+
+            composer.gotoScene("newChildProblemBehaviorsI")
+        
+        end
+
 
         
 
@@ -574,6 +589,9 @@ function scene:show( event )
 
         -- this listens to see if object has been tapped
         backButton:addEventListener("tap", backButton)
+        nextButton:addEventListener("tap", nextButton)
+        backButton2:addEventListener("tap", backButton2)
+
 
 
 
