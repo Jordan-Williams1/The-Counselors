@@ -76,7 +76,7 @@ function scene:show( event )
 		
         
 
-        local background = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth, display.contentHeight*2)
+        local background = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth, display.contentHeight*4)
         background:setFillColor( 0.745098 ,0.745098 ,0.745098)
         sceneGroup:insert(background)
         scrollView:insert( background )
@@ -445,18 +445,132 @@ function scene:show( event )
         uncaringText:setFillColor(0,0,0)
         scrollView:insert(uncaringText)
 
+-----------------------------------------------------------------------		
+		-- STRENGTHS TEXTBOX
+-----------------------------------------------------------------------
+
+		local strengthsText = display.newText("Strengths", display.contentWidth/2, display.contentWidth/2 + 800 )
+        strengthsText.size = 40
+        strengthsText:setFillColor(0,0,0)
+        scrollView:insert(strengthsText)
+
+        strengthsBox = native.newTextBox( display.contentWidth/2, display.contentWidth/2 + 900 , 600, 150 )
+		strengthsBox.isEditable = true
+		strengthsBox:addEventListener( "userInput", textListener )
+		scrollView:insert(strengthsBox)
+
+-----------------------------------------------------------------------		
+		-- WEAKNESS TEXTBOX
+-----------------------------------------------------------------------
+
+		local weaknessText = display.newText("Weaknesses", display.contentWidth/2, strengthsBox.y + 200 )
+        weaknessText.size = 40
+        weaknessText:setFillColor(0,0,0)
+        scrollView:insert(weaknessText)
+ 		
+ 		weaknessBox = native.newTextBox( display.contentWidth/2, strengthsBox.y + 300, 600, 150 )
+		weaknessBox.isEditable = true
+		weaknessBox:addEventListener( "userInput", textListener )
+		scrollView:insert(weaknessBox)
+
+-----------------------------------------------------------------------		
+		-- MATURITY LEVEL
+-----------------------------------------------------------------------
+         
+        local maturityText = display.newText("Maturity Level", display.contentWidth/2, weaknessBox.y + 220 )
+        maturityText.size = 40
+        maturityText:setFillColor(0,0,0)
+        scrollView:insert(maturityText)
+ 		
+ 		maturityBox = native.newTextBox( display.contentWidth/2, weaknessBox.y + 300, 600, 110 )
+		maturityBox.isEditable = true
+		maturityBox:addEventListener( "userInput", textListener )
+		scrollView:insert(maturityBox)
+
+-----------------------------------------------------------------------		
+		-- INTERESTS
+-----------------------------------------------------------------------
+
+		local interestsText = display.newText("Interests", display.contentWidth/2, maturityBox.y + 200 )
+        interestsText.size = 40
+        interestsText:setFillColor(0,0,0)
+        scrollView:insert(interestsText)
+
+        interestsBox = native.newTextBox( display.contentWidth/2, maturityBox.y + 300, 600, 150 )
+		interestsBox.isEditable = true
+		interestsBox:addEventListener( "userInput", textListener )
+		scrollView:insert(interestsBox)
+
+-----------------------------------------------------------------------		
+		-- DISCIPLINE WORKED IN PAST
+-----------------------------------------------------------------------
+
+		local successfulDiscliplineText = display.newText("Discipline that has worked in the past", display.contentWidth/2, interestsBox.y + 200 )
+        successfulDiscliplineText.size = 35
+        successfulDiscliplineText:setFillColor(0,0,0)
+        scrollView:insert(successfulDiscliplineText)
+
+        successfulDiscliplineBox = native.newTextBox( display.contentWidth/2, interestsBox.y + 300, 600, 150 )
+		successfulDiscliplineBox.isEditable = true
+		successfulDiscliplineBox:addEventListener( "userInput", textListener )
+		scrollView:insert(successfulDiscliplineBox)
+
+-----------------------------------------------------------------------		
+		-- DISCIPLINE THAT HAS WORKED IN PAST
+-----------------------------------------------------------------------
+
+		local successfulDiscliplineText = display.newText("Discipline that has worked in the past", display.contentWidth/2, interestsBox.y + 200 )
+        successfulDiscliplineText.size = 35
+        successfulDiscliplineText:setFillColor(0,0,0)
+        scrollView:insert(successfulDiscliplineText)
+
+        successfulDiscliplineBox = native.newTextBox( display.contentWidth/2, interestsBox.y + 300, 600, 150 )
+		successfulDiscliplineBox.isEditable = true
+		successfulDiscliplineBox:addEventListener( "userInput", textListener )
+		scrollView:insert(successfulDiscliplineBox)
+
+-----------------------------------------------------------------------		
+		-- DISCIPLINE THAT HAS NOT WORKED IN PAST
+-----------------------------------------------------------------------
+
+		local unsuccessfulDiscliplineText = display.newText("Discipline that has not worked in the past", display.contentWidth/2, successfulDiscliplineBox.y + 200 )
+        unsuccessfulDiscliplineText.size = 35
+        unsuccessfulDiscliplineText:setFillColor(0,0,0)
+        scrollView:insert(unsuccessfulDiscliplineText)
+
+        unsuccessfulDiscliplineBox = native.newTextBox( display.contentWidth/2, successfulDiscliplineBox.y + 300, 600, 150 )
+		unsuccessfulDiscliplineBox.isEditable = true
+		unsuccessfulDiscliplineBox:addEventListener( "userInput", textListener )
+		scrollView:insert(unsuccessfulDiscliplineBox)
+
+-----------------------------------------------------------------------		
+		-- Bottom Buttons
+-----------------------------------------------------------------------
+
+ 		local cancelButton = display.newRect(display.contentWidth/2 - display.contentWidth/2 + 100, 3100, 70, 75)
+        cancelButton:setFillColor(0.372549, 0.619608, 0.627451)
+        scrollView:insert(cancelButton)
+
+        local nextButton = display.newRect(display.contentWidth/2 + display.contentWidth/2  - 100, 3100, 70, 75)
+        nextButton:setFillColor(0.372549, 0.619608, 0.627451)
+        scrollView:insert(nextButton)
+
+
+
+
+
+
+
          function backButton:tap(event)
 
             composer.gotoScene("addChild")
-            --childAge:removeSelf()
-            --childGrade:removeSelf()
         
         end
 
         
 
 
-		scrollView:setScrollHeight(2000)
+		scrollView:setScrollHeight(3200)
 
         -- this listens to see if object has been tapped
         backButton:addEventListener("tap", backButton)
