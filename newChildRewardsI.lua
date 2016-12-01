@@ -15,7 +15,7 @@ local scene = composer.newScene()
 
 -- create()
 function scene:create( event )
-    composer.removeScene("newChildDesiredBehaviors")
+    composer.removeScene("newChildConsequencesII")
     composer.removeScene("newChildRewardsII")
 
 
