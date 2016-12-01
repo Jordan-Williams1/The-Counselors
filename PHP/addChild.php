@@ -10,7 +10,6 @@ if(!$con) //if connection not established
 {
 	die('Could not connect: '.mysqli_error($con));
 }
-
 mysqli_select_db($con,'IDP')or die('cannot select db');
 $finduser = "select * from users where username='$username' and password='$password';";
 $results = mysqli_query($con,$finduser);
@@ -20,9 +19,6 @@ $json = array();
 
 $json["session_id"] = session_id();
 $json["childPriv"] = $userArray[4];
-$json["schedPriv"] = $userArray[8];
-$json["behavPriv"] = $userArray[9];
-$json["CRPriv"] = $userArray[10];
 
 $masterU = $userArray[2];
 $masterP = $userArray[3];
