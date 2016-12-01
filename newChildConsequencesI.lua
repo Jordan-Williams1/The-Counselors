@@ -27,6 +27,7 @@ end
 -- show()
 function scene:show( event )
     composer.removeScene("newChildConsequencesII")
+    composer.removeScene("newChildProblemBehaviorsII")
     local sceneGroup = self.view
     local phase = event.phase
     if (not event.params) then 
@@ -47,6 +48,7 @@ function scene:show( event )
     if (event.params) then
         Soptions.params.userName = event.params.userName 
         Soptions.params.Password = event.params.Password
+        Soptions.params.behaviors2 = event.params
     end
 
     if ( phase == "will" ) then
