@@ -15,13 +15,59 @@ local scene = composer.newScene()
 
 -- create()
 function scene:create( event )
-
+    composer.removeScene("newChildConsequencesI")
     local sceneGroup = self.view
+
+    local phase = event.phase
+    if (not event.params) then 
+        session = "null session"
+        print("Session: "..session)
+    else
+        session = event.params.session_ID
+        print("Session: "..session)
+    end
+
+    Soptions =
+    {
+        params = {
+            session_ID = session
+        }
+    } 
+
+    if (event.params) then
+        Soptions.params.userName = event.params.userName 
+        Soptions.params.Password = event.params.Password
+        Soptions.params.consequences1 = event.params
+    end
     -- Code here runs when the scene is first created but has not yet appeared on screen
-    composer.removeScene("newChildDesiredBehaviors")
-     local background = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth, display.contentHeight)
+    
+        if (Soptions.params) then
+            Soptions.params.Fconsequences = {}
+        end
+
+        local scrollView = widget.newScrollView(
+            {
+                --top = 100,
+                --left = 10,
+                width = display.contentWidth,
+                height = 7*(display.contentHeight/8)-50,
+                scrollWidth = 600,
+                scrollHeight = 2500,
+                listener = scrollListener
+            }
+        )
+
+        sceneGroup:insert(scrollView)
+
+        local background = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth, display.contentHeight)
         background:setFillColor( 0.745098 ,0.745098 ,0.745098)
         sceneGroup:insert(background)
+        background:toBack()
+        local background2 = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth, 5000)
+        background2:setFillColor( 0.745098 ,0.745098 ,0.745098)
+        sceneGroup:insert(background2)
+        scrollView:insert(background2)
+        background2:toBack()
 
 
         local pickText = display.newText("          New Child:\n        Consequences II", display.contentWidth/2, display.contentHeight-display.contentHeight + 100, native.systemFont, 50)
@@ -56,7 +102,7 @@ function scene:create( event )
 		backButtonNew.y = display.contentHeight - display.contentHeight + 100
 		sceneGroup:insert(backButtonNew)
 
-        
+                
 
         local defaultField
 

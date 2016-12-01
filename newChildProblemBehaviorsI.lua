@@ -51,6 +51,7 @@ function scene:show( event )
     if (event.params) then
         Soptions.params.userName = event.params.userName 
         Soptions.params.Password = event.params.Password
+        Soptions.params.description2 = event.params
     end
 
     if ( phase == "will" ) then
@@ -798,8 +799,11 @@ function scene:show( event )
         scrollView:insert(nextButton)
 
         function nextButton:tap(event)
-            if (event.params) then
+            --print("tapped")
+            if (Soptions.params) then
                 Soptions.params.behaviors = {}
+                --print("<<<<<<<<<<<<<<<<<<<<<")
+                print(Soptions.params.behaviors)
                 if(lyingButton.isOn) then 
                     table.insert(Soptions.params.behaviors,{"lying","speaking truthfully"}) 
                 end

@@ -27,6 +27,7 @@ end
 -- show()
 function scene:show( event )
     composer.removeScene("newChildConsequencesII")
+    composer.removeScene("newChildProblemBehaviorsII")
     local sceneGroup = self.view
     local phase = event.phase
     if (not event.params) then 
@@ -47,6 +48,7 @@ function scene:show( event )
     if (event.params) then
         Soptions.params.userName = event.params.userName 
         Soptions.params.Password = event.params.Password
+        Soptions.params.behaviors2 = event.params
     end
 
     if ( phase == "will" ) then
@@ -439,7 +441,7 @@ function scene:show( event )
 
         function nextButton:tap(event)
 
-            if (event.params) then
+            if (Soptions.params) then
                 Soptions.params.Consequences = {}
                 
                 if (swattPunshimentButton.isOn) then
@@ -468,10 +470,9 @@ function scene:show( event )
                 end
                 if (servicePunshimentButton.isOn) then
                    table.insert(Soptions.params.Consequences,{"Service to Others"}) 
-                end
-                composer.gotoScene("newChildConsequencesII",Soptions)
+                end    
            end
-
+           composer.gotoScene("newChildConsequencesII",Soptions)
        end
 
         -- this listens to see if object has been tapped
