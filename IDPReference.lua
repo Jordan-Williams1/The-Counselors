@@ -8,7 +8,7 @@ local scene = composer.newScene()
 -- -----------------------------------------------------------------------------------
 
 
-
+local session
 
 -- -----------------------------------------------------------------------------------
 -- Scene event functions
@@ -55,13 +55,32 @@ function scene:show( event )
     if ( phase == "will" ) then
         -- Code here runs when the scene is still off screen (but is about to come on screen)
 
-        local background = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth, display.contentHeight)
+        
+
+        if (not event.params) then 
+	        session = "null session"
+	        print("Session: "..session)
+    	else
+	        session = event.params.session_ID
+	        print("Session: "..session)
+    	end
+
+	    Soptions =
+	    {
+	        params = {
+	            session_ID = session
+	        }
+	    }    
+
+	    local background = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth, display.contentHeight)
         background:setFillColor( 0.745098 ,0.745098 ,0.745098)
         sceneGroup:insert(background)
 
         local pdfView = native.newWebView( display.centerX, display.centerY, display.contentWidth-20, display.contentHeight-50)
 
 		pdfView:request( "IDPReference.html", system.ResourceDirectory )
+
+
 		-- Function to handle button events
 		--[[local function handleButtonEvent( event )
 
@@ -89,7 +108,11 @@ function scene:show( event )
        
 
         -- Create the widget
+
 		--[[local IDP_Reference = widget.newButton(
+=======
+		local partOne = widget.newButton(
+>>>>>>> origin/master
 		    {
 		        --width = 500,
 		        --heigth = 500,
@@ -99,9 +122,9 @@ function scene:show( event )
 		    }
 		)
 
-		IDP_Reference.x = display.contentWidth/2 
-		IDP_Reference.y = display.contentHeight/2-200
-		sceneGroup:insert(IDP_Reference)
+		partOne.x = display.contentWidth/2 
+		partOne.y = display.contentHeight/2-200
+		sceneGroup:insert(partOne)
 
         
         -- Create the widget
@@ -190,13 +213,19 @@ function scene:show( event )
 
 
         function backButtonNew:tap(event)
-
             composer.gotoScene("MainMenu",Soptions)
-        
-     end
+    	end
+
+    	function partOne:tap(event)
+
+    	 	composer.gotoScene("IDPReferencePart1", Soptions)
+    	
+    	end
 
         -- this listens to see if object has been tapped
         backButtonNew:addEventListener("tap", backButtonNew)
+
+        partOne:addEventListener("tap", partOne)
 
 
 
