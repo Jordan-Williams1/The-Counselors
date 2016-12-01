@@ -49,32 +49,6 @@ function scene:show( event )
 
     if ( phase == "will" ) then
         -- Code here runs when the scene is still off screen (but is about to come on screen)
-        -- ScrollView listener
-	
-
-		local function scrollListener( event )
-
-		    local phase = event.phase
-		    if ( phase == "began" ) then print( "Scroll view was touched" )
-		    elseif ( phase == "moved" ) then print( "Scroll view was moved" )
-		    elseif ( phase == "ended" ) then print( "Scroll view was released" )
-		    end
-
-		    -- In the event a scroll limit is reached...
-		    if ( event.limitReached ) then
-		        if ( event.direction == "up" ) then print( "Reached bottom limit" )
-		        elseif ( event.direction == "down" ) then print( "Reached top limit" )
-		        elseif ( event.direction == "left" ) then print( "Reached right limit" )
-		        elseif ( event.direction == "right" ) then print( "Reached left limit" )
-		        end
-		    end
-
-		    return true
-		end
-
-
-
-		
         
 
         local background = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth, display.contentHeight*4)
@@ -127,11 +101,13 @@ function scene:show( event )
         strengthsText.size = 40
         strengthsText:setFillColor(0,0,0)
         sceneGroup:insert(strengthsText)
+        
 
         strengthsBox = native.newTextBox( display.contentWidth/2, display.contentHeight/2 - 500 , 600, 150 )
 		strengthsBox.isEditable = true
 		strengthsBox:addEventListener( "userInput", textListener )
 		sceneGroup:insert(strengthsBox)
+		
 
 -----------------------------------------------------------------------		
 		-- WEAKNESS TEXTBOX
@@ -142,10 +118,12 @@ function scene:show( event )
         weaknessText:setFillColor(0,0,0)
         sceneGroup:insert(weaknessText)
  		
+
  		weaknessBox = native.newTextBox( display.contentWidth/2, strengthsBox.y + 250, 600, 150 )
 		weaknessBox.isEditable = true
 		weaknessBox:addEventListener( "userInput", textListener )
 		sceneGroup:insert(weaknessBox)
+		
 
 -----------------------------------------------------------------------		
 		-- MATURITY LEVEL
@@ -225,7 +203,7 @@ function scene:show( event )
         end
 
       
-
+		
         -- this listens to see if object has been tapped
         backButton:addEventListener("tap", backButton)
         nextButton:addEventListener("tap", nextButton)

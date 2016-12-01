@@ -49,6 +49,8 @@ function scene:show( event )
         }
     } 
 
+
+
     if ( phase == "will" ) then
         -- Code here runs when the scene is still off screen (but is about to come on screen)
         -- ScrollView listener
@@ -459,8 +461,59 @@ function scene:show( event )
         sceneGroup:insert(cancelButton)
 
         
-
+       
         function nextButton:tap(event)
+
+ 		if (event.params) then
+	        Soptions.params.userName = event.params.userName 
+	        Soptions.params.Password = event.params.Password
+
+	        Soptions.params.name = childName.text
+	        Soptions.params.age = childAge.text
+	        Soptions.params.grade = childGrade.text
+	        
+	        if (extrovert.isOn) then
+	        	Soptions.params.extrovertIntrovert = "extrovert"
+	        else
+	        	Soptions.params.extrovertIntrovert = "introvert"
+	        end
+
+
+	        
+	        if (outgoing.isOn) then
+	        	Soptions.params.outgoingShy = "outgoing"
+	        else
+	        	Soptions.params.outgoingShy = "shy"
+
+	        end
+	        
+	        if (leader.isOn) then
+	        	Soptions.params.leaderFollower = "leader"
+	        else
+	        	Soptions.params.leaderFollower = "follower"
+
+	        end
+	        
+	        if (active.isOn) then
+	        	Soptions.params.activeCalm = "active"
+	        else
+	        	Soptions.params.activeCalm = "calm"
+
+	        end
+	        
+	        if (planner.isOn) then
+	        	Soptions.params.plannerImpulsive = "planner"
+	        else
+	        	Soptions.params.plannerImpulsive = "impulsive"
+	        end
+	        
+	        if (caring.isOn) then
+	        	Soptions.params.caringUncaring = "caring"
+	        else
+	        	Soptions.params.caringUncaring = "uncaring"
+
+	        end
+            
             composer.gotoScene("newChildDescriptionpart2",Soptions)
         end
 
