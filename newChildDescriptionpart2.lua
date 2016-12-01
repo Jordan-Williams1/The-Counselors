@@ -200,6 +200,21 @@ function scene:show( event )
 
 
         function nextButton:tap(event)
+
+            if (event.params) then
+                Soptions.params.userName = event.params.userName 
+                Soptions.params.Password = event.params.Password
+
+                
+                Soptions.params.Strengths = strengthsBox.text
+                Soptions.params.Weaknesses = weaknessBox.text
+                Soptions.params.Maturity = maturityBox.text
+                Soptions.params.Interests = interestsBox.text
+                Soptions.params.successfulDisclipline = successfulDiscliplineBox.text
+                Soptions.params.unsuccessfulDisclipline = unsuccessfulDiscliplineBox.text      
+            end
+
+
             composer.gotoScene("newChildProblemBehaviorsI",Soptions)
         end
 

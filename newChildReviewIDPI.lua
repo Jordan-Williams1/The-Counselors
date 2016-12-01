@@ -15,9 +15,8 @@ local scene = composer.newScene()
 
 -- create()
 function scene:create( event )
-    composer.removeScene("newChildRewardsI")
-    composer.removeScene("newChildReviewIDPI")
-
+    composer.removeScene("newChildReviewIDPII")
+    composer.removeScene("newChildRewardsII")
 
 
     local sceneGroup = self.view
@@ -28,7 +27,7 @@ function scene:create( event )
         sceneGroup:insert(background)
 
 
-       local pickText = display.newText("          New Child:\n          Rewards II", display.contentWidth/2, display.contentHeight-display.contentHeight + 100, native.systemFont, 50)
+       local pickText = display.newText("          New Child:\n          Review IDP I", display.contentWidth/2, display.contentHeight-display.contentHeight + 100, native.systemFont, 50)
         pickText.size = 40
         pickText.width = 600
         pickText.align = "center"
@@ -54,10 +53,22 @@ function scene:create( event )
         nextButton:setFillColor(0.372549, 0.619608, 0.627451)
         sceneGroup:insert(nextButton)
 
+        function nextButton:tap(event)
+
+            composer.gotoScene("newChildReviewIDPII")
         
+        end
+        nextButton:addEventListener("tap", nextButton)
+
+        function backButtonNew:tap(event)
+            
+            composer.gotoScene("newChildRewardsII")
+        
+        end
+        backButtonNew:addEventListener("tap", backButtonNew)
 
 
-
+        --[[
         local childTEXT = display.newText("", display.contentWidth/2+140, display.contentHeight/2, 400, 75)
         childTEXT.size = 40
         childTEXT:setFillColor(0,0,0)
@@ -67,6 +78,20 @@ function scene:create( event )
         addTEXT.size = 25
         addTEXT:setFillColor(0,0,0)
         sceneGroup:insert(addTEXT)
+
+        local backButtonNew = widget.newButton(
+		    {
+		        --width = 500,
+		        --heigth = 500,
+		        id = "backButtonNew",
+		        defaultFile = "backArrow3.png",
+		        onEvent = handleButtonEvent
+		    }
+		)
+
+		backButtonNew.x = display.contentWidth/2 - 320 
+		backButtonNew.y = display.contentHeight - display.contentHeight + 100
+		sceneGroup:insert(backButtonNew)
 
         
 
@@ -105,14 +130,6 @@ function scene:create( event )
         plus:setFillColor(0,0,0)
         sceneGroup:insert(plus)
 
-        function nextButton:tap(event)
-
-            composer.gotoScene("newChildreviewIDPI")
-        
-        end
-        nextButton:addEventListener("tap", nextButton)
-        
-
         function plus:tap(event)
 
             childTEXT.text = writeBehavior.text
@@ -123,7 +140,7 @@ function scene:create( event )
 
          function backButtonNew:tap(event)
             
-            composer.gotoScene("newChildRewardsI")
+            composer.gotoScene("desiredBehaviorList")
         
         end
         backButtonNew:addEventListener("tap", backButtonNew)
@@ -133,7 +150,7 @@ function scene:create( event )
         
         sceneGroup:insert(writeBehavior)
         writeBehavior:addEventListener( "userInput", textListener )
-        --
+        --]]
 end
 
 
