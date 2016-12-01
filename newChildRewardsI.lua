@@ -16,6 +16,8 @@ local scene = composer.newScene()
 -- create()
 function scene:create( event )
     composer.removeScene("newChildDesiredBehaviors")
+    composer.removeScene("newChildRewardsII")
+
 
     local sceneGroup = self.view
     -- Code here runs when the scene is first created but has not yet appeared on screen
@@ -25,7 +27,7 @@ function scene:create( event )
         sceneGroup:insert(background)
 
 
-       local pickText = display.newText("          New Child:\n        Rewards I", display.contentWidth/2, display.contentHeight-display.contentHeight + 100, native.systemFont, 50)
+       local pickText = display.newText("          New Child:\n          Rewards I", display.contentWidth/2, display.contentHeight-display.contentHeight + 100, native.systemFont, 50)
         pickText.size = 40
         pickText.width = 600
         pickText.align = "center"
@@ -53,7 +55,7 @@ function scene:create( event )
 
         function nextButton:tap(event)
 
-            --composer.gotoScene("newChildDesiredBehaviors")
+            composer.gotoScene("newChildRewardsII")
         
         end
         nextButton:addEventListener("tap", nextButton)
