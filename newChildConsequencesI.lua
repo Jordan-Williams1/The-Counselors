@@ -126,7 +126,7 @@ function scene:show( event )
                 --width = 500,
                 --heigth = 500,
                 id = "Desired_Behavior_List",
-                defaultFile = "toy:device.png",
+                defaultFile = "toy_device.png",
                 onEvent = handleButtonEvent
             }
         )
