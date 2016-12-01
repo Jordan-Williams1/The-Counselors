@@ -445,31 +445,31 @@ function scene:show( event )
                 Soptions.params.Consequences = {}
                 
                 if (swattPunshimentButton.isOn) then
-                   table.insert(Soptions.params.Consequences,{"Swatts with the paddle"}) 
+                   table.insert(Soptions.params.Consequences,"Swatts with the paddle") 
                 end
                 if (timeOutPunshimentButton.isOn) then
-                   table.insert(Soptions.params.Consequences,{"Time-Out"}) 
+                   table.insert(Soptions.params.Consequences,"Time-Out") 
                 end
                 if (talkingTimeOutPunshimentButton.isOn) then
-                   table.insert(Soptions.params.Consequences,{"Talking Time-Out"}) 
+                   table.insert(Soptions.params.Consequences,"Talking Time-Out") 
                 end
                  if (toyPunshimentButton.isOn) then
-                   table.insert(Soptions.params.Consequences,{"Toy/Device Time-Out"}) 
+                   table.insert(Soptions.params.Consequences,"Toy/Device Time-Out") 
                 end
                  if (lossToyPunshimentButton.isOn) then
-                   table.insert(Soptions.params.Consequences,{"Permanent loss of Toy/Device"}) 
+                   table.insert(Soptions.params.Consequences,"Permanent loss of Toy/Device") 
                 end
                 if (obediencePunshimentButton.isOn) then
-                   table.insert(Soptions.params.Consequences,{"Practice Obedience/Respect"}) 
+                   table.insert(Soptions.params.Consequences,"Practice Obedience/Respect") 
                 end
                 if (RewindPunshimentButton.isOn) then
-                   table.insert(Soptions.params.Consequences,{"Rewind and Say-It-Again"}) 
+                   table.insert(Soptions.params.Consequences,"Rewind and Say-It-Again") 
                 end
                 if (apologyPunshimentButton.isOn) then
-                   table.insert(Soptions.params.Consequences,{"Write an apology note"}) 
+                   table.insert(Soptions.params.Consequences,"Write an apology note") 
                 end
                 if (servicePunshimentButton.isOn) then
-                   table.insert(Soptions.params.Consequences,{"Service to Others"}) 
+                   table.insert(Soptions.params.Consequences,"Service to Others") 
                 end    
            end
            composer.gotoScene("newChildConsequencesII",Soptions)
