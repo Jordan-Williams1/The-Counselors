@@ -50,7 +50,7 @@ function scene:create( event )
                 --top = 100,
                 --left = 10,
                 width = display.contentWidth,
-                height = 7*(display.contentHeight/8)-50,
+                height = 7*(display.contentHeight/8)-100,
                 scrollWidth = 600,
                 scrollHeight = 2500,
                 listener = scrollListener
@@ -77,16 +77,18 @@ function scene:create( event )
         pickText:setFillColor(0,0,0)
         sceneGroup:insert(pickText)
 
-        
-        local childTEXT = display.newText("", display.contentWidth/2+140, display.contentHeight/2, 400, 75)
-        childTEXT.size = 40
-        childTEXT:setFillColor(0,0,0)
-        sceneGroup:insert(childTEXT)
-
-        local addTEXT = display.newText("Add Consequence", display.contentWidth/2+40, display.contentHeight/2+250, 400, 75)
-        addTEXT.size = 25
-        addTEXT:setFillColor(0,0,0)
-        sceneGroup:insert(addTEXT)
+        count = 0
+        for k in pairs(Soptions.params.consequences1.Consequences) do
+            --print(Soptions.params.behaviors1.behaviors[k][1])
+            local newConsequence = display.newText(Soptions.params.consequences1.Consequences[k],display.contentWidth/2,display.contentHeight-display.contentHeight + 150+50*k,native.systemFont,44)
+            newConsequence:setFillColor(0,0,0)
+            sceneGroup:insert(newConsequence)
+            scrollView:insert(newConsequence)
+            count = count + 1
+            if(Soptions.params) then
+                table.insert(Soptions.params.Fconsequences,Soptions.params.consequences1.Consequences[k])
+            end
+        end
 
         local backButtonNew = widget.newButton(
 		    {
@@ -143,46 +145,48 @@ function scene:create( event )
         nextButton:setFillColor(0.372549, 0.619608, 0.627451)
         sceneGroup:insert(nextButton)
 
-        function plus:tap(event)
+        writeBehavior = native.newTextField( display.contentWidth/2, display.contentHeight/2+300, display.contentWidth/2, 75)
+        sceneGroup:insert(writeBehavior)
+        writeBehavior:addEventListener( "userInput", textListener )
+        writeBehavior.size = 40
+        writeBehavior.text = "New Consequence"
 
-            childTEXT.text = writeBehavior.text
-        
+        function plus:tap(event)
+            print("tap")
+            local newConsequence = display.newText(writeBehavior.text,display.contentWidth/2,display.contentHeight-display.contentHeight + 150+50*(count+1),native.systemFont,44)
+            newConsequence:setFillColor(0,0,0)
+            sceneGroup:insert(newConsequence)
+            scrollView:insert(newConsequence)
+            count = count + 1
+            if(Soptions.params) then
+                table.insert(Soptions.params.Fconsequences,writeBehavior.text)
+            end       
         end
         plus:addEventListener("tap", plus)
 
 
          function backButtonNew:tap(event)
             
-            composer.gotoScene("newChildConsequencesI")
+            composer.gotoScene("newChildConsequencesI",Soptions)
         
         end
         backButtonNew:addEventListener("tap", backButtonNew)
 
         function nextButton:tap(event)
 
-            composer.gotoScene("newChildRewardsI")
+            composer.gotoScene("newChildRewardsI",Soptions)
         
         end
         nextButton:addEventListener("tap", nextButton)
 
          -- Create text field
-        writeBehavior = native.newTextField( display.contentWidth/2, display.contentHeight/2+300, display.contentWidth/2, 75)
-        sceneGroup:insert(writeBehavior)
-        writeBehavior:addEventListener( "userInput", textListener )
-        writeBehavior.size = 40
-        writeBehavior.text = "Consequence Name"
         
-        consequenceDescription = native.newTextBox( display.contentWidth/2, writeBehavior.y + 150, 600, 200 )
+        
+        --[[consequenceDescription = native.newTextBox( display.contentWidth/2, writeBehavior.y + 150, 600, 200 )
         consequenceDescription.isEditable = true
         consequenceDescription:addEventListener( "userInput", textListener )
         sceneGroup:insert(consequenceDescription)
-        consequenceDescription.text = "Consequence Description"
-
-
-
-
-
-
+        consequenceDescription.text = "Consequence Description"]]--
 
 end
 
