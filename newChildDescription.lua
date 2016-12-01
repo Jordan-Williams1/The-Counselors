@@ -541,13 +541,6 @@ function scene:show( event )
         
 		scrollView:setScrollHeight(3200)
 
-<<<<<<< HEAD
-=======
-        
-
-
-		
->>>>>>> origin/master
 
         -- this listens to see if object has been tapped
         backButton:addEventListener("tap", backButton)
