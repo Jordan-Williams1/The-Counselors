@@ -441,6 +441,7 @@ function scene:show( event )
 
         function nextButton:tap(event)
 
+            if (Soptions.params) then
                 Soptions.params.Consequences = {}
                 
                 if (swattPunshimentButton.isOn) then
@@ -469,6 +470,9 @@ function scene:show( event )
                 end
                 if (servicePunshimentButton.isOn) then
                    table.insert(Soptions.params.Consequences,{"Service to Others"}) 
+                end    
+           end
+           composer.gotoScene("newChildConsequencesII",Soptions)
        end
 
         -- this listens to see if object has been tapped
