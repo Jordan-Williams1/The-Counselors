@@ -28,6 +28,7 @@ end
 
 -- show()
 function scene:show( event )
+    composer.removeScene("newChildDescriptionpart2")
     composer.removeScene("newChildDescription")
     composer.removeScene("newChildProblemBehaviorsII")
     local sceneGroup = self.view
