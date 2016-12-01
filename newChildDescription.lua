@@ -584,16 +584,6 @@ function scene:show( event )
             composer.gotoScene("addChild",Soptions)
         end
 
-        function backButton2:tap(event)
-            composer.gotoScene("newChildProblemBehaviorsI",Soptions)        
-
-         function backButton:tap(event)
-
-            composer.gotoScene("addChild")
-            --childAge:removeSelf()
-            --childGrade:removeSelf()
-        end
-
 
         
 
@@ -603,7 +593,6 @@ function scene:show( event )
         -- this listens to see if object has been tapped
         backButton:addEventListener("tap", backButton)
         nextButton:addEventListener("tap", nextButton)
-        backButton2:addEventListener("tap", backButton2)
 
 
 
