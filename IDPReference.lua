@@ -29,9 +29,28 @@ end
 
 -- show()
 function scene:show( event )
-
+	composer.removeScene("mainMenu")
     local sceneGroup = self.view
     local phase = event.phase
+    if (not event.params) then 
+        session = "null session"
+        print("Session: "..session)
+    else
+        session = event.params.session_ID
+        print("Session: "..session)
+    end
+
+    Soptions =
+    {
+        params = {
+            session_ID = session
+        }
+    }    
+
+    if (event.params) then
+        Soptions.params.userName = event.params.userName 
+        Soptions.params.Password = event.params.Password
+    end
 
     if ( phase == "will" ) then
         -- Code here runs when the scene is still off screen (but is about to come on screen)
@@ -40,15 +59,16 @@ function scene:show( event )
         background:setFillColor( 0.745098 ,0.745098 ,0.745098)
         sceneGroup:insert(background)
 
+        local pdfView = native.newWebView( display.centerX, display.centerY, display.contentWidth-20, display.contentHeight-50)
 
-
+		pdfView:request( "IDPReference.html", system.ResourceDirectory )
 		-- Function to handle button events
-		local function handleButtonEvent( event )
+		--[[local function handleButtonEvent( event )
 
 		    if ( "ended" == event.phase ) then
 		        print( "Button was pressed and released" )
 		    end
-		end
+		end]]--
 
 		-- Create the widget
 		local backButtonNew = widget.newButton(
@@ -69,7 +89,7 @@ function scene:show( event )
        
 
         -- Create the widget
-		local IDP_Reference = widget.newButton(
+		--[[local IDP_Reference = widget.newButton(
 		    {
 		        --width = 500,
 		        --heigth = 500,
@@ -166,12 +186,12 @@ function scene:show( event )
 
 		Reward_Log.x = display.contentWidth/2 
 		Reward_Log.y = display.contentHeight/2+400
-		sceneGroup:insert(Reward_Log)
+		sceneGroup:insert(Reward_Log)]]--
 
 
         function backButtonNew:tap(event)
 
-            composer.gotoScene("MainMenu")
+            composer.gotoScene("MainMenu",Soptions)
         
      end
 

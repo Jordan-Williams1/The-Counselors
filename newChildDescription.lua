@@ -8,7 +8,7 @@ local scene = composer.newScene()
 -- the scene is removed entirely (not recycled) via "composer.removeScene()"
 -- -----------------------------------------------------------------------------------
 
-
+local session
 
 
 -- -----------------------------------------------------------------------------------
@@ -27,9 +27,24 @@ end
 -- show()
 function scene:show( event )
     composer.removeScene("addChild")
+    composer.removeScene("newChildProblemBehaviorsI")
 
     local sceneGroup = self.view
     local phase = event.phase
+    if (not event.params) then 
+        session = "null session"
+        print("Session: "..session)
+    else
+        session = event.params.session_ID
+        print("Session: "..session)
+    end
+
+    Soptions =
+    {
+        params = {
+            session_ID = session
+        }
+    } 
 
     if ( phase == "will" ) then
         -- Code here runs when the scene is still off screen (but is about to come on screen)
@@ -563,22 +578,15 @@ function scene:show( event )
 
 
         function nextButton:tap(event)
-
-            composer.gotoScene("newChildProblemBehaviorsI")
+            composer.gotoScene("newChildProblemBehaviorsI",Soptions)
         end
 
-
-
         function backButton:tap(event)
-
-            composer.gotoScene("addChild")
-        
+            composer.gotoScene("addChild",Soptions)
         end
 
         function backButton2:tap(event)
-
-            composer.gotoScene("newChildProblemBehaviorsI")
-        
+            composer.gotoScene("newChildProblemBehaviorsI",Soptions)        
         end
 
 

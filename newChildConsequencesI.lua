@@ -26,9 +26,23 @@ end
 
 -- show()
 function scene:show( event )
-    composer.removeScene("newChildDescription")
+    composer.removeScene("newChildProblemBehaviorsII")
     local sceneGroup = self.view
     local phase = event.phase
+    if (not event.params) then 
+        session = "null session"
+        print("Session: "..session)
+    else
+        session = event.params.session_ID
+        print("Session: "..session)
+    end
+
+    Soptions =
+    {
+        params = {
+            session_ID = session
+        }
+    } 
 
     if ( phase == "will" ) then
         -- Code here runs when the scene is still off screen (but is about to come on screen)
@@ -126,7 +140,7 @@ function scene:show( event )
                 --width = 500,
                 --heigth = 500,
                 id = "Desired_Behavior_List",
-                defaultFile = "toy:device.png",
+                defaultFile = "toy_device.png",
                 onEvent = handleButtonEvent
             }
         )
@@ -217,7 +231,7 @@ function scene:show( event )
 
         function backButtonNew:tap(event)
 
-            composer.gotoScene("MainMenu")
+            composer.gotoScene("MainMenu",Soptions)
         end
 
         -- this listens to see if object has been tapped

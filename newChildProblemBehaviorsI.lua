@@ -27,8 +27,23 @@ end
 -- show()
 function scene:show( event )
     composer.removeScene("newChildDescription")
+    composer.removeScene("newChildProblemBehaviorsII")
     local sceneGroup = self.view
     local phase = event.phase
+    if (not event.params) then 
+        session = "null session"
+        print("Session: "..session)
+    else
+        session = event.params.session_ID
+        print("Session: "..session)
+    end
+
+    Soptions =
+    {
+        params = {
+            session_ID = session
+        }
+    } 
 
     if ( phase == "will" ) then
         -- Code here runs when the scene is still off screen (but is about to come on screen)
@@ -767,7 +782,7 @@ function scene:show( event )
 
         function backButton:tap(event)
 
-            composer.gotoScene("newChildDescription")
+            composer.gotoScene("newChildDescription",Soptions)
         end
 
         local nextButton = display.newRect(display.contentWidth/2 + display.contentWidth/2  - 100, 2100, 70, 75)
@@ -776,7 +791,7 @@ function scene:show( event )
 
         function nextButton:tap(event)
 
-            composer.gotoScene("newChildProblemBehaviorsII")
+            composer.gotoScene("newChildProblemBehaviorsII",Soptions)
         end
 
 
