@@ -240,7 +240,7 @@ function scene:show( event )
 
         function backButtonNew:tap(event)
 
-            composer.gotoScene("MainMenu",Soptions)
+            composer.gotoScene("newChildProblemBehaviorsII",Soptions)
         end
 
         -- this listens to see if object has been tapped

@@ -88,7 +88,7 @@ function scene:show( event )
 
          function backButtonNew:tap(event)
 
-            composer.gotoScene("newChildProblemBehaviorsII",Soptions)
+            composer.gotoScene("newChildProblemBehaviorsI",Soptions)
         
         end
 
