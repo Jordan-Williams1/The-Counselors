@@ -49,6 +49,140 @@ function scene:create( event )
         sceneGroup:insert(backButtonNew)
 
 
+-----------------------------------------------------------------------     
+        -- AFFIRMATIONS
+-----------------------------------------------------------------------
+
+        local AffirmText = display.newText("Affirmations: ", display.contentWidth/2-250, display.contentHeight-display.contentHeight + 300, native.systemFont, 50)
+        AffirmText.size = 45
+        --AffirmText.width = 600
+        AffirmText:setFillColor(0,0,0)
+        sceneGroup:insert(AffirmText)
+
+        local verbalAffirmText = display.newText("Verbal affirmations", display.contentWidth/2-150, display.contentHeight-display.contentHeight + 400, native.systemFont, 50)
+        verbalAffirmText.size = 35
+        verbalAffirmText:setFillColor(0,0,0)
+        sceneGroup:insert(verbalAffirmText)
+
+        local verbalAffirmButton = widget.newSwitch(
+            {
+                left = 250,
+                top = 200,
+                style = "checkbox",
+                id = "Checkbox2",
+                onPress = onSwitchPress
+            }
+        )
+        verbalAffirmButton.x = display.contentWidth/2-350 
+        verbalAffirmButton.y = display.contentHeight-display.contentHeight + 400
+        sceneGroup:insert(verbalAffirmButton)
+
+        local affectionText = display.newText("Hugs & appropriate affection", display.contentWidth/2-80, display.contentHeight-display.contentHeight + 500, native.systemFont, 50)
+        affectionText.size = 35
+        affectionText:setFillColor(0,0,0)
+        sceneGroup:insert(affectionText)
+
+        local affectionTextButton = widget.newSwitch(
+            {
+                left = 250,
+                top = 200,
+                style = "checkbox",
+                id = "Checkbox2",
+                onPress = onSwitchPress
+            }
+        )
+        affectionTextButton.x = display.contentWidth/2-350 
+        affectionTextButton.y = display.contentHeight-display.contentHeight + 500
+        sceneGroup:insert(affectionTextButton)
+
+        local emailsText = display.newText("Texts or Emails", display.contentWidth/2-190, display.contentHeight-display.contentHeight + 600, native.systemFont, 50)
+        emailsText.size = 35
+        emailsText:setFillColor(0,0,0)
+        sceneGroup:insert(emailsText)
+
+        local emailsTextButton = widget.newSwitch(
+            {
+                left = 250,
+                top = 200,
+                style = "checkbox",
+                id = "Checkbox2",
+                onPress = onSwitchPress
+            }
+        )
+        emailsTextButton.x = display.contentWidth/2-350 
+        emailsTextButton.y = display.contentHeight-display.contentHeight + 600
+        sceneGroup:insert(emailsTextButton)
+
+
+
+-----------------------------------------------------------------------     
+        -- PRIVILEGES
+-----------------------------------------------------------------------
+
+        local privilegesText = display.newText("Privileges:", display.contentWidth/2-250, display.contentHeight-display.contentHeight + 700, native.systemFont, 50)
+        privilegesText.size = 45
+        privilegesText:setFillColor(0,0,0)
+        sceneGroup:insert(privilegesText)
+
+        local tvTimeText = display.newText("Extra TV Time", display.contentWidth/2-190, display.contentHeight-display.contentHeight + 800, native.systemFont, 50)
+        tvTimeText.size = 35
+        tvTimeText:setFillColor(0,0,0)
+        sceneGroup:insert(tvTimeText)
+
+        local tvTimeButton = widget.newSwitch(
+            {
+                left = 250,
+                top = 200,
+                style = "checkbox",
+                id = "Checkbox2",
+                onPress = onSwitchPress
+            }
+        )
+        tvTimeButton.x = display.contentWidth/2-350 
+        tvTimeButton.y = display.contentHeight-display.contentHeight + 800
+        sceneGroup:insert(tvTimeButton)
+
+
+        local choreText = display.newText("Parent does child's chore", display.contentWidth/2-100, display.contentHeight-display.contentHeight + 900, native.systemFont, 50)
+        choreText.size = 35
+        choreText:setFillColor(0,0,0)
+        sceneGroup:insert(choreText)
+
+        local choreTextButton = widget.newSwitch(
+            {
+                left = 250,
+                top = 200,
+                style = "checkbox",
+                id = "Checkbox2",
+                onPress = onSwitchPress
+            }
+        )
+        choreTextButton.x = display.contentWidth/2-350 
+        choreTextButton.y = display.contentHeight-display.contentHeight + 900
+        sceneGroup:insert(choreTextButton)
+
+
+
+
+        
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         local nextButton = display.newRect(display.contentWidth - 50, display.contentHeight-display.contentHeight + 100, 70, 75)
         nextButton:setFillColor(0.372549, 0.619608, 0.627451)
         sceneGroup:insert(nextButton)
