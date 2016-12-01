@@ -139,6 +139,7 @@ end
 -- show()
 function scene:show( event )
     composer.removeScene("signIn")
+    composer.removeScene("register")
     local sceneGroup = self.view
     local phase = event.phase
     if (not event.params) then 

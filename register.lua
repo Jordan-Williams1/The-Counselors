@@ -1,5 +1,6 @@
 local composer = require( "composer" )
 local crypto = require("crypto")
+local widget = require("widget")
 local scene = composer.newScene()
 local json = require("json")
 
@@ -33,7 +34,7 @@ function scene:show( event )
 		sceneGroup:insert(myText)
 		
 
-        local register = display.newRect(display.contentWidth/2, display.contentHeight/2+ 400, 200, 75)
+        local register = display.newRect(display.contentWidth/2, display.contentHeight/2 + 500, 200, 75)
         register:setFillColor(0.372549, 0.619608, 0.627451)
         sceneGroup:insert(register)
 		
@@ -46,7 +47,7 @@ function scene:show( event )
         sceneGroup:insert(signInText2)
 
 		
-        local signInText = display.newText("Register", display.contentWidth/2+30, display.contentHeight/2 + 400, 200, 50)
+        local signInText = display.newText("Register", display.contentWidth/2+30, display.contentHeight/2 + 500, 200, 50)
         signInText:setFillColor(0,0,0)
         sceneGroup:insert(signInText)
 		
@@ -56,6 +57,30 @@ function scene:show( event )
         titleOfApp.size = 110
         titleOfApp:setFillColor(0,0,0)
         sceneGroup:insert(titleOfApp)
+
+         -- Create the widget
+        local backButtonNew = widget.newButton(
+            {
+                --width = 500,
+                --heigth = 500,
+                id = "backButtonNew",
+                defaultFile = "backArrow3.png",
+                onEvent = handleButtonEvent
+            }
+        )
+
+        backButtonNew.x = display.contentWidth/2 - 320 
+        backButtonNew.y = display.contentHeight - display.contentHeight + 100
+        sceneGroup:insert(backButtonNew)
+
+         function backButtonNew:tap(event)
+
+            composer.gotoScene("MainMenu")
+        
+        end
+
+        -- this listens to see if object has been tapped
+        backButtonNew:addEventListener("tap", backButtonNew)
 		
 
 
@@ -98,7 +123,7 @@ function scene:show( event )
         Password:addEventListener( "userInput", textListener )
         sceneGroup:insert(Password)
 
-        PasswordCheck = native.newTextField( display.contentWidth/2, display.contentHeight/2+ 325, display.contentWidth/2, 75)
+        PasswordCheck = native.newTextField( display.contentWidth/2, signInText2.y + 100, display.contentWidth/2, 75)
         Password:addEventListener( "userInput", textListener )
         sceneGroup:insert(PasswordCheck)
 
