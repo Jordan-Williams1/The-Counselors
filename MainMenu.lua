@@ -325,11 +325,8 @@ function scene:show( event )
         family_Schedule:addEventListener("tap", family_Schedule)
     end
 ----------------------END FAMILY SCHEDULE PRIVILEGES
-
-<<<<<<< HEAD
 ----------------------START BEHAVIOR PRIVILEGES
 
-=======
         --local Problem_Behavior_List = display.newRect(display.contentWidth/2, display.contentHeight/2 + 200, 400, 75)
         --Problem_Behavior_List:setFillColor(0.372549, 0.619608, 0.627451)
         --sceneGroup:insert(Problem_Behavior_List)
@@ -340,7 +337,6 @@ function scene:show( event )
         --sceneGroup:insert(Problem_TEXT)
     --serverResponse["behavPriv"] = "0"
     if(serverResponse["behavPriv"]~="0") then
->>>>>>> origin/master
          local Problem_Behavior_List = widget.newButton(
 		    {
 		        --width = 500,
@@ -381,12 +377,7 @@ function scene:show( event )
         Desired_Behavior_List:addEventListener("tap", Desired_Behavior_List)
     end
 -----------------------END BEHAVIOR PRIVILEGES
-<<<<<<< HEAD
- 		
-=======
-
-
-        --local Consequence_Log = display.newRect(display.contentWidth/2, display.contentHeight/2 + 400, 400, 75)
+    --local Consequence_Log = display.newRect(display.contentWidth/2, display.contentHeight/2 + 400, 400, 75)
         --Consequence_Log:setFillColor(0.372549, 0.619608, 0.627451)
         --sceneGroup:insert(Consequence_Log)
 
@@ -397,7 +388,6 @@ function scene:show( event )
 -----------------------START REWARDS/CONSEQUENCES PRIVILEGES
     --serverResponse["CRPriv"]="0"
  	if(serverResponse["CRPriv"]~="0") then	
->>>>>>> origin/master
  		local Consequence_Log = widget.newButton(
 		    {
 		        --width = 500,
