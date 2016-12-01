@@ -1,6 +1,7 @@
 local composer = require( "composer" )
 local widget = require( "widget" )
 local scene = composer.newScene()
+local json = require("json")
 
 -- -----------------------------------------------------------------------------------
 -- Code outside of the scene event functions below will only be executed ONCE unless
@@ -137,25 +138,29 @@ end
 
 -- show()
 function scene:show( event )
-
+    composer.removeScene("signIn")
     local sceneGroup = self.view
     local phase = event.phase
-    --session = event.params.session_ID
-    --print("SessionID: "..session)
-
-     flag = false
-
-    if ( phase == "will" ) then
-
-    if userName.text == "jordan" and flag == false then
-
-        local food = display.newText("click a day of the week", display.contentWidth/2, display.contentHeight-display.contentHeight + 200, native.systemFont, 48)
-        food:setFillColor(0,1,0)
-        sceneGroup:insert(food)
-
-        flag = true
-        
+    if (not event.params) then 
+        session = "null session"
+        print("Session: "..session)
+    else
+        session = event.params.session_ID
+        print("Session: "..session)
     end
+
+    Soptions =
+    {
+        params = {
+            session_ID = session
+        }
+    }    
+
+    if (event.params) then
+        Soptions.params.userName = event.params.userName 
+        Soptions.params.Password = event.params.Password
+    end
+
         -- Code here runs when the scene is still off screen (but is about to come on screen)
     local background = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth, display.contentHeight)
     background:setFillColor( 0.745098 ,0.745098 ,0.745098)
@@ -186,7 +191,7 @@ function scene:show( event )
 
     function IDP_Reference:tap(event)
 
-      composer.gotoScene("IDPReference", options)
+      composer.gotoScene("IDPReference", Soptions)
     
     end
 
@@ -195,23 +200,30 @@ function scene:show( event )
     -- this listens to see if object has been tapped
     IDP_Reference:addEventListener("tap", IDP_Reference)
 
+-----------------------NETWORK LISTENER HERE----------------------------------------------------
     local function networkListener( event )
         if ( event.isError ) then
             print( "Network error: ", event.response )
             local alert = native.showAlert("Login Error","Server is not available at this time.",{"OK"})
-            composer.gotoScene("signin", options)
+            composer.gotoScene("signin", Soptions)
         else
-            serverResponse = event.response
-            print ( "RESPONSE: " .. serverResponse )
+            serverResponse = json.decode(event.response)
+            if(serverResponse) then
+                print ( "RESPONSE: " .. serverResponse["session_id"] )
+                for k in pairs(serverResponse["children"]) do print ("Child: ".. serverResponse["children"][k]) end
+                print("Priveleges: "..serverResponse["childPriv"].." "..serverResponse["schedPriv"].." "..serverResponse["behavPriv"].." "..serverResponse["CRPriv"])
+            else
+                print("No server response")
+            end
 
-            if(serverResponse[0] == 'U') then
+            --[[if(serverResponse[0] == 'U') then
                 local Main = display.newText("Account of: "..serverResponse(3,(string.len(serverResponse))), display.contentWidth/2-30, display.contentHeight-display.contentHeight + 100, native.systemFont, 50)
                 Main.size = 40
                 Main:setFillColor(0,0,0)
                 sceneGroup:insert(Main)
-            end
+            end]]--
 
-            -----------------START CHILD PRIVILEGES
+-----------------START CHILD PRIVILEGES---------------------------
 
     -- ScrollView listener
     local function scrollListener( event )
@@ -234,51 +246,57 @@ function scene:show( event )
         return true
     end
 
+    --serverResponse["childPriv"] = "0"
+    if(serverResponse["childPriv"]~="0") then
     -- Create the widget
-    local scrollView = widget.newScrollView(
-        {
-            top = 100,
-            left = 10,
-            width = 500,
-            height = 300,
-            scrollWidth = 800,
-            scrollHeight = 400,
-            listener = scrollListener
-        }
-    )
-    sceneGroup:insert(scrollView)
+        local scrollView = widget.newScrollView(
+            {
+                top = 100,
+                left = 10,
+                width = 500,
+                height = 300,
+                scrollWidth = 800,
+                scrollHeight = 400,
+                listener = scrollListener
+            }
+        )
+        sceneGroup:insert(scrollView)
 
-    scrollView.x = display.contentWidth/2
-    scrollView.y = 350
+        scrollView.x = display.contentWidth/2
+        scrollView.y = 350
 
     --local box = display.newRect(scrollView.width/2, scrollView.height/2, 70, 75) -- child inside of box
     --box:setFillColor(0,1,0)
-    local   myChild = display.newCircle( scrollView.width/2, scrollView.height/2, 30 )
-    myChild:setFillColor( 0,0,1 )
-
-
-    local childName = display.newText("Timmy", scrollView.width/2, scrollView.height/2+ 75, native.systemFont, 30)
-    childName:setFillColor( 0,0,1 )
-    childName.size = 20
     
-    scrollView:insert(childName) 
-    scrollView:insert(myChild)
-    scrollView:setScrollWidth(800)
+        for k in pairs(serverResponse["children"]) do 
+            local myChild = display.newCircle( (scrollView.width/2)+(k-1)*150-150, scrollView.height/2, 30 )
+            myChild:setFillColor( 0,0,1 )
+
+
+            local childName = display.newText(serverResponse["children"][k], (scrollView.width/2)+(k-1)*150-150, scrollView.height/2+ 75, native.systemFont, 30)
+            childName:setFillColor( 0,0,1 )
+            childName.size = 20
+        
+            scrollView:insert(childName) 
+            scrollView:insert(myChild)
+            scrollView:setScrollWidth(800)
+        end
 
     --local back = display.newRect(display.contentWidth/2 - 270, display.contentHeight/2 - 480, 70, 75)
     --back:setFillColor(0,1,0)
     --sceneGroup:insert(back)
-    local Manage = display.newRect(display.contentWidth/2+290, 350, 75, 300)
-    Manage:setFillColor(0.372549, 0.619608, 0.627451)
-    sceneGroup:insert(Manage)
+        local Manage = display.newRect(display.contentWidth/2+290, 350, 75, 300)
+        Manage:setFillColor(0.372549, 0.619608, 0.627451)
+        sceneGroup:insert(Manage)
 
 
-    function Manage:tap(event)
+        function Manage:tap(event)
 
-      composer.gotoScene("addChild", options)
-    
-    end
-    Manage:addEventListener("tap", Manage)
+          composer.gotoScene("addChild", Soptions)
+        
+        end
+        Manage:addEventListener("tap", Manage)
+    end 
 
 ---------------------END CHILD PRIVILEGES
 ---------------------START FAMILY SCHEDULE PRIVILEGES
@@ -291,7 +309,8 @@ function scene:show( event )
         --FAMILY_TEXT.size = 40
         --FAMILY_TEXT:setFillColor(0,0,0)
         --sceneGroup:insert(FAMILY_TEXT)
-
+    --serverResponse["schedPriv"] = "0"
+    if(serverResponse["schedPriv"]~="0") then
         local family_Schedule = widget.newButton(
 		    {
 		        --width = 500,
@@ -312,6 +331,7 @@ function scene:show( event )
         
         end
         family_Schedule:addEventListener("tap", family_Schedule)
+    end
 ----------------------END FAMILY SCHEDULE PRIVILEGES
 ----------------------START BEHAVIOR PRIVILEGES
 
@@ -323,7 +343,8 @@ function scene:show( event )
         --Problem_TEXT.size = 40
         --Problem_TEXT:setFillColor(0,0,0)
         --sceneGroup:insert(Problem_TEXT)
-
+    --serverResponse["behavPriv"] = "0"
+    if(serverResponse["behavPriv"]~="0") then
          local Problem_Behavior_List = widget.newButton(
 		    {
 		        --width = 500,
@@ -363,15 +384,15 @@ function scene:show( event )
 		sceneGroup:insert(Desired_Behavior_List)
 
         function Problem_Behavior_List:tap(event)
-          composer.gotoScene("problemBehaviorList")
+          composer.gotoScene("problemBehaviorList",Soptions)
         end
         Problem_Behavior_List:addEventListener("tap", Problem_Behavior_List)
 
         function Desired_Behavior_List:tap(event)
-          composer.gotoScene("desiredBehaviorList")
+          composer.gotoScene("desiredBehaviorList",Soptions)
         end
         Desired_Behavior_List:addEventListener("tap", Desired_Behavior_List)
-
+    end
 -----------------------END BEHAVIOR PRIVILEGES
 
 
@@ -383,7 +404,9 @@ function scene:show( event )
         --Consequence_TEXT.size = 40
         --Consequence_TEXT:setFillColor(0,0,0)
         --sceneGroup:insert(Consequence_TEXT)
- 		
+-----------------------START REWARDS/CONSEQUENCES PRIVILEGES
+    --serverResponse["CRPriv"]="0"
+ 	if(serverResponse["CRPriv"]~="0") then	
  		local Consequence_Log = widget.newButton(
 		    {
 		        --width = 500,
@@ -424,23 +447,35 @@ function scene:show( event )
 		sceneGroup:insert(Reward_Log)
         
         function Consequence_Log:tap(event)
-          composer.gotoScene("consequencesLog")
+          composer.gotoScene("consequencesLog",Soptions)
         end
         Consequence_Log:addEventListener("tap", Consequence_Log)
 
         function Reward_Log:tap(event)
-          composer.gotoScene("rewardsLog")
+          composer.gotoScene("rewardsLog",Soptions)
         end
         Reward_Log:addEventListener("tap", Reward_Log)
 
         end
 
+
+
+
+-----------------------END REWARDS/CONSEQUENCES PRIVILEGES
     end
-    --End of network listener
+end
+-----------------------END NETWORK LISTENER
     --print("session ID2: "..session)
-    local URL = "http://35.161.136.208/mainMenu.php"--?sessionID="..session
-    -- Access server via post
-    network.request( URL, "GET", networkListener)
+    if (session~="null session") then
+        local URL = "http://35.161.136.208/mainMenu.php?sessionID="..session
+        -- Access server via get
+        network.request( URL, "GET", networkListener)
+    else
+        local alert = native.showAlert("Session Invalid","Sorry, please re-login to resume.",{"OK"})
+        local URL = "http://35.161.136.208/Signout.php"
+        network.request( URL, "GET", networkListener)
+        composer.gotoScene("signIn")
+    end
 
 
 
@@ -548,9 +583,6 @@ function scene:show( event )
     end
 
 
-    elseif ( phase == "did" ) then
-        -- Code here runs when the scene is entirely on screen
-    end
 end
 
 
