@@ -203,7 +203,9 @@ function scene:show( event )
             serverResponse = json.decode(event.response)
             if(serverResponse) then
                 print ( "RESPONSE: " .. serverResponse["session_id"] )
-                for k in pairs(serverResponse["children"]) do print ("Child: ".. serverResponse["children"][k]) end
+                if(serverResponse["children"]) then
+                    for k in pairs(serverResponse["children"]) do print ("Child: ".. serverResponse["children"][k]) end
+                end
                 print("Priveleges: "..serverResponse["childPriv"].." "..serverResponse["schedPriv"].." "..serverResponse["behavPriv"].." "..serverResponse["CRPriv"])
             else
                 print("No server response")
@@ -260,19 +262,26 @@ function scene:show( event )
 
     --local box = display.newRect(scrollView.width/2, scrollView.height/2, 70, 75) -- child inside of box
     --box:setFillColor(0,1,0)
-    
-        for k in pairs(serverResponse["children"]) do 
-            local myChild = display.newCircle( (scrollView.width/2)+(k-1)*150-150, scrollView.height/2, 30 )
-            myChild:setFillColor( 0,0,1 )
+        if(serverResponse["children"]) then
+            for k in pairs(serverResponse["children"]) do 
+                local myChild = display.newCircle( (scrollView.width/2)+(k-1)*150-150, scrollView.height/2, 30 )
+                myChild:setFillColor( 0,0,1 )
 
 
-            local childName = display.newText(serverResponse["children"][k], (scrollView.width/2)+(k-1)*150-150, scrollView.height/2+ 75, native.systemFont, 30)
-            childName:setFillColor( 0,0,1 )
-            childName.size = 20
-        
+                local childName = display.newText(serverResponse["children"][k], (scrollView.width/2)+(k-1)*150-150, scrollView.height/2+ 75, native.systemFont, 30)
+                childName:setFillColor( 0,0,1 )
+                childName.size = 20
+            
+                scrollView:insert(childName) 
+                scrollView:insert(myChild)
+                scrollView:setScrollWidth(800)
+            end
+        else
+            scrollView:setScrollWidth(500)
+            
+            local childName = display.newText("No children in database. Press button to add==>", (scrollView.width/2), scrollView.height/2,scrollView.width-50,scrollView.height, native.systemFont, 30)
+            childName:setFillColor( 0,0,0 )
             scrollView:insert(childName) 
-            scrollView:insert(myChild)
-            scrollView:setScrollWidth(800)
         end
 
     --local back = display.newRect(display.contentWidth/2 - 270, display.contentHeight/2 - 480, 70, 75)

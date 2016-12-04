@@ -216,16 +216,16 @@ function scene:show( event )
             composer.gotoScene("MainMenu",Soptions)
     	end
 
-    	function partOne:tap(event)
+    	--[[function partOne:tap(event)
 
     	 	composer.gotoScene("IDPReferencePart1", Soptions)
     	
-    	end
+    	end]]--
 
         -- this listens to see if object has been tapped
         backButtonNew:addEventListener("tap", backButtonNew)
 
-        partOne:addEventListener("tap", partOne)
+        --partOne:addEventListener("tap", partOne)
 
 
 

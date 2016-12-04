@@ -95,14 +95,16 @@ function scene:show( event )
                 serverResponse = json.decode(event.response)
                 if(serverResponse) then
                     print ( "RESPONSE: " .. serverResponse["session_id"] )
-                    for k in pairs(serverResponse["children"]) do print ("Child: ".. serverResponse["children"][k]) end
+                    if(serverResponse["children"]) then
+                        for k in pairs(serverResponse["children"]) do print ("Child: ".. serverResponse["children"][k]) end
+                    end
                     print("Priveleges: "..serverResponse["childPriv"])
                 else
                     print("No server response")
                 end
 
                 --serverResponse["childPriv"]="0"
-                if(serverResponse["childPriv"]~="0") then
+                if(serverResponse["childPriv"]~="0" and serverResponse["children"]) then --if they have any kids and are allowed to look at this page, then they see kids
                     for k in pairs(serverResponse["children"]) do
                         local childButton = display.newRect(display.contentWidth/2, display.contentHeight/4-200+(k*150), 400, 75)
                         childButton:setFillColor(0.372549, 0.619608, 0.627451)
@@ -129,7 +131,7 @@ function scene:show( event )
 
             
                 --serverResponse["childPriv"]="1"
-                if(serverResponse["childPriv"]=="2") then
+                if(serverResponse["childPriv"]=="2") then --if edit privileges, then they can add kids
                     local addChildButton = display.newRect(display.contentWidth/2, 7*(display.contentHeight/8), 400, 75)
                     addChildButton:setFillColor(1 , 0.498039,0.313725)
                     sceneGroup:insert(addChildButton)
