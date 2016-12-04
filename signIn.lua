@@ -112,12 +112,6 @@ local function textListener( event )
 
     elseif ( event.phase == "ended" or event.phase == "submitted" ) then
         -- Output resulting text from "defaultField"
-        
-        -- once the user inputs their user name then we can use it.
-        if userName.text == "jordan" then
-            print("ok")
-            Password.text = "ok"
-        end
 
     elseif ( event.phase == "editing" ) then
         print( event.newCharacters )
@@ -150,10 +144,7 @@ Password.text = "testMaster"
         regButton:addEventListener("tap",goRegister)
 
 options =
-{
-   Password = Password.text,
-   userName = userName.text,
-    
+{   
     params = {
         userName = userName.text, 
         Password = Password.text,
@@ -163,6 +154,7 @@ options =
 
 function signIn:tap(event)
     print("tap")
+    print(userName.text.." "..Password.text)
     local x = crypto.digest(crypto.md5,userName.text)
     local y = crypto.digest(crypto.md5,Password.text)
     signIn.isVisible = false

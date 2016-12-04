@@ -64,8 +64,9 @@ function scene:show( event )
     if (event.params) then
         Soptions.params.userName = event.params.userName 
         Soptions.params.Password = event.params.Password
-        for k in pairs(event.params) do print(k) end
-        Soptions.params.description1 = deepcopy(event.params)
+        print(event.params.userName)
+        print("1---"..event.params.extrovertIntrovert)
+        Soptions.params.description1 = {name = event.params.name, age = event.params.age, grade = event.params.grade,extrovertIntrovert = event.params.extrovertIntrovert,outgoingShy = event.params.outgoingShy, leaderFollower = event.params.leaderFollower, activeCalm = event.params.activeCalm, plannerImpulsive = event.params.plannerImpulsive, caringUncaring = event.params.caringUncaring}
         print("-----"..Soptions.params.description1.name)
     end
 

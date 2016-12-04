@@ -451,7 +451,9 @@ function scene:show( event )
         function nextButton:tap(event)
 
 	 		if (Soptions.params) then
-	 			print(childName.text)
+
+	 			print("N "..childName.text)
+
 		        Soptions.params.name = childName.text
 		        Soptions.params.age = childAge.text
 		        Soptions.params.grade = childGrade.text
