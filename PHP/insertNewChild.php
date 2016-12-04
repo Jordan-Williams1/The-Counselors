@@ -1,13 +1,15 @@
 <?php
-session_id($_GET['sessionID']);
+$jsonC = json_decode($_POST['json'],true);
+session_id($jsonC['params']['session_ID']);
 session_start();
 $con = mysqli_connect('localhost','root','ITC4602016');
-if(!$con) //if connection not established
-{
-	die('Could not connect: '.mysqli_error($con));
-}
 $username = $_SESSION['username'];
 $password = $_SESSION['password'];
+$_SESSION['consequences'] = $jsonC;
+
+echo json_encode($jsonC);
+
+/*
 $name = mysqli_real_escape_string($con,$_GET['cName']);
 $age = mysqli_real_escape_string($con,$_GET['cAge']);
 $grade = mysqli_real_escape_string($con,$_GET['cGrade']);
@@ -52,7 +54,7 @@ mysqli_query($con,$newChild)or die('error submitting to database: '.mysqli_error
 
 
 mysqli_close($con);
-}
+}*/
 
 
 

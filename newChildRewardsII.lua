@@ -185,51 +185,42 @@ function scene:create( event )
             end
         end
 
+        local function networkListener( event )
+            if ( event.isError ) then
+                print( "Network error: ", event.response )
+                local alert = native.showAlert("Error","Server is not available at this time.",{"OK"})
+                composer.gotoScene("signin", Soptions)
+                nextButton:addEventListener("tap",nextButton)
+            else
+                print(event.response)
+                serverResponse = json.decode(event.response)
+                if(serverResponse) then
+                    print ( "RESPONSE: " .. serverResponse["params"]["session_ID"])
+                    if(serverResponse["behaviors"]) then
+                        for k in pairs(serverResponse["behaviors"]) do print ("B: ".. serverResponse["behaviors"][k]) end
+                    end
+
+                else
+                    print("No server response")
+                    local alert = native.showAlert("Session Invalid","Sorry, please re-login to resume.",{"OK"})
+                    composer.gotoScene("signIn")
+                end
+            end
+        end
+
         function nextButton:tap(event)
             local alert = native.showAlert("Confirmation","Are you sure you are finished?",{"Yes","No"},onComplete)
             if confirm == 1 then
-                local function networkListener( event )
-                    if ( event.isError ) then
-                        print( "Network error: ", event.response )
-                        local alert = native.showAlert("Login Error","Server is not available at this time.",{"OK"})
-                        composer.gotoScene("signin", Soptions)
-                    else
-                        print("NO error")
-                    end
-                end
                 if (session~="null session") then
-                    local URL = "http://35.161.136.208/mainMenu.php?sessionID="..session
-                    childName = Soptions.params.rewards1.consequences2.consequences1.behaviors2.behaviors1.description2.description1.name
-                    childAge =  Soptions.params.rewards1.consequences2.consequences1.behaviors2.behaviors1.description2.description1.age
-                    childGrade = Soptions.params.rewards1.consequences2.consequences1.behaviors2.behaviors1.description2.description1.grade
-                    childEI = Soptions.params.rewards1.consequences2.consequences1.behaviors2.behaviors1.description2.description1.extrovertIntrovert
-                    childOS = Soptions.params.rewards1.consequences2.consequences1.behaviors2.behaviors1.description2.description1.outgoingShy
-                    childLF = Soptions.params.rewards1.consequences2.consequences1.behaviors2.behaviors1.description2.description1.leaderFollower
-                    childAC = Soptions.params.rewards1.consequences2.consequences1.behaviors2.behaviors1.description2.description1.activeCalm
-                    childPI = Soptions.params.rewards1.consequences2.consequences1.behaviors2.behaviors1.description2.description1.plannerImpulse
-                    childCU = Soptions.params.rewards1.consequences2.consequences1.behaviors2.behaviors1.description2.description1.caringUncaring
-                    childStr = Soptions.params.rewards1.consequences2.consequences1.behaviors2.behaviors1.description2.Strengths
-                    childWea = Soptions.params.rewards1.consequences2.consequences1.behaviors2.behaviors1.description2.Weaknesses
-                    childMat = Soptions.params.rewards1.consequences2.consequences1.behaviors2.behaviors1.description2.Maturity
-                    childInt = Soptions.params.rewards1.consequences2.consequences1.behaviors2.behaviors1.description2.Interests
-                    childSD = Soptions.params.rewards1.consequences2.consequences1.behaviors2.behaviors1.description2.successfulDiscipline
-                    childUD = Soptions.params.rewards1.consequences2.consequences1.behaviors2.behaviors1.description2.unsuccessfulDiscipline
-                    URL = URL.."&cName="..childName.."&cAge="..tonumber(childAge).."&cGrade="..childGrade.."&EI="..tonumber(childEI).."&OS="..tonumber(childOS).."&LF="..tonumber(childLF).."&AC="..tonumber(childAC)
-                    URL = URL.."&PI="..tonumber(childPI).."&CU="..tonumber(childCU).."&Strengths="..childStr.."&Weaknesses="..childWea.."&MLevel="..childMat.."&Interests="..childInt.."&Dworked="..childSD.."&DNWorked="..childUD
+                    local URL = "http://35.161.136.208/insertNewChild.php"
+                    
+                    local Pparams = {}
+                    for k in pairs(Soptions.params.Frewards) do print ("C: "..Soptions.params.Frewards[k]) end
+                    Pparams.body = "json="..json.encode(Soptions)
+                    print (Pparams.body)
 
-                    jsonBehaviors = json.encode(Soptions.params.rewards1.consequences2.consequences1.behaviors2.Fbehaviors)
-                    jsonConsequences = json.encode(Soptions.params.rewards1.consequences2.Fconsequences)
-                    jsonRewards = json.encode(Soption.params.Frewards)
-
-                    print(jsonBehaviors)
-                    print(jsonConsequences)
-                    print(jsonRewards)
-
-                    URL = URL..'&Behaviors='..jsonBehaviors..'&Consequences='..jsonConsequences..'&Rewards='..jsonRewards
-
-
-
-                    --network.request(URL,"GET",networkListener)
+                    network.request(URL,"POST",networkListener,Pparams)
+                    composer.gotoScene("mainMenu",Soptions)
                 else
                     local alert = native.showAlert("Session Invalid","Sorry, please re-login to resume.",{"OK"})
                     local URL = "http://35.161.136.208/Signout.php"
