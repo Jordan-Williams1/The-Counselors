@@ -214,6 +214,12 @@ function scene:show( event )
 
          function backButtonNew:tap(event)
 
+             if scrollViewFull.numChildren > 1 then
+                    scrollView:removeSelf()
+                    scrollView2:removeSelf()
+                    scrollView3:removeSelf()
+             end
+
             composer.gotoScene("childInformation")
         
         end
@@ -229,6 +235,10 @@ function scene:show( event )
 
         -- this listens to see if object has been tapped
         --childButton:addEventListener("tap", childButton)
+
+
+       
+
                 scrollViewFull:setScrollHeight(3200)
 
 
