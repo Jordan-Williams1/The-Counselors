@@ -10,6 +10,7 @@ local json = require("json")
 
 local serverResponse
 local session
+local Manage
 
 function widget.newPanel( options )
     composer.removeScene("IDPReference")
@@ -243,63 +244,65 @@ function scene:show( event )
     end
 
     --serverResponse["childPriv"] = "0"
-    if(serverResponse["childPriv"]~="0") then
-    -- Create the widget
-        local scrollView = widget.newScrollView(
-            {
-                top = 100,
-                left = 10,
-                width = 500,
-                height = 300,
-                scrollWidth = 800,
-                scrollHeight = 400,
-                listener = scrollListener
-            }
-        )
-        sceneGroup:insert(scrollView)
+    if(serverResponse) then
+        if(serverResponse["childPriv"]~="0") then
+        -- Create the widget
+            local scrollView = widget.newScrollView(
+                {
+                    top = 100,
+                    left = 10,
+                    width = 500,
+                    height = 300,
+                    scrollWidth = 800,
+                    scrollHeight = 400,
+                    listener = scrollListener
+                }
+            )
+            sceneGroup:insert(scrollView)
 
-        scrollView.x = display.contentWidth/2
-        scrollView.y = 350
+            scrollView.x = display.contentWidth/2
+            scrollView.y = 350
 
-    --local box = display.newRect(scrollView.width/2, scrollView.height/2, 70, 75) -- child inside of box
-    --box:setFillColor(0,1,0)
-        if(serverResponse["children"]) then
-            for k in pairs(serverResponse["children"]) do 
-                local myChild = display.newCircle( (scrollView.width/2)+(k-1)*150-150, scrollView.height/2, 30 )
-                myChild:setFillColor( 0,0,1 )
+        --local box = display.newRect(scrollView.width/2, scrollView.height/2, 70, 75) -- child inside of box
+        --box:setFillColor(0,1,0)
+            if(serverResponse["children"]) then
+                for k in pairs(serverResponse["children"]) do 
+                    local myChild = display.newCircle( (scrollView.width/2)+(k-1)*150-150, scrollView.height/2, 30 )
+                    myChild:setFillColor( 0,0,1 )
 
 
-                local childName = display.newText(serverResponse["children"][k], (scrollView.width/2)+(k-1)*150-150, scrollView.height/2+ 75, native.systemFont, 30)
-                childName:setFillColor( 0,0,1 )
-                childName.size = 20
-            
+                    local childName = display.newText(serverResponse["children"][k], (scrollView.width/2)+(k-1)*150-150, scrollView.height/2+ 75, native.systemFont, 30)
+                    childName:setFillColor( 0,0,1 )
+                    childName.size = 20
+                
+                    scrollView:insert(childName) 
+                    scrollView:insert(myChild)
+                    scrollView:setScrollWidth(800)
+                end
+            else
+                scrollView:setScrollWidth(500)
+                
+                local childName = display.newText("No children in database. Press button to add==>", (scrollView.width/2), scrollView.height/2,scrollView.width-50,scrollView.height, native.systemFont, 30)
+                childName:setFillColor( 0,0,0 )
                 scrollView:insert(childName) 
-                scrollView:insert(myChild)
-                scrollView:setScrollWidth(800)
             end
-        else
-            scrollView:setScrollWidth(500)
+
+        --local back = display.newRect(display.contentWidth/2 - 270, display.contentHeight/2 - 480, 70, 75)
+        --back:setFillColor(0,1,0)
+        --sceneGroup:insert(back)
+            Manage = display.newRect(display.contentWidth/2+290, 350, 75, 300)
+            Manage:setFillColor(0.372549, 0.619608, 0.627451)
+            sceneGroup:insert(Manage)
+
+
+            function Manage:tap(event)
+
+              composer.gotoScene("addChild", Soptions)
             
-            local childName = display.newText("No children in database. Press button to add==>", (scrollView.width/2), scrollView.height/2,scrollView.width-50,scrollView.height, native.systemFont, 30)
-            childName:setFillColor( 0,0,0 )
-            scrollView:insert(childName) 
-        end
-
-    --local back = display.newRect(display.contentWidth/2 - 270, display.contentHeight/2 - 480, 70, 75)
-    --back:setFillColor(0,1,0)
-    --sceneGroup:insert(back)
-        local Manage = display.newRect(display.contentWidth/2+290, 350, 75, 300)
-        Manage:setFillColor(0.372549, 0.619608, 0.627451)
-        sceneGroup:insert(Manage)
-
-
-        function Manage:tap(event)
-
-          composer.gotoScene("addChild", Soptions)
-        
-        end
-        Manage:addEventListener("tap", Manage)
-    end 
+            end
+            Manage:addEventListener("tap", Manage)
+        end 
+    end
 
 ---------------------END CHILD PRIVILEGES
 ---------------------START FAMILY SCHEDULE PRIVILEGES
@@ -313,27 +316,29 @@ function scene:show( event )
         --FAMILY_TEXT:setFillColor(0,0,0)
         --sceneGroup:insert(FAMILY_TEXT)
     --serverResponse["schedPriv"] = "0"
-    if(serverResponse["schedPriv"]~="0") then
-        local family_Schedule = widget.newButton(
-		    {
-		        --width = 500,
-		        --heigth = 500,
-		        id = "family_Schedule",
-		        defaultFile = "FamilySchedule.png",
-		        onEvent = handleButtonEvent
-		    }
-		)
+    if(serverResponse) then
+        if(serverResponse["schedPriv"]~="0") then
+            local family_Schedule = widget.newButton(
+    		    {
+    		        --width = 500,
+    		        --heigth = 500,
+    		        id = "family_Schedule",
+    		        defaultFile = "FamilySchedule.png",
+    		        onEvent = handleButtonEvent
+    		    }
+    		)
 
-		family_Schedule.x = display.contentWidth/2 
-		family_Schedule.y = display.contentHeight/2 + 120
-		sceneGroup:insert(family_Schedule)
+    		family_Schedule.x = display.contentWidth/2 
+    		family_Schedule.y = display.contentHeight/2 + 120
+    		sceneGroup:insert(family_Schedule)
 
-        function family_Schedule:tap(event)
+            function family_Schedule:tap(event)
 
-          composer.gotoScene("familySchedule")
-        
+              composer.gotoScene("familySchedule")
+            
+            end
+            family_Schedule:addEventListener("tap", family_Schedule)
         end
-        family_Schedule:addEventListener("tap", family_Schedule)
     end
 ----------------------END FAMILY SCHEDULE PRIVILEGES
 ----------------------START BEHAVIOR PRIVILEGES
@@ -347,45 +352,47 @@ function scene:show( event )
         --Problem_TEXT:setFillColor(0,0,0)
         --sceneGroup:insert(Problem_TEXT)
     --serverResponse["behavPriv"] = "0"
-    if(serverResponse["behavPriv"]~="0") then
-         local Problem_Behavior_List = widget.newButton(
-		    {
-		        --width = 500,
-		        --heigth = 500,
-		        id = "Problem_Behavior_List",
-		        defaultFile = "ProblemBehaviorList.png",
-		        onEvent = handleButtonEvent
-		    }
-		)
+    if(serverResponse) then
+        if(serverResponse["behavPriv"]~="0") then
+             local Problem_Behavior_List = widget.newButton(
+    		    {
+    		        --width = 500,
+    		        --heigth = 500,
+    		        id = "Problem_Behavior_List",
+    		        defaultFile = "ProblemBehaviorList.png",
+    		        onEvent = handleButtonEvent
+    		    }
+    		)
 
-		Problem_Behavior_List.x = display.contentWidth/2 
-		Problem_Behavior_List.y = display.contentHeight/2 + 240
-		sceneGroup:insert(Problem_Behavior_List)
+    		Problem_Behavior_List.x = display.contentWidth/2 
+    		Problem_Behavior_List.y = display.contentHeight/2 + 240
+    		sceneGroup:insert(Problem_Behavior_List)
 
 
-        local Desired_Behavior_List = widget.newButton(
-		    {
-		        --width = 500,
-		        --heigth = 500,
-		        id = "Desired_Behavior_List",
-		        defaultFile = "DesiredBehaviorList.png",
-		        onEvent = handleButtonEvent
-		    }
-		)
+            local Desired_Behavior_List = widget.newButton(
+    		    {
+    		        --width = 500,
+    		        --heigth = 500,
+    		        id = "Desired_Behavior_List",
+    		        defaultFile = "DesiredBehaviorList.png",
+    		        onEvent = handleButtonEvent
+    		    }
+    		)
 
-		Desired_Behavior_List.x = display.contentWidth/2 
-		Desired_Behavior_List.y = display.contentHeight/2 + 360
-		sceneGroup:insert(Desired_Behavior_List)
+    		Desired_Behavior_List.x = display.contentWidth/2 
+    		Desired_Behavior_List.y = display.contentHeight/2 + 360
+    		sceneGroup:insert(Desired_Behavior_List)
 
-        function Problem_Behavior_List:tap(event)
-          composer.gotoScene("problemBehaviorList",Soptions)
+            function Problem_Behavior_List:tap(event)
+              composer.gotoScene("problemBehaviorList",Soptions)
+            end
+            Problem_Behavior_List:addEventListener("tap", Problem_Behavior_List)
+
+            function Desired_Behavior_List:tap(event)
+              composer.gotoScene("desiredBehaviorList",Soptions)
+            end
+            Desired_Behavior_List:addEventListener("tap", Desired_Behavior_List)
         end
-        Problem_Behavior_List:addEventListener("tap", Problem_Behavior_List)
-
-        function Desired_Behavior_List:tap(event)
-          composer.gotoScene("desiredBehaviorList",Soptions)
-        end
-        Desired_Behavior_List:addEventListener("tap", Desired_Behavior_List)
     end
 -----------------------END BEHAVIOR PRIVILEGES
     --local Consequence_Log = display.newRect(display.contentWidth/2, display.contentHeight/2 + 400, 400, 75)
@@ -398,49 +405,50 @@ function scene:show( event )
         --sceneGroup:insert(Consequence_TEXT)
 -----------------------START REWARDS/CONSEQUENCES PRIVILEGES
     --serverResponse["CRPriv"]="0"
- 	if(serverResponse["CRPriv"]~="0") then	
- 		local Consequence_Log = widget.newButton(
-		    {
-		        --width = 500,
-		        --heigth = 500,
-		        id = "Consequence_Log",
-		        defaultFile = "ConsequenceLog.png",
-		        onEvent = handleButtonEvent
-		    }
-		)
+    if(serverResponse) then
+     	if(serverResponse["CRPriv"]~="0") then	
+     		local Consequence_Log = widget.newButton(
+    		    {
+    		        --width = 500,
+    		        --heigth = 500,
+    		        id = "Consequence_Log",
+    		        defaultFile = "ConsequenceLog.png",
+    		        onEvent = handleButtonEvent
+    		    }
+    		)
 
-		Consequence_Log.x = display.contentWidth/2 
-		Consequence_Log.y = display.contentHeight/2 + 480
-		sceneGroup:insert(Consequence_Log)
+    		Consequence_Log.x = display.contentWidth/2 
+    		Consequence_Log.y = display.contentHeight/2 + 480
+    		sceneGroup:insert(Consequence_Log)
 
 
 
-        local Reward_Log = widget.newButton(
-		    {
-		        --width = 500,
-		        --heigth = 500,
-		        id = "Reward_Log",
-		        defaultFile = "RewardLog.png",
-		        onEvent = handleButtonEvent
-		    }
-		)
+            local Reward_Log = widget.newButton(
+    		    {
+    		        --width = 500,
+    		        --heigth = 500,
+    		        id = "Reward_Log",
+    		        defaultFile = "RewardLog.png",
+    		        onEvent = handleButtonEvent
+    		    }
+    		)
 
-		Reward_Log.x = display.contentWidth/2 
-		Reward_Log.y = display.contentHeight/2 + 600
-		sceneGroup:insert(Reward_Log)
-        
-        function Consequence_Log:tap(event)
-          composer.gotoScene("consequencesLog",Soptions)
+    		Reward_Log.x = display.contentWidth/2 
+    		Reward_Log.y = display.contentHeight/2 + 600
+    		sceneGroup:insert(Reward_Log)
+            
+            function Consequence_Log:tap(event)
+              composer.gotoScene("consequencesLog",Soptions)
+            end
+            Consequence_Log:addEventListener("tap", Consequence_Log)
+
+            function Reward_Log:tap(event)
+              composer.gotoScene("rewardsLog",Soptions)
+            end
+            Reward_Log:addEventListener("tap", Reward_Log)
+
         end
-        Consequence_Log:addEventListener("tap", Consequence_Log)
-
-        function Reward_Log:tap(event)
-          composer.gotoScene("rewardsLog",Soptions)
-        end
-        Reward_Log:addEventListener("tap", Reward_Log)
-
-        end
-
+    end
 
 
 
@@ -512,9 +520,15 @@ end
     panel:insert(panel.Quick_IDP)
 
     -- account Managment button on panel
-    panel.accountManagment = display.newRect( panel.width/8, -200 , 200, 75)
-    panel.accountManagment:setFillColor(0.372549, 0.619608, 0.627451)
-    panel:insert(panel.accountManagment)
+    panel.signOutButton = display.newRect( panel.width/8, -200 , 200, 75)
+    panel.signOutButton:setFillColor(0.372549, 0.619608, 0.627451)
+    panel:insert(panel.signOutButton)
+    function panel.signOutButton:tap( event )
+        local URL = "http://35.161.136.208/Signout.php"
+        network.request( URL, "GET", networkListener)
+        composer.gotoScene("signIn")
+    end
+    panel.signOutButton:addEventListener("tap",panel.signOutButton)
 
     -- words in panel
     panel.IDP_words = display.newText("Quick IDP", panel.width/8, -400,  native.systemFontBold, 18  )
@@ -537,7 +551,7 @@ end
     panel:insert(panel.slideBack)
     
 
-        
+    
         --sceneGroup:insert(back)
 
     
@@ -546,12 +560,14 @@ end
     function show:tap(event)
         panel:show()
         panel:toFront()
+        Manage:removeEventListener("tap", Manage)
     end
 
     show:addEventListener("tap", show)
 
     function panel.slideBack:tap(event)
         panel:hide()
+        Manage:addEventListener("tap", Manage)
     end
     panel.slideBack:addEventListener("tap", slideBack)
 
