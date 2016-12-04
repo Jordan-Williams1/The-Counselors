@@ -50,6 +50,7 @@ function scene:show( event )
     composer.removeScene("newChildConsequencesI")
     local sceneGroup = self.view
     local phase = event.phase
+    
     if (not event.params) then 
         session = "null session"
         print("Session: "..session)
@@ -248,7 +249,7 @@ function scene:show( event )
          function backButtonNew:tap(event)
             newPBehavior:removeSelf()
             newDBehavior:removeSelf()
-            composer.gotoScene("newChildProblemBehaviorsI",Soptions)        
+            composer.gotoScene("newChildProblemBehaviorsI", Soptions)        
         end
 
         -- this listens to see if object has been tapped

@@ -32,6 +32,30 @@ function scene:show( event )
     if ( phase == "will" ) then
         -- Code here runs when the scene is still off screen (but is about to come on screen)
 
+         if (not event.params) then 
+        session = "null session"
+        print("Session: "..session)
+        else
+            session = event.params.session_ID
+            print("Session: "..session)
+        end
+
+        Soptions =
+        {
+            params = {
+                session_ID = session,
+                Fbehaviors = {}            
+            }
+        } 
+
+        if (event.params) then
+            Soptions.params.userName = event.params.userName 
+            Soptions.params.Password = event.params.Password
+            Soptions.params.behaviors1 = event.params
+        end
+
+
+
         local background = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth, display.contentHeight)
         background:setFillColor( 0.745098 ,0.745098 ,0.745098)
         sceneGroup:insert(background)
@@ -55,7 +79,7 @@ function scene:show( event )
 
          function backButtonNew:tap(event)
 
-            composer.gotoScene("MainMenu")
+            composer.gotoScene("MainMenu", Soptions)
         
         end
 

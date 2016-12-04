@@ -24,6 +24,8 @@ function scene:create( event )
 end
 
 
+local session
+
 -- show()
 function scene:show( event )
     composer.removeScene("mainMenu")

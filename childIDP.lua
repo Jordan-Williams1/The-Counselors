@@ -71,6 +71,26 @@ function scene:show( event )
     local sceneGroup = self.view
     local phase = event.phase
 
+     if (not event.params) then 
+        session = "null session"
+        print("Session: "..session)
+    else
+        session = event.params.session_ID
+        print("Session: "..session)
+    end
+
+    Soptions =
+    {
+        params = {
+            session_ID = session
+        }
+    }    
+
+    if (event.params) then
+        Soptions.params.userName = event.params.userName 
+        Soptions.params.Password = event.params.Password
+    end
+
     if ( phase == "will" ) then
         -- Code here runs when the scene is still off screen (but is about to come on screen)
 
@@ -220,7 +240,7 @@ function scene:show( event )
                     scrollView3:removeSelf()
              end
 
-            composer.gotoScene("childInformation")
+            composer.gotoScene("childInformation", Soptions)
         
         end
 

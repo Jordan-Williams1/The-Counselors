@@ -34,6 +34,26 @@ function scene:show( event )
     local sceneGroup = self.view
     local phase = event.phase
 
+    if (not event.params) then 
+        session = "null session"
+        print("Session: "..session)
+    else
+        session = event.params.session_ID
+        print("Session: "..session)
+    end
+
+    Soptions =
+    {
+        params = {
+            session_ID = session
+        }
+    }    
+
+    if (event.params) then
+        Soptions.params.userName = event.params.userName 
+        Soptions.params.Password = event.params.Password
+    end
+
     if ( phase == "will" ) then
         -- Code here runs when the scene is still off screen (but is about to come on screen)
 
@@ -89,7 +109,7 @@ function scene:show( event )
 
          function backButtonNew:tap(event)
 
-            composer.gotoScene("addChild")
+            composer.gotoScene("addChild", Soptions)
         
         end
 
@@ -99,7 +119,7 @@ function scene:show( event )
 
         function IDP:tap(event)
 
-            composer.gotoScene("childIDP")
+            composer.gotoScene("childIDP", Soptions)
         
         end
 
@@ -108,7 +128,7 @@ function scene:show( event )
          
         function childDescriptionButton:tap(event)
 
-            composer.gotoScene("existingChildDescription")
+            composer.gotoScene("existingChildDescription", Soptions)
         
         end
 
@@ -117,7 +137,7 @@ function scene:show( event )
 
         function behavioralHistory:tap(event)
 
-            composer.gotoScene("childBehavioralHistory")
+            composer.gotoScene("childBehavioralHistory", Soptions)
         
         end
 

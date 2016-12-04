@@ -357,7 +357,7 @@ function scene:show( event )
 
             function family_Schedule:tap(event)
 
-              composer.gotoScene("familySchedule")
+              composer.gotoScene("familySchedule", Soptions)
             
             end
             family_Schedule:addEventListener("tap", family_Schedule)
