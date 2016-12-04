@@ -13,10 +13,31 @@ local scene = composer.newScene()
 -- Scene event functions
 -- -----------------------------------------------------------------------------------
 
+
+  
 -- create()
 function scene:create( event )
 
     local sceneGroup = self.view
+    if (not event.params) then 
+        session = "null session"
+        print("Session: "..session)
+    else
+        session = event.params.session_ID
+        print("Session: "..session)
+    end
+
+    Soptions =
+    {
+        params = {
+            session_ID = session
+        }
+    }    
+
+    if (event.params) then
+        Soptions.params.userName = event.params.userName 
+        Soptions.params.Password = event.params.Password
+    end
     -- Code here runs when the scene is first created but has not yet appeared on screen
     
      local background = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth, display.contentHeight)
@@ -103,7 +124,7 @@ function scene:create( event )
 
          function backButtonNew:tap(event)
             
-            composer.gotoScene("desiredBehaviorList")
+            composer.gotoScene("desiredBehaviorList", Soptions)
         
         end
         backButtonNew:addEventListener("tap", backButtonNew)

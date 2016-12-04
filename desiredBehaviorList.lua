@@ -97,7 +97,7 @@ function scene:show( event )
 
         function childButton:tap(event)
 
-            composer.gotoScene("desiredBehaviorListLast")
+            composer.gotoScene("desiredBehaviorListLast",Soptions)
         
         end
 

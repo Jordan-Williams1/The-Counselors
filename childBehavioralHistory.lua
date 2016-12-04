@@ -57,7 +57,7 @@ function scene:show( event )
     local phase = event.phase
 
 
-      if (not event.params) then 
+    if (not event.params) then 
         session = "null session"
         print("Session: "..session)
     else
