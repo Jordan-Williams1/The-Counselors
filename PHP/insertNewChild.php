@@ -12,6 +12,7 @@ $_SESSION['consequences'] = $jsonC;
 
 $child1 = $_SESSION["childDesc1"];
 $child2 = $_SESSION["childDesc2"];
+$behaviors = $_SESSION["behaviors"];
 
 mysqli_select_db($con,'IDP')or die('cannot select db');
 
@@ -31,9 +32,12 @@ $newChild = "INSERT INTO child (username,password,name,age,grade,ExtrovertIntrov
 
 mysqli_query($con,$newChild)or die('error submitting to database: '.mysqli_error($con));
 
-//$latestChild = mysqli_insert_id($con);
+$latestChild = mysqli_insert_id($con);
 
-//$newBehavior = "insert into behaviors (childID,desiredBehavior,problemBehavior) values ('$latestChild',)";
+foreach ($behaviors['params']['behaviors1'] as $key => $value) {
+	$newBehavior = "insert into behaviors (childID,desiredBehavior,problemBehavior) values ('$latestChild','$value[0]','$value[1]')";
+	mysqli_query($con,$newBehavior)or die('error submitting to database: '.mysqli_error($con));
+}
 
 //mysqli_query($con,$newChild)or die('error submitting to database: '.mysqli_error($con));
 
