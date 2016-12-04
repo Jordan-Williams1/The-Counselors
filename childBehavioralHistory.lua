@@ -10,6 +10,30 @@ local scene = composer.newScene()
 
 
 
+  local defaultField
+
+        local function textListener( event )
+
+            if ( event.phase == "began" ) then
+                -- User begins editing "defaultField"
+
+            elseif ( event.phase == "ended" or event.phase == "submitted" ) then
+                -- Output resulting text from "defaultField"
+               
+                -- once the user inputs their user name then we can use it.
+                if userName.text == "jordan" then
+                    print("ok")
+                    Password.text = "ok"
+                end
+
+            elseif ( event.phase == "editing" ) then
+                print( event.newCharacters )
+                print( event.oldText )
+                print( event.startPosition )
+                print( event.text )
+            end
+        end
+
 
 -- -----------------------------------------------------------------------------------
 -- Scene event functions
@@ -43,6 +67,54 @@ function scene:show( event )
         pickText.size = 40
         pickText:setFillColor(0,0,0)
         sceneGroup:insert(pickText)
+
+        local childButton = display.newRect(display.contentWidth/2, display.contentHeight/2-200, 400, 75)
+        childButton:setFillColor(0.372549, 0.619608, 0.627451)
+        sceneGroup:insert(childButton)
+
+
+        local childTEXT = display.newText("List of child stuff", display.contentWidth/2+100, display.contentHeight/2-200, 400, 75)
+        childTEXT.size = 40
+        childTEXT:setFillColor(0,0,0)
+        sceneGroup:insert(childTEXT)
+
+        local backButtonNew = widget.newButton(
+            {
+                --width = 500,
+                --heigth = 500,
+                id = "backButtonNew",
+                defaultFile = "backArrow3.png",
+                onEvent = handleButtonEvent
+            }
+        )
+
+        backButtonNew.x = display.contentWidth/2 - 320 
+        backButtonNew.y = display.contentHeight - display.contentHeight + 100
+        sceneGroup:insert(backButtonNew)
+
+         
+        -- Create text field
+        writeBehavior = native.newTextField( display.contentWidth/2, display.contentHeight-100, display.contentWidth/2, 75)
+        writeBehavior:addEventListener( "userInput", textListener )
+        sceneGroup:insert(writeBehavior)
+
+        local addButton = display.newRect(display.contentWidth/2+250, display.contentHeight-100, 70, 75)
+        addButton:setFillColor(0.372549, 0.619608, 0.627451)
+        sceneGroup:insert(addButton)
+
+        local plus = display.newText("ADD", display.contentWidth/2+250, display.contentHeight-100, 70, 75)
+        plus.size = 33
+        plus:setFillColor(0,0,0)
+        sceneGroup:insert(plus)
+
+        function plus:tap(event)
+
+            childTEXT.text = writeBehavior.text
+        
+        end
+        
+        plus:addEventListener("tap", plus)
+
 --[[
         local IDP = display.newRect(display.contentWidth/2, display.contentHeight/2, 400, 75)
         IDP:setFillColor(0.372549, 0.619608, 0.627451)
@@ -72,6 +144,7 @@ function scene:show( event )
         sceneGroup:insert(behavioralHistoryText)
 
 --]]
+
         local backButtonNew = widget.newButton(
 		    {
 		      
