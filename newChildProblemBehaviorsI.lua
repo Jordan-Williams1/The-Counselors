@@ -802,7 +802,7 @@ function scene:show( event )
 
         function nextButton:tap(event)
             --print("tapped")
-            nextButton:setEnabled(false)
+            nextButton:removeEventListener("tap", nextButton)
             if (Soptions.params) then
                 Soptions.params.behaviors = {}
                 --print("<<<<<<<<<<<<<<<<<<<<<")

@@ -133,14 +133,19 @@ function scene:show( event )
         count = 0
         for k in pairs(Soptions.params.behaviors1.behaviors) do
             --print(Soptions.params.behaviors1.behaviors[k][1])
-            local newBehavior = display.newText(Soptions.params.behaviors1.behaviors[k][1].."/"..Soptions.params.behaviors1.behaviors[k][2],display.contentWidth/2,display.contentHeight-display.contentHeight + 150+50*k,native.systemFont,44)
+            local newBehavior = display.newText(Soptions.params.behaviors1.behaviors[k][1].." / "..Soptions.params.behaviors1.behaviors[k][2],display.contentWidth/2,display.contentHeight-display.contentHeight + 150+50*k,native.systemFont,44)
             newBehavior:setFillColor(0,0,0)
             sceneGroup:insert(newBehavior)
             scrollView:insert(newBehavior)
             count = count + 1
             if(Soptions.params) then
-                table.insert(Soptions.params.Fbehaviors,{Soptions.params.behaviors1.behaviors[k][1],Soptions.params.behaviors1.behaviors[k][2]})
+                local a = Soptions.params.behaviors1.behaviors[k][1]
+                local b = Soptions.params.behaviors1.behaviors[k][2]
+                print(a..","..b)
+                print("--------")
+                table.insert(Soptions.params.Fbehaviors,{a,b})
             end
+            
         end
 
         local newBehaviorButton = display.newRect(3*(display.contentWidth/4) + 100, 7*(display.contentHeight/8), 75, 75)
@@ -219,8 +224,13 @@ function scene:show( event )
             nextButton:removeEventListener("tap",nextButton)
             
             if(session~="null session") then
-                URL = "http://35.161.136.208/behaviors.php?sessionID="..session
+                URL = "http://35.161.136.208/behaviors.php"
+                local Pparams = {}
+                for k in pairs(Soptions.params.Fbehaviors) do print ("B: "..Soptions.params.Fbehaviors[k][1]..","..Soptions.params.Fbehaviors[k][2]) end
+                Pparams.body = json.encode(Soptions)
+                --print (Pparams.body) 
 
+                network.request(URL,"POST",Pparams)
 
                 newPBehavior:removeSelf()
                 newDBehavior:removeSelf()

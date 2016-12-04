@@ -5,8 +5,8 @@ session_start();
 $con = mysqli_connect('localhost','root','ITC4602016');
 $username = $_SESSION['username'];
 $password = $_SESSION['password'];
-
-
+$json = json_decode($_SESSION['Pparams'],true);
+$array = $json
 
 if(!$con) //if connection not established
 {
