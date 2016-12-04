@@ -76,9 +76,10 @@ function scene:show( event )
         background:setFillColor( 0.745098 ,0.745098 ,0.745098)
         sceneGroup:insert(background)
 
-        local pdfView = native.newWebView( display.contentWidth/2, display.contentHeight/2, display.contentWidth-20, display.contentHeight-50)
+        local pdfView = native.newWebView( display.contentWidth/2, display.contentHeight/2+100, display.contentWidth-20, display.contentHeight - 50)
 
 		pdfView:request( "IDPReference.html", system.ResourceDirectory )
+		sceneGroup:insert(pdfView)
 
 
 		-- Function to handle button events
@@ -101,7 +102,7 @@ function scene:show( event )
 		)
 
 		backButtonNew.x = display.contentWidth/2 - 320 
-		backButtonNew.y = display.contentHeight - display.contentHeight + 100
+		backButtonNew.y = display.contentHeight - display.contentHeight + 85
 		sceneGroup:insert(backButtonNew)
 
        

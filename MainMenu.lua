@@ -12,6 +12,7 @@ local serverResponse
 local session
 
 function widget.newPanel( options )
+    composer.removeScene("IDPReference")
     local customOptions = options or {}
     local opt = {}
  
