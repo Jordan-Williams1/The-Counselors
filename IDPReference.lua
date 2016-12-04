@@ -76,7 +76,7 @@ function scene:show( event )
         background:setFillColor( 0.745098 ,0.745098 ,0.745098)
         sceneGroup:insert(background)
 
-        local pdfView = native.newWebView( display.centerX, display.centerY, display.contentWidth-20, display.contentHeight-50)
+        local pdfView = native.newWebView( display.contentWidth/2, display.contentHeight/2, display.contentWidth-20, display.contentHeight-50)
 
 		pdfView:request( "IDPReference.html", system.ResourceDirectory )
 
