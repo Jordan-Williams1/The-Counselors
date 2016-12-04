@@ -107,17 +107,16 @@ function scene:show( event )
         -- this listens to see if object has been tapped
         IDP:addEventListener("tap", IDP)
          
+        function childDescriptionButton:tap(event)
 
-
-       -- function childButton:tap(event)
-
-            --composer.gotoScene("desiredBehaviorListLast")
+            composer.gotoScene("existingChildDescription")
         
-        --end
+        end
 
         -- this listens to see if object has been tapped
-       -- childButton:addEventListener("tap", childButton)
-
+        childDescriptionButton:addEventListener("tap", childDescriptionButton)
+        
+      
 
     elseif ( phase == "did" ) then
         -- Code here runs when the scene is entirely on screen

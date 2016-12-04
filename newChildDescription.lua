@@ -80,6 +80,9 @@ function scene:show( event )
                 -- Output resulting text from "defaultField"
                
                 -- once the user inputs their user name then we can use it.
+                if childName.text == "jordan" then
+                	print("ok")
+                end
         
 
             elseif ( event.phase == "editing" ) then
@@ -448,6 +451,7 @@ function scene:show( event )
         function nextButton:tap(event)
 
 	 		if (Soptions.params) then
+	 			print(childName.text)
 		        Soptions.params.name = childName.text
 		        Soptions.params.age = childAge.text
 		        Soptions.params.grade = childGrade.text
