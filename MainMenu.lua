@@ -174,14 +174,18 @@ function scene:show( event )
 		    {
 		        --width = 500,
 		        --heigth = 500,
+
 		        id = "IDP_Reference",
 		        defaultFile = "IDPReference.png",
 		        onEvent = handleButtonEvent
+                
 		    }
 		)
 
 		IDP_Reference.x = display.contentWidth/2 
 		IDP_Reference.y = display.contentHeight/2
+
+       
 		sceneGroup:insert(IDP_Reference)
 
     function IDP_Reference:tap(event)
@@ -194,6 +198,32 @@ function scene:show( event )
 
     -- this listens to see if object has been tapped
     IDP_Reference:addEventListener("tap", IDP_Reference)
+
+
+
+     local Manage = widget.newButton(
+            {
+                width = 200,
+                heigth = 300,
+                id = "Manage",
+                defaultFile = "manageButton.png",
+                onEvent = handleButtonEvent
+                
+            }
+            )
+            Manage.x = display.contentWidth/2+278
+            Manage.y = 350
+            sceneGroup:insert(Manage)
+
+            
+            function Manage:tap(event)
+
+              composer.gotoScene("addChild", Soptions)
+            
+            end
+            
+            Manage:addEventListener("tap", Manage)   
+        
 
 -----------------------NETWORK LISTENER HERE----------------------------------------------------
     local function networkListener( event )
@@ -286,23 +316,16 @@ function scene:show( event )
                 childName:setFillColor( 0,0,0 )
                 scrollView:insert(childName) 
             end
+          
+          --Manage = display.newRect(display.contentWidth/2+290, 350, 75, 300)
+           -- Manage:setFillColor(0.372549, 0.619608, 0.627451)
+            --sceneGroup:insert(Manage)
 
-        --local back = display.newRect(display.contentWidth/2 - 270, display.contentHeight/2 - 480, 70, 75)
-        --back:setFillColor(0,1,0)
-        --sceneGroup:insert(back)
-            Manage = display.newRect(display.contentWidth/2+290, 350, 75, 300)
-            Manage:setFillColor(0.372549, 0.619608, 0.627451)
-            sceneGroup:insert(Manage)
-
-
-            function Manage:tap(event)
-
-              composer.gotoScene("addChild", Soptions)
+-- TOOK MANAGE OUT FROM HERE AND MOVED TO TOP
             
-            end
-            Manage:addEventListener("tap", Manage)
         end 
     end
+
 
 ---------------------END CHILD PRIVILEGES
 ---------------------START FAMILY SCHEDULE PRIVILEGES
@@ -553,28 +576,32 @@ end
 
     
         --sceneGroup:insert(back)
-
+          
     
-
-
+    
+ 
     function show:tap(event)
+    
         panel:show()
         panel:toFront()
-        Manage:removeEventListener("tap", Manage)
+        Manage.isVisible = false
+              
     end
 
     show:addEventListener("tap", show)
 
     function panel.slideBack:tap(event)
-        panel:hide()
-        Manage:addEventListener("tap", Manage)
+        Manage.isVisible = true
+        panel:hide() 
+
     end
     panel.slideBack:addEventListener("tap", slideBack)
 
 
-    function panel.slideBack:tap(event)
-        panel:hide()
-    end
+    --function panel.slideBack:tap(event)
+     --   IDP_Reference.isVisible = true
+     --   panel:hide()
+    --end
 
 
 end
