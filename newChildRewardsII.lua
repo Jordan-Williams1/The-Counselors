@@ -209,7 +209,7 @@ function scene:create( event )
         end
 
         function nextButton:tap(event)
-            local alert = native.showAlert("Confirmation","Are you sure you are finished?",{"Yes","No"},onComplete)
+            --local alert = native.showAlert("Confirmation","Are you sure you are finished?",{"Yes","No"},onComplete)
             if confirm == 1 then
                 if (session~="null session") then
                     local URL = "http://35.161.136.208/insertNewChild.php"
@@ -220,6 +220,7 @@ function scene:create( event )
                     print (Pparams.body)
 
                     network.request(URL,"POST",networkListener,Pparams)
+                    writeBehavior:removeSelf()
                     composer.gotoScene("mainMenu",Soptions)
                 else
                     local alert = native.showAlert("Session Invalid","Sorry, please re-login to resume.",{"OK"})

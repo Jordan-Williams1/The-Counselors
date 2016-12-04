@@ -1,5 +1,6 @@
 <?php
 $jsonC = json_decode($_POST['json'],true);
+echo $jsonC;
 session_id($jsonC['params']['session_ID']);
 session_start();
 $con = mysqli_connect('localhost','root','ITC4602016');
@@ -7,27 +8,10 @@ $username = $_SESSION['username'];
 $password = $_SESSION['password'];
 $_SESSION['consequences'] = $jsonC;
 
-echo json_encode($jsonC);
+//echo json_encode($jsonC);
 
-/*
-$name = mysqli_real_escape_string($con,$_GET['cName']);
-$age = mysqli_real_escape_string($con,$_GET['cAge']);
-$grade = mysqli_real_escape_string($con,$_GET['cGrade']);
-$EI = mysqli_real_escape_string($con,$_GET['EI']);
-$OS = mysqli_real_escape_string($con,$_GET['OS']);
-$LF = mysqli_real_escape_string($con,$_GET['LF']);
-$AC = mysqli_real_escape_string($con,$_GET['AC']);
-$PI = mysqli_real_escape_string($con,$_GET['PI']);
-$CU = mysqli_real_escape_string($con,$_GET['CU']);
-$Strengths = mysqli_real_escape_string($con,$_GET['Strengths']);
-$Weaknesses = mysqli_real_escape_string($con,$_GET['Weaknesses']);
-$MLevel = mysqli_real_escape_string($con,$_GET['MLevel']);
-$Interests = mysqli_real_escape_string($con,$_GET['Interests']);
-$DWorked = mysqli_real_escape_string($con,$_GET['DWorked']);
-$DNWorked = mysqli_real_escape_string($con,$_GET['DNWorked']);
-$Behaviors = json_decode($_GET['Behaviors']);
-$Consequences = json_decode($_GET['Consequences']);
-$Rewards = json_decode($_GET['Rewards']);
+$child1 = $_SESSION["childDesc1"];
+$child2 = $_SESSION["childDesc2"];
 
 mysqli_select_db($con,'IDP')or die('cannot select db');
 
@@ -43,18 +27,20 @@ if($count ~= 1)
 }
 else
 {
-$newChild = "insert into child (username,password,name,age,grade,ExtrovertIntrovert,OutgoingShy,LeaderFollower,ActiveCalm,PlannerImpulsive,CaringUncaring,Strengths,Weaknesses,MaturityLevel,Interests,DisciplineWorked,DisciplineNotWorked) values('$username','$password','$name','$age','$grade','$EI','$OS','$LF','$AC','$PI','$CU','$Strengths','$Weaknesses','$MLevel','$Interests','$DWorked','$DNWorked');";
-mysqli_query($con,$newChild)or die('error submitting to database: '.mysqli_error($con));
-
-$latestChild = mysqli_insert_id($con);
-foreach 
-$newBehavior = "insert into behaviors (childID,desiredBehavior,problemBehavior) values ('$latestChild',)";
+$newChild = "INSERT INTO child (username,password,name,age,grade,ExtrovertIntrovert,OutgoingShy,LeaderFollower,ActiveCalm,PlannerImpulsive,CaringUncaring,PersonalityNotes,Strengths,Weaknesses,MaturityLevel,Interests,DisciplineWorked,DisciplineNotWorked) values($child1[0],$child1[1],$child1[2],$child1[3],$child1[4],$child1[5],$child1[6],$child1[7],$child1[8],$child2[0],$child2[1],$child2[2],$child2[3],$child2[4],$child2[5]);"
 
 mysqli_query($con,$newChild)or die('error submitting to database: '.mysqli_error($con));
+
+//$latestChild = mysqli_insert_id($con);
+
+//$newBehavior = "insert into behaviors (childID,desiredBehavior,problemBehavior) values ('$latestChild',)";
+
+//mysqli_query($con,$newChild)or die('error submitting to database: '.mysqli_error($con));
 
 
 mysqli_close($con);
-}*/
+echo json_encode($jsonC);
+}
 
 
 
