@@ -26,6 +26,7 @@ mysqli_select_db($con,'IDP')or die('cannot select db');
 $finduser = "select * from users where username='$username' and password='$password';";
 $results = mysqli_query($con,$finduser);
 $userArray = $results->fetch_row();
+$count = mysqli_num_rows($results);
 
 if($count == 1)
 {

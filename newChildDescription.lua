@@ -451,7 +451,7 @@ function scene:show( event )
 	            print( "Network error: ", event.response )
             	local alert = native.showAlert("Error","Server is not available at this time.",{"OK"})
             	composer.gotoScene("signin", Soptions)
-	            nextButton:removeEventListener("tap",nextButton)
+	            nextButton:addEventListener("tap",nextButton)
 	        else
 	        	serverResponse = json.decode(event.response)
 	            if(serverResponse) then
@@ -462,6 +462,7 @@ function scene:show( event )
 
 	            else
 	            	print("No server response")
+	            	nextButton:addEventListener("tap",nextButton)
 	            end
 	        end
 	    end
