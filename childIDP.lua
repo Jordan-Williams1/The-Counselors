@@ -8,7 +8,29 @@ local scene = composer.newScene()
 -- the scene is removed entirely (not recycled) via "composer.removeScene()"
 -- -----------------------------------------------------------------------------------
 
+  local defaultField
 
+        local function textListener( event )
+
+            if ( event.phase == "began" ) then
+                -- User begins editing "defaultField"
+
+            elseif ( event.phase == "ended" or event.phase == "submitted" ) then
+                -- Output resulting text from "defaultField"
+               
+                -- once the user inputs their user name then we can use it.
+                if userName.text == "jordan" then
+                    print("ok")
+                    Password.text = "ok"
+                end
+
+            elseif ( event.phase == "editing" ) then
+                print( event.newCharacters )
+                print( event.oldText )
+                print( event.startPosition )
+                print( event.text )
+            end
+        end
 
 
 -- -----------------------------------------------------------------------------------
@@ -66,6 +88,30 @@ function scene:show( event )
 		backButtonNew.y = display.contentHeight - display.contentHeight + 100
 		sceneGroup:insert(backButtonNew)
 
+         
+        -- Create text field
+        writeBehavior = native.newTextField( display.contentWidth/2, display.contentHeight-100, display.contentWidth/2, 75)
+        writeBehavior:addEventListener( "userInput", textListener )
+        sceneGroup:insert(writeBehavior)
+
+        local addButton = display.newRect(display.contentWidth/2+250, display.contentHeight-100, 70, 75)
+        addButton:setFillColor(0.372549, 0.619608, 0.627451)
+        sceneGroup:insert(addButton)
+
+        local plus = display.newText("ADD", display.contentWidth/2+250, display.contentHeight-100, 70, 75)
+        plus.size = 33
+        plus:setFillColor(0,0,0)
+        sceneGroup:insert(plus)
+
+        function plus:tap(event)
+
+            childTEXT.text = writeBehavior.text
+        
+        end
+        
+        plus:addEventListener("tap", plus)
+
+
          function backButtonNew:tap(event)
 
             composer.gotoScene("childInformation")
@@ -74,10 +120,6 @@ function scene:show( event )
 
         -- this listens to see if object has been tapped
         backButtonNew:addEventListener("tap", backButtonNew)
-
-       
-
-
 
         function childButton:tap(event)
 
