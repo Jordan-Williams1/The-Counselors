@@ -52,6 +52,7 @@ function scene:show( event )
         Soptions.params.userName = event.params.userName 
         Soptions.params.Password = event.params.Password
         Soptions.params.description2 = event.params
+        print("N "..Soptions.params.description2.description1.name)
     end
 
     if ( phase == "will" ) then
@@ -800,6 +801,7 @@ function scene:show( event )
 
         function nextButton:tap(event)
             --print("tapped")
+            nextButton:setEnabled(false)
             if (Soptions.params) then
                 Soptions.params.behaviors = {}
                 --print("<<<<<<<<<<<<<<<<<<<<<")

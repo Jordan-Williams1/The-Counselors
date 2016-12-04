@@ -16,6 +16,19 @@ $finduser = "select * from users where username='$username' and password='$passw
 $results = mysqli_query($con,$finduser);
 $userArray = $results->fetch_row();
 
+if($count == 1)
+{
+	$_SESSION['username'] = $username;
+	$_SESSION['password'] = $password;
+	$array = ["Logged in"=>"Logged in","session_id"=>session_id()];
+	echo json_encode($array);
+}
+else
+{
+	echo "Invalid username or password";
+	session_destroy();
+}
+
 $json = array();
 
 $json["session_id"] = session_id();
@@ -37,5 +50,6 @@ while ($row = mysqli_fetch_array($results, MYSQLI_NUM)) {
 }
 
 echo json_encode($json);
+mysqli_close($con);
 
 ?>

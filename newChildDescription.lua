@@ -63,7 +63,6 @@ function scene:show( event )
         local background = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth,6000)
 
         background:setFillColor( 0.745098 ,0.745098 ,0.745098)
-        
         sceneGroup:insert( background )
 
 
@@ -446,63 +445,84 @@ function scene:show( event )
         cancelButton:setFillColor(0.372549, 0.619608, 0.627451)
         sceneGroup:insert(cancelButton)
 
-        
+        local function networkListener( event )
+	        if ( event.isError ) then
+	            print( "Network error: ", event.response )
+            	local alert = native.showAlert("Error","Server is not available at this time.",{"OK"})
+            	composer.gotoScene("signin", Soptions)
+	            nextButton:removeEventListener("tap",nextButton)
+	        else
+	            if(event.response) then
+	            	serverResponse = json.decode(event.response)
+	            	print ( "RESPONSE: " .. serverResponse["session_id"])
+	            	if(serverResponse["childDesc1"]) then
+                    	for k in pairs(serverResponse["childDesc1"]) do print ("C1: ".. serverResponse["childDesc1"][k]) end
+                	end
+
+	            else
+	            	print("No server response")
+	            end
+	        end
+	    end
        
         function nextButton:tap(event)
+        	nextButton:removeEventListener("tap",nextButton)
+        	if(session~="null session") then
+        		childEI
+        		childOS
+        		childLF
+        		childAC
+        		childPI
+        		childCU
 
-	 		if (Soptions.params) then
-
-	 			print("N "..childName.text)
-
-		        Soptions.params.name = childName.text
-		        Soptions.params.age = childAge.text
-		        Soptions.params.grade = childGrade.text
-		        
+        		URL = "http://35.161.136.208/childDesc1.php?sessionID="..session
+	        	URL = URL.."&cName"..childName.text.."&cAge="..tonumber(childAge.text).."&cGrade="..childGrade.text
+	        
 		        if (extrovert.isOn) then
-		        	Soptions.params.extrovertIntrovert = "extrovert"
+		        	childEI = 0
 		        else
-		        	Soptions.params.extrovertIntrovert = "introvert"
+		        	childEI = 1
 		        end
-
-
 		        
 		        if (outgoing.isOn) then
-		        	Soptions.params.outgoingShy = "outgoing"
+		        	childOS = 0
 		        else
-		        	Soptions.params.outgoingShy = "shy"
-
+		        	childOS = 1
 		        end
 		        
 		        if (leader.isOn) then
-		        	Soptions.params.leaderFollower = "leader"
+		        	childLF = 0
 		        else
-		        	Soptions.params.leaderFollower = "follower"
-
+		        	childLF = 1
 		        end
 		        
 		        if (active.isOn) then
-		        	Soptions.params.activeCalm = "active"
+		        	childAC = 0
 		        else
-		        	Soptions.params.activeCalm = "calm"
-
+		        	childAC= 1
 		        end
 		        
 		        if (planner.isOn) then
-		        	Soptions.params.plannerImpulsive = "planner"
+		        	childPI = 0
 		        else
-		        	Soptions.params.plannerImpulsive = "impulsive"
+		        	childPI = 1
 		        end
 		        
 		        if (caring.isOn) then
-		        	Soptions.params.caringUncaring = "caring"
+		        	childCU = 0
 		        else
-		        	Soptions.params.caringUncaring = "uncaring"
-
+		        	childCU = 1
 		        end
-	            
-	            
-	        end
-	        composer.gotoScene("newChildDescriptionpart2",Soptions)
+		            
+		        URL = URL.."&EI="..childEI.."&OS="..childOS.."&LF="..childLF.."&AC="..childAC.."&PI="..childPI.."&CU="..childCU
+		        network.request(URL,"GET",networkListener)
+		        composer.gotoScene("newChildDescriptionpart2",Soptions)
+		    else
+		    	local alert = native.showAlert("Session Invalid","Sorry, please re-login to resume.",{"OK"})
+                local URL = "http://35.161.136.208/Signout.php"
+                network.request( URL, "GET", networkListener)
+                composer.gotoScene("signIn")
+	    	end
         end
 
         function backButton:tap(event)

@@ -154,15 +154,16 @@ options =
 
 function signIn:tap(event)
     print("tap")
+    signIn:removeEventListener("tap",signIn)
     print(userName.text.." "..Password.text)
     local x = crypto.digest(crypto.md5,userName.text)
     local y = crypto.digest(crypto.md5,Password.text)
-    signIn.isVisible = false
+    
 
     local function networkListener( event )
         if ( event.isError ) then
             print( "Network error: ", event.response )
-            signIn.isVisible = true
+            signIn:addEventListener("tap", signIn)
         else
             serverResponse = json.decode(event.response)
             print ( "RESPONSE: " .. serverResponse["session_id"])
@@ -170,15 +171,15 @@ function signIn:tap(event)
                 options.params.session_ID = serverResponse["session_id"]
                 composer.gotoScene("MainMenu", options)
             elseif serverResponse == "Invalid username or password" then
-                signIn.isVisible = true
                 local alert = native.showAlert("Login Error","Invalid username or password.",{"OK"})
-                
+                signIn:addEventListener("tap", signIn)
             end
         end
     end
     local URL = "http://35.161.136.208/Login.php?loginUsername="..x.."&loginPassword="..y
     -- Access server via post
     network.request( URL, "GET", networkListener)   
+
 
     --signIn:removeSelf()
     --signInText:removeSelf()
