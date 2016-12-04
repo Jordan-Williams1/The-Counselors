@@ -1,6 +1,6 @@
 <?php
 //echo $test;
-$json = json_decode($_POST['Pparams'],true);
+$json = json_decode($_POST['json'],true);
 session_id($json['session_ID']);
 session_start();
 $con = mysqli_connect('localhost','root','ITC4602016');

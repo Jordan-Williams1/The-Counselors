@@ -227,7 +227,7 @@ function scene:show( event )
                 URL = "http://35.161.136.208/behaviors.php"
                 local Pparams = {}
                 for k in pairs(Soptions.params.Fbehaviors) do print ("B: "..Soptions.params.Fbehaviors[k][1]..","..Soptions.params.Fbehaviors[k][2]) end
-                Pparams.body = json.encode(Soptions)
+                Pparams.body = "json="..json.encode(Soptions)
                 --print (Pparams.body) 
 
                 network.request(URL,"POST",Pparams)
