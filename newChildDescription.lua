@@ -9,7 +9,6 @@ local scene = composer.newScene()
 -- -----------------------------------------------------------------------------------
 
 local session
-local Soptions
 
 
 -- -----------------------------------------------------------------------------------
@@ -55,42 +54,45 @@ function scene:show( event )
         Soptions.params.userName = event.params.userName 
         Soptions.params.Password = event.params.Password
     end
-
-    
     
     if ( phase == "will" ) then
         -- Code here runs when the scene is still off screen (but is about to come on screen)
         -- ScrollView listener
-		
-		local defaultField
-
-	    local function textListener( event )
-
-	        if ( event.phase == "began" ) then
-	            -- User begins editing "defaultField"
-
-	        elseif ( event.phase == "ended" or event.phase == "submitted" ) then
-	            -- Output resulting text from "defaultField"
-	           	if childName.text == "jordan" then
-	           		print("ok")
-	           	end
-	            -- once the user inputs their user name then we can use it.
-	    
-
-	        elseif ( event.phase == "editing" ) then
-	            print( event.newCharacters )
-	            print( event.oldText )
-	            print( event.startPosition )
-	            print( event.text )
-	        end
-	    end
-
+	
 		
         local background = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth,6000)
 
         background:setFillColor( 0.745098 ,0.745098 ,0.745098)
         
         sceneGroup:insert( background )
+
+
+
+
+        local defaultField
+
+        local function textListener( event )
+
+            if ( event.phase == "began" ) then
+                -- User begins editing "defaultField"
+
+            elseif ( event.phase == "ended" or event.phase == "submitted" ) then
+                -- Output resulting text from "defaultField"
+               
+                -- once the user inputs their user name then we can use it.
+                if childName.text == "jordan" then
+                	print("ok")
+                end
+        
+
+            elseif ( event.phase == "editing" ) then
+                print( event.newCharacters )
+                print( event.oldText )
+                print( event.startPosition )
+                print( event.text )
+            end
+        end
+
 
         local backButton = display.newRect(display.contentWidth/2 - display.contentWidth/2 + 50, display.contentHeight-display.contentHeight + 100, 70, 75)
         backButton:setFillColor(0.372549, 0.619608, 0.627451)
@@ -108,9 +110,8 @@ function scene:show( event )
 
          -- Create text field Name
         childName = native.newTextField( display.contentWidth/1.5, display.contentHeight-display.contentHeight + 200, display.contentWidth/2, 75)
-        childName:addEventListener( "userInput", textListener )
         sceneGroup:insert(childName)
-        childName.text = "test"
+        childName:addEventListener( "userInput", textListener )
 
         local childNameText = display.newText("Name: ", display.contentWidth/2-140, display.contentHeight-display.contentHeight + 200, 400, 75)
         childNameText.size = 40
@@ -450,51 +451,50 @@ function scene:show( event )
         function nextButton:tap(event)
 
 	 		if (Soptions.params) then
-	 			print("HERE DUMBASS")
+	 			print("N "..childName.text)
 		        Soptions.params.name = childName.text
 		        Soptions.params.age = childAge.text
 		        Soptions.params.grade = childGrade.text
-		        print("N "..childName.text)
 		        
 		        if (extrovert.isOn) then
-		        	Soptions.params.extrovertIntrovert = "0"--"extrovert"
+		        	Soptions.params.extrovertIntrovert = "extrovert"
 		        else
-		        	Soptions.params.extrovertIntrovert = "1"--"introvert"
+		        	Soptions.params.extrovertIntrovert = "introvert"
 		        end
 
 
 		        
 		        if (outgoing.isOn) then
-		        	Soptions.params.outgoingShy = "0"--"outgoing"
+		        	Soptions.params.outgoingShy = "outgoing"
 		        else
-		        	Soptions.params.outgoingShy = "1" --"shy" 
+		        	Soptions.params.outgoingShy = "shy"
 
 		        end
 		        
 		        if (leader.isOn) then
-		        	Soptions.params.leaderFollower = "0" --"leader"
+		        	Soptions.params.leaderFollower = "leader"
 		        else
-		        	Soptions.params.leaderFollower = "1" --"follower"
+		        	Soptions.params.leaderFollower = "follower"
 
 		        end
 		        
 		        if (active.isOn) then
-		        	Soptions.params.activeCalm = "0" --"active"
+		        	Soptions.params.activeCalm = "active"
 		        else
-		        	Soptions.params.activeCalm = "1" --"calm"
+		        	Soptions.params.activeCalm = "calm"
 
 		        end
 		        
 		        if (planner.isOn) then
-		        	Soptions.params.plannerImpulsive = "0" --"planner"
+		        	Soptions.params.plannerImpulsive = "planner"
 		        else
-		        	Soptions.params.plannerImpulsive = "1" --"impulsive"
+		        	Soptions.params.plannerImpulsive = "impulsive"
 		        end
 		        
 		        if (caring.isOn) then
-		        	Soptions.params.caringUncaring = "0" --"caring"
+		        	Soptions.params.caringUncaring = "caring"
 		        else
-		        	Soptions.params.caringUncaring = "1" --"uncaring"
+		        	Soptions.params.caringUncaring = "uncaring"
 
 		        end
 	            
