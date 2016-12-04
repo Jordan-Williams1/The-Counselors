@@ -171,9 +171,10 @@ function scene:show( event )
                 composer.gotoScene("signin", Soptions)
                 nextButton:addEventListener("tap",nextButton)
             else
+                print(event.response)
                 serverResponse = json.decode(event.response)
                 if(serverResponse) then
-                    print ( "RESPONSE: " .. serverResponse["session_id"])
+                    print ( "RESPONSE: " .. serverResponse["params"]["session_ID"])
                     if(serverResponse["behaviors"]) then
                         for k in pairs(serverResponse["behaviors"]) do print ("B: ".. serverResponse["behaviors"][k]) end
                     end
@@ -229,9 +230,11 @@ function scene:show( event )
                 local Pparams = {}
                 for k in pairs(Soptions.params.Fbehaviors) do print ("B: "..Soptions.params.Fbehaviors[k][1]..","..Soptions.params.Fbehaviors[k][2]) end
                 Pparams.body = "json="..json.encode(Soptions)
-                --print (Pparams.body) 
+                print (Pparams.body) 
 
-                network.request(URL,"POST",Pparams)
+                network.request(URL,"POST",networkListener,Pparams)
+                --URL2 = "http://35.161.136.208/test.php";
+                --network.request(URL2,"GET",networkListener)
 
                 newPBehavior:removeSelf()
                 newDBehavior:removeSelf()

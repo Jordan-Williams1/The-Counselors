@@ -6,7 +6,7 @@ session_start();
 $con = mysqli_connect('localhost','root','ITC4602016');
 $username = $_SESSION['username'];
 $password = $_SESSION['password'];
-$_SESSION['behaviors'] = $jsonC;
+$_SESSION['consequences'] = $jsonC;
 
 echo json_encode($jsonC);
 

@@ -1,13 +1,14 @@
 local composer = require( "composer" )
 local widget = require("widget")
 local scene = composer.newScene()
-
+local json = require("json")
 -- -----------------------------------------------------------------------------------
 -- Code outside of the scene event functions below will only be executed ONCE unless
 -- the scene is removed entirely (not recycled) via "composer.removeScene()"
 -- -----------------------------------------------------------------------------------
 
-
+local nextButton
+local session
 
 -- -----------------------------------------------------------------------------------
 -- Scene event functions
@@ -151,6 +152,9 @@ function scene:create( event )
         writeBehavior.size = 40
         writeBehavior.text = "New Consequence"
 
+
+
+
         function plus:tap(event)
             print("tap")
             local newConsequence = display.newText(writeBehavior.text,display.contentWidth/2,display.contentHeight-display.contentHeight + 150+50*(count+1),native.systemFont,44)
@@ -165,16 +169,56 @@ function scene:create( event )
         plus:addEventListener("tap", plus)
 
 
-         function backButtonNew:tap(event)
+        function backButtonNew:tap(event)
             
             composer.gotoScene("newChildConsequencesI",Soptions)
         
         end
         backButtonNew:addEventListener("tap", backButtonNew)
 
-        function nextButton:tap(event)
+        local function networkListener( event )
+            if ( event.isError ) then
+                print( "Network error: ", event.response )
+                local alert = native.showAlert("Error","Server is not available at this time.",{"OK"})
+                composer.gotoScene("signin", Soptions)
+                nextButton:addEventListener("tap",nextButton)
+            else
+                print(event.response)
+                serverResponse = json.decode(event.response)
+                if(serverResponse) then
+                    print ( "RESPONSE: " .. serverResponse["params"]["session_ID"])
+                    if(serverResponse["behaviors"]) then
+                        for k in pairs(serverResponse["behaviors"]) do print ("B: ".. serverResponse["behaviors"][k]) end
+                    end
 
-            composer.gotoScene("newChildRewardsI",Soptions)
+                else
+                    print("No server response")
+                    local alert = native.showAlert("Session Invalid","Sorry, please re-login to resume.",{"OK"})
+                    composer.gotoScene("signIn")
+                end
+            end
+        end
+
+        function nextButton:tap(event)
+            nextButton:removeEventListener("tap",nextButton)
+            
+            if(session~="null session") then
+                URL = "http://35.161.136.208/consequences.php"
+                local Pparams = {}
+                for k in pairs(Soptions.params.Fconsequences) do print ("C: "..Soptions.params.Fconsequences[k]) end
+                Pparams.body = "json="..json.encode(Soptions)
+                print (Pparams.body)
+
+                network.request(URL,"POST",networkListener,Pparams)
+
+                composer.gotoScene("newChildRewardsI",Soptions)
+            else
+                local alert = native.showAlert("Session Invalid","Sorry, please re-login to resume.",{"OK"})
+                local URL = "http://35.161.136.208/Signout.php"
+                network.request( URL, "GET", networkListener)
+                composer.gotoScene("signIn")
+            end
+            
         
         end
         nextButton:addEventListener("tap", nextButton)
