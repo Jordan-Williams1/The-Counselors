@@ -1,12 +1,15 @@
 local composer = require( "composer" )
 local widget = require("widget")
 local scene = composer.newScene()
-
+local json = require("json")
 
 -- -----------------------------------------------------------------------------------
 -- Code outside of the scene event functions below will only be executed ONCE unless
 -- the scene is removed entirely (not recycled) via "composer.removeScene()"
 -- -----------------------------------------------------------------------------------
+
+local nextButton
+local session
 
 local function textListener( event )
 
@@ -59,7 +62,7 @@ function scene:show( event )
     {
         params = {
             session_ID = session,
-            Fbehaviors = {}
+            Fbehaviors = {}            
         }
     } 
 
@@ -155,6 +158,28 @@ function scene:show( event )
         newDBehavior:addEventListener( "userInput", textListener )
         newDBehavior.text = "add desired behavior"
 
+        local function networkListener( event )
+            if ( event.isError ) then
+                print( "Network error: ", event.response )
+                local alert = native.showAlert("Error","Server is not available at this time.",{"OK"})
+                composer.gotoScene("signin", Soptions)
+                nextButton:addEventListener("tap",nextButton)
+            else
+                serverResponse = json.decode(event.response)
+                if(serverResponse) then
+                    print ( "RESPONSE: " .. serverResponse["session_id"])
+                    if(serverResponse["behaviors"]) then
+                        for k in pairs(serverResponse["behaviors"]) do print ("B: ".. serverResponse["behaviors"][k]) end
+                    end
+
+                else
+                    print("No server response")
+                    local alert = native.showAlert("Session Invalid","Sorry, please re-login to resume.",{"OK"})
+                    composer.gotoScene("signIn")
+                end
+            end
+        end
+
         function newBehaviorButton:tap(event)
             print("tap")
             local newBehavior = display.newText(newPBehavior.text.."/"..newDBehavior.text,display.contentWidth/2,display.contentHeight-display.contentHeight + 150+50*(count+1),native.systemFont,44)
@@ -191,9 +216,21 @@ function scene:show( event )
 
 
         function nextButton:tap(event)
-            newPBehavior:removeSelf()
-            newDBehavior:removeSelf()
-            composer.gotoScene("newChildConsequencesI",Soptions)
+            nextButton:removeEventListener("tap",nextButton)
+            
+            if(session~="null session") then
+                URL = "http://35.161.136.208/behaviors.php?sessionID="..session
+
+
+                newPBehavior:removeSelf()
+                newDBehavior:removeSelf()
+                composer.gotoScene("newChildConsequencesI",Soptions)
+            else
+                local alert = native.showAlert("Session Invalid","Sorry, please re-login to resume.",{"OK"})
+                local URL = "http://35.161.136.208/Signout.php"
+                network.request( URL, "GET", networkListener)
+                composer.gotoScene("signIn")
+            end
         end
         
         nextButton:addEventListener("tap", nextButton)
