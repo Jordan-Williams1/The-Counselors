@@ -15,6 +15,17 @@ mysqli_select_db($con,'IDP')or die('cannot select db');
 $finduser = "select * from users where username='$username' and password='$password';";
 $results = mysqli_query($con,$finduser);
 $userArray = $results->fetch_row();
+$count = mysqli_num_rows($results);
+
+if($count == 1)
+{
+
+}
+else
+{
+	echo "Invalid username or password";
+	session_destroy();
+}
 
 $json = array();
 
@@ -35,7 +46,8 @@ while ($row = mysqli_fetch_array($results, MYSQLI_NUM)) {
       $json["childIDs"][$count] = $row[0];
       $count = $count+1;
 }
-
+mysqli_close($con);
 echo json_encode($json);
+
 
 ?>

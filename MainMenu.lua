@@ -208,7 +208,7 @@ function scene:show( event )
                 if(serverResponse["children"]) then
                     for k in pairs(serverResponse["children"]) do print ("Child: ".. serverResponse["children"][k]) end
                 end
-                print("Priveleges: "..serverResponse["childPriv"].." "..serverResponse["schedPriv"].." "..serverResponse["behavPriv"].." "..serverResponse["CRPriv"])
+                print("Privileges: "..serverResponse["childPriv"].." "..serverResponse["schedPriv"].." "..serverResponse["behavPriv"].." "..serverResponse["CRPriv"])
             else
                 print("No server response")
             end

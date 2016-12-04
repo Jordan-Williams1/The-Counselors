@@ -11,7 +11,7 @@ local scene = composer.newScene()
 local session
 
 
-function deepcopy(orig)
+--[[function deepcopy(orig)
     local orig_type = type(orig)
     local copy
     if orig_type == 'table' then
@@ -24,7 +24,7 @@ function deepcopy(orig)
         copy = orig
     end
     return copy
-end
+end]]--
 -- -----------------------------------------------------------------------------------
 -- Scene event functions
 -- -----------------------------------------------------------------------------------
@@ -64,11 +64,10 @@ function scene:show( event )
     if (event.params) then
         Soptions.params.userName = event.params.userName 
         Soptions.params.Password = event.params.Password
-        print(event.params.userName)
-        
-        Soptions.params.description1 = event.params--{name = event.params.name, age = event.params.age, grade = event.params.grade,extrovertIntrovert = event.params.extrovertIntrovert,outgoingShy = event.params.outgoingShy, leaderFollower = event.params.leaderFollower, activeCalm = event.params.activeCalm, plannerImpulsive = event.params.plannerImpulsive, caringUncaring = event.params.caringUncaring}
-        print("1---"..Soptions.params.description1.name)
-        print("-----"..Soptions.params.description1.name)
+        --print(event.params.userName)
+        --Soptions.params.description1 = {name = event.params.name, age = event.params.age, grade = event.params.grade,extrovertIntrovert = event.params.extrovertIntrovert,outgoingShy = event.params.outgoingShy, leaderFollower = event.params.leaderFollower, activeCalm = event.params.activeCalm, plannerImpulsive = event.params.plannerImpulsive, caringUncaring = event.params.caringUncaring}
+        --print("1---"..Soptions.params.description1.name)
+        --print("-----"..Soptions.params.description1.name)
     end
 
     if ( phase == "will" ) then
@@ -218,12 +217,10 @@ function scene:show( event )
 
 
         function nextButton:tap(event)
-
+            nextButton:removeEventListener("tap",nextButton)
             if (event.params) then
                 Soptions.params.userName = event.params.userName 
-                Soptions.params.Password = event.params.Password
-
-                
+                Soptions.params.Password = event.params.Password             
                 Soptions.params.Strengths = strengthsBox.text
                 Soptions.params.Weaknesses = weaknessBox.text
                 Soptions.params.Maturity = maturityBox.text

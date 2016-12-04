@@ -4,8 +4,6 @@ $con = mysqli_connect('localhost','root','ITC4602016');
 $username = mysqli_real_escape_string($con,$_GET['loginUsername']);
 $password = mysqli_real_escape_string($con,$_GET['loginPassword']);
 
-
-
 if(!$con) //if connection not established
 {
 	die('Could not connect: '.mysqli_error($con));

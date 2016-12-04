@@ -37,7 +37,7 @@ CREATE TABLE child
 username varchar(100),
 password varchar(100),
 name varchar(100),
-age int,
+age varchar(100),
 grade varchar(100),
 ExtrovertIntrovert int, 
 OutgoingShy int,
@@ -55,8 +55,8 @@ DisciplineNotWorked text,
 CONSTRAINT fk_childID1 FOREIGN KEY (username,password) references users(username,password)
 );
 
-INSERT INTO child (username,password,name,age) values ("95cf5007322b0c2a87ebb3d3089c4569","95cf5007322b0c2a87ebb3d3089c4569","Ricky",12);
-INSERT INTO child (username,password,name,age) values ("95cf5007322b0c2a87ebb3d3089c4569","95cf5007322b0c2a87ebb3d3089c4569","Bobby",8);
+INSERT INTO child (username,password,name,age) values ("95cf5007322b0c2a87ebb3d3089c4569","95cf5007322b0c2a87ebb3d3089c4569","Ricky","12");
+INSERT INTO child (username,password,name,age) values ("95cf5007322b0c2a87ebb3d3089c4569","95cf5007322b0c2a87ebb3d3089c4569","Bobby","8");
 
 
 CREATE TABLE behaviors
