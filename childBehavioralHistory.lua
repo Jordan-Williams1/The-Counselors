@@ -28,8 +28,6 @@ end
 function scene:show( event )
     composer.removeScene("desiredBehaviorListLast")
     composer.removeScene("childIDP")
-    composer.removeScene("childBehavioralHistory")
-
 
     local sceneGroup = self.view
     local phase = event.phase
@@ -39,13 +37,13 @@ function scene:show( event )
 
         local background = display.newRect(display.contentWidth/2, display.contentHeight/2, display.contentWidth, display.contentHeight)
         background:setFillColor( 0.745098 ,0.745098 ,0.745098)
-        sceneGroup:insert(background)       
+        sceneGroup:insert(background)
 
-        local pickText = display.newText("Child Information Scene", display.contentWidth/2, display.contentHeight-display.contentHeight + 100, native.systemFont, 50)
+        local pickText = display.newText("Child Behavioral History", display.contentWidth/2, display.contentHeight-display.contentHeight + 100, native.systemFont, 50)
         pickText.size = 40
         pickText:setFillColor(0,0,0)
         sceneGroup:insert(pickText)
-
+--[[
         local IDP = display.newRect(display.contentWidth/2, display.contentHeight/2, 400, 75)
         IDP:setFillColor(0.372549, 0.619608, 0.627451)
         sceneGroup:insert(IDP)
@@ -73,10 +71,10 @@ function scene:show( event )
         behavioralHistoryText:setFillColor(0,0,0)
         sceneGroup:insert(behavioralHistoryText)
 
-
+--]]
         local backButtonNew = widget.newButton(
 		    {
-		  
+		      
 		        id = "backButtonNew",
 		        defaultFile = "backArrow3.png",
 		        onEvent = handleButtonEvent
@@ -89,40 +87,13 @@ function scene:show( event )
 
          function backButtonNew:tap(event)
 
-            composer.gotoScene("addChild")
+            composer.gotoScene("childInformation")
         
         end
 
         -- this listens to see if object has been tapped
         backButtonNew:addEventListener("tap", backButtonNew)
          
-
-        function IDP:tap(event)
-
-            composer.gotoScene("childIDP")
-        
-        end
-
-        -- this listens to see if object has been tapped
-        IDP:addEventListener("tap", IDP)
-         
-        function childDescriptionButton:tap(event)
-
-            composer.gotoScene("existingChildDescription")
-        
-        end
-
-        -- this listens to see if object has been tapped
-        childDescriptionButton:addEventListener("tap", childDescriptionButton)
-
-        function behavioralHistory:tap(event)
-
-            composer.gotoScene("childBehavioralHistory")
-        
-        end
-
-        -- this listens to see if object has been tapped
-        behavioralHistory:addEventListener("tap", behavioralHistory)
         
       
 

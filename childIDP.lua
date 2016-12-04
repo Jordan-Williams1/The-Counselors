@@ -69,7 +69,7 @@ function scene:show( event )
         sceneGroup:insert(childButton)
 
 
-        local childTEXT = display.newText("Johnny", display.contentWidth/2+140, display.contentHeight/2-200, 400, 75)
+        local childTEXT = display.newText("List of child stuff", display.contentWidth/2+100, display.contentHeight/2-200, 400, 75)
         childTEXT.size = 40
         childTEXT:setFillColor(0,0,0)
         sceneGroup:insert(childTEXT)

@@ -67,7 +67,7 @@ function scene:show( event )
         print(event.params.userName)
         
         Soptions.params.description1 = event.params--{name = event.params.name, age = event.params.age, grade = event.params.grade,extrovertIntrovert = event.params.extrovertIntrovert,outgoingShy = event.params.outgoingShy, leaderFollower = event.params.leaderFollower, activeCalm = event.params.activeCalm, plannerImpulsive = event.params.plannerImpulsive, caringUncaring = event.params.caringUncaring}
-        print("1---"..Soption.params.description1.name)
+        print("1---"..Soptions.params.description1.name)
         print("-----"..Soptions.params.description1.name)
     end
 
