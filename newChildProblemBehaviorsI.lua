@@ -1,6 +1,7 @@
 local composer = require( "composer" )
 local widget = require("widget")
 local scene = composer.newScene()
+local json = require("json")
 
 
 -- -----------------------------------------------------------------------------------
@@ -51,8 +52,8 @@ function scene:show( event )
     if (event.params) then
         Soptions.params.userName = event.params.userName 
         Soptions.params.Password = event.params.Password
-        Soptions.params.description2 = event.params
-        print("N "..Soptions.params.description2.description1.name)
+        --Soptions.params.description2 = event.params
+        --print("N "..Soptions.params.description2.description1.name)
     end
 
     if ( phase == "will" ) then

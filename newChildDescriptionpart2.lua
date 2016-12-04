@@ -1,7 +1,7 @@
 local composer = require( "composer" )
 local widget = require("widget")
 local scene = composer.newScene()
-
+local json = require("json")
 
 -- -----------------------------------------------------------------------------------
 -- Code outside of the scene event functions below will only be executed ONCE unless
@@ -229,7 +229,8 @@ function scene:show( event )
 
                 else
                     print("No server response")
-                    nextButton:addEventListener("tap",nextButton)
+                    local alert = native.showAlert("Session Invalid","Sorry, please re-login to resume.",{"OK"})
+                    composer.gotoScene("signIn")
                 end
             end
         end
