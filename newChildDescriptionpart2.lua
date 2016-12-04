@@ -213,24 +213,42 @@ function scene:show( event )
         cancelButton:setFillColor(0.372549, 0.619608, 0.627451)
         sceneGroup:insert(cancelButton)
 
-        
+        local function networkListener( event )
+            if ( event.isError ) then
+                print( "Network error: ", event.response )
+                local alert = native.showAlert("Error","Server is not available at this time.",{"OK"})
+                composer.gotoScene("signin", Soptions)
+                nextButton:addEventListener("tap",nextButton)
+            else
+                serverResponse = json.decode(event.response)
+                if(serverResponse) then
+                    print ( "RESPONSE: " .. serverResponse["session_id"])
+                    if(serverResponse["childDesc2"]) then
+                        for k in pairs(serverResponse["childDesc2"]) do print ("C1: ".. serverResponse["childDesc2"][k]) end
+                    end
+
+                else
+                    print("No server response")
+                    nextButton:addEventListener("tap",nextButton)
+                end
+            end
+        end
 
 
         function nextButton:tap(event)
             nextButton:removeEventListener("tap",nextButton)
-            if (event.params) then
-                Soptions.params.userName = event.params.userName 
-                Soptions.params.Password = event.params.Password             
-                Soptions.params.Strengths = strengthsBox.text
-                Soptions.params.Weaknesses = weaknessBox.text
-                Soptions.params.Maturity = maturityBox.text
-                Soptions.params.Interests = interestsBox.text
-                Soptions.params.successfulDisclipline = successfulDiscliplineBox.text
-                Soptions.params.unsuccessfulDisclipline = unsuccessfulDiscliplineBox.text      
+            if(session~="null session") then
+                URL = "http://35.161.136.208/childDesc2.php?sessionID="..session
+                URL = URL.."&Strengths="..strengthsBox.text.."&Weaknesses="..weaknessBox.text.."&MLevel="..maturityBox.text
+                URL = URL.."&Interests="..interestsBox.text.."&Dworked="..successfulDiscliplineBox.text.."&DNWorked="..unsuccessfulDiscliplineBox.text
+                network.request(URL,"GET",networkListener)
+                composer.gotoScene("newChildProblemBehaviorsI",Soptions)
+            else
+                local alert = native.showAlert("Session Invalid","Sorry, please re-login to resume.",{"OK"})
+                local URL = "http://35.161.136.208/Signout.php"
+                network.request( URL, "GET", networkListener)
+                composer.gotoScene("signIn")
             end
-
-
-            composer.gotoScene("newChildProblemBehaviorsI",Soptions)
         end
 
         function backButton:tap(event)

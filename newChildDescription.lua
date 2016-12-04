@@ -481,7 +481,7 @@ function scene:show( event )
         		print("t "..childGrade.text)
 
         		URL = "http://35.161.136.208/childDesc1.php?sessionID="..session
-	        	URL = URL.."&cName"..childName.text.."&cAge="..childAge.text.."&cGrade="..childGrade.text
+	        	URL = URL.."&cName="..childName.text.."&cAge="..childAge.text.."&cGrade="..childGrade.text
 	        
 		        if (extrovert.isOn) then
 		        	childEI = 0
