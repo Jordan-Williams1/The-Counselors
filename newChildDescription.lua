@@ -1,13 +1,14 @@
 local composer = require( "composer" )
 local widget = require("widget")
 local scene = composer.newScene()
-
+local json = require("json")
 
 -- -----------------------------------------------------------------------------------
 -- Code outside of the scene event functions below will only be executed ONCE unless
 -- the scene is removed entirely (not recycled) via "composer.removeScene()"
 -- -----------------------------------------------------------------------------------
 
+local serverResponse
 local session
 
 
@@ -452,8 +453,8 @@ function scene:show( event )
             	composer.gotoScene("signin", Soptions)
 	            nextButton:removeEventListener("tap",nextButton)
 	        else
-	            if(event.response) then
-	            	serverResponse = json.decode(event.response)
+	        	serverResponse = json.decode(event.response)
+	            if(serverResponse) then
 	            	print ( "RESPONSE: " .. serverResponse["session_id"])
 	            	if(serverResponse["childDesc1"]) then
                     	for k in pairs(serverResponse["childDesc1"]) do print ("C1: ".. serverResponse["childDesc1"][k]) end
@@ -468,15 +469,18 @@ function scene:show( event )
         function nextButton:tap(event)
         	nextButton:removeEventListener("tap",nextButton)
         	if(session~="null session") then
-        		childEI
-        		childOS
-        		childLF
-        		childAC
-        		childPI
-        		childCU
+        		local childEI
+        		local childOS
+        		local childLF
+        		local childAC
+        		local childPI
+        		local childCU
+        		print("t "..childName.text)
+        		print("t "..childAge.text)
+        		print("t "..childGrade.text)
 
         		URL = "http://35.161.136.208/childDesc1.php?sessionID="..session
-	        	URL = URL.."&cName"..childName.text.."&cAge="..tonumber(childAge.text).."&cGrade="..childGrade.text
+	        	URL = URL.."&cName"..childName.text.."&cAge="..childAge.text.."&cGrade="..childGrade.text
 	        
 		        if (extrovert.isOn) then
 		        	childEI = 0

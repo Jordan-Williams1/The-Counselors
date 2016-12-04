@@ -30,7 +30,7 @@ $userArray = $results->fetch_row();
 if($count == 1)
 {
 	$array = ["session_id"=>session_id()];
-	$array["childDesc1"] = $_SESSION["childDesc1"]);
+	$array["childDesc1"] = $_SESSION["childDesc1"];
 	echo json_encode($array);
 }
 else
