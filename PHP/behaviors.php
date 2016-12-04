@@ -6,13 +6,7 @@ $con = mysqli_connect('localhost','root','ITC4602016');
 $username = $_SESSION['username'];
 $password = $_SESSION['password'];
 
-$Strengths = mysqli_real_escape_string($con,$_GET["Strengths"]);
-$Weaknesses = mysqli_real_escape_string($con,$_GET["Weaknesses"]);
-$MLevel = mysqli_real_escape_string($con,$_GET["MLevel"]);
-$Interests = mysqli_real_escape_string($con,$_GET["Interests"]);
-$Dworked = mysqli_real_escape_string($con,$_GET["Dworked"]);
-$DNWorked = mysqli_real_escape_string($con,$_GET["DNWorked"]);
-$_SESSION["childDesc2"] = array($Strengths,$Weaknesses,$MLevel,$Interests,$Dworked,$DNWorked); 
+
 
 if(!$con) //if connection not established
 {
@@ -28,7 +22,7 @@ $count = mysqli_num_rows($results);
 if($count == 1)
 {
 	$array = ["session_id"=>session_id()];
-	$array["childDesc2"] = $_SESSION["childDesc2"];
+	$array["behaviors"] = $_SESSION["behaviors"];
 	echo json_encode($array);
 }
 else
