@@ -43,7 +43,7 @@ foreach ($behaviors['params']['behaviors1'] as $key => $value) {
 
 
 mysqli_close($con);
-echo json_encode($jsonC);
+echo json_encode($behaviors['params']['behaviors1']);
 }
 
 
