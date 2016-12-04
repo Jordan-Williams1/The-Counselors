@@ -36,7 +36,7 @@ $latestChild = mysqli_insert_id($con);
 
 foreach ($behaviors['params']['behaviors1'] as $key => $value) {
 	$newBehavior = "insert into behaviors (childID,desiredBehavior,problemBehavior) values ('$latestChild','$value[0]','$value[1]')";
-	mysqli_query($con,$newBehavior)or die('error submitting to database: '.mysqli_error($con));
+	//mysqli_query($con,$newBehavior)or die('error submitting to database: '.mysqli_error($con));
 }
 
 //mysqli_query($con,$newChild)or die('error submitting to database: '.mysqli_error($con));

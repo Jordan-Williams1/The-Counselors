@@ -165,14 +165,18 @@ function signIn:tap(event)
             print( "Network error: ", event.response )
             signIn:addEventListener("tap", signIn)
         else
-            serverResponse = json.decode(event.response)
-            print ( "RESPONSE: " .. serverResponse["session_id"])
-            if(serverResponse["Logged in"] == "Logged in") then
-                options.params.session_ID = serverResponse["session_id"]
-                composer.gotoScene("MainMenu", options)
-            elseif serverResponse == "Invalid username or password" then
-                local alert = native.showAlert("Login Error","Invalid username or password.",{"OK"})
-                signIn:addEventListener("tap", signIn)
+            if(event.response) then
+                serverResponse = json.decode(event.response)
+                if(serverResponse) then
+                    print ( "RESPONSE: " .. serverResponse["session_id"])
+                    if(serverResponse["Logged in"] == "Logged in") then
+                        options.params.session_ID = serverResponse["session_id"]
+                        composer.gotoScene("MainMenu", options)
+                    elseif serverResponse == "Invalid username or password" then
+                        local alert = native.showAlert("Login Error","Invalid username or password.",{"OK"})
+                        signIn:addEventListener("tap", signIn)
+                    end
+                end
             end
         end
     end
